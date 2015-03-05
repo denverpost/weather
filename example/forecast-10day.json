@@ -1,0 +1,305 @@
+{
+    u'Headline': {
+        u'Category': u'warmer',
+        u'EndDate': u'2015-03-06T19: 00: 00-07: 00',
+        u'Severity': 4,
+        u'EffectiveDate': u'2015-03-05T07: 00: 00-07: 00',
+        u'Text': u'Muchmildertodayandtomorrow',
+        u'EndEpochDate': 1425693600,
+        u'EffectiveEpochDate': 1425564000,
+        u'Link': u'http: //www.accuweather.com/en/us/denver-co/80203/daily-weather-forecast/347810?lang=en-us',
+        u'MobileLink': u'http: //m.accuweather.com/en/us/denver-co/80203/extended-weather-forecast/347810?lang=en-us'
+    },
+    u'DailyForecasts': [
+        {
+            u'Temperature': {
+                u'Minimum': {
+                    u'UnitType': 18,
+                    u'Unit': u'F',
+                    u'Value': 18.0
+                },
+                u'Maximum': {
+                    u'UnitType': 18,
+                    u'Unit': u'F',
+                    u'Value': 41.0
+                }
+            },
+            u'Sources': [
+                u'AccuWeather'
+            ],
+            u'Link': u'http: //www.accuweather.com/en/us/denver-co/80203/daily-weather-forecast/347810?day=1&lang=en-us',
+            u'Night': {
+                u'IconPhrase': u'Partlycloudy',
+                u'Icon': 35
+            },
+            u'Date': u'2015-03-05T07: 00: 00-07: 00',
+            u'EpochDate': 1425564000,
+            u'MobileLink': u'http: //m.accuweather.com/en/us/denver-co/80203/daily-weather-forecast/347810?day=1&lang=en-us',
+            u'Day': {
+                u'IconPhrase': u'Partlysunny',
+                u'Icon': 3
+            }
+        },
+        {
+            u'Temperature': {
+                u'Minimum': {
+                    u'UnitType': 18,
+                    u'Unit': u'F',
+                    u'Value': 24.0
+                },
+                u'Maximum': {
+                    u'UnitType': 18,
+                    u'Unit': u'F',
+                    u'Value': 53.0
+                }
+            },
+            u'Sources': [
+                u'AccuWeather'
+            ],
+            u'Link': u'http: //www.accuweather.com/en/us/denver-co/80203/daily-weather-forecast/347810?day=2&lang=en-us',
+            u'Night': {
+                u'IconPhrase': u'Mostlyclear',
+                u'Icon': 34
+            },
+            u'Date': u'2015-03-06T07: 00: 00-07: 00',
+            u'EpochDate': 1425650400,
+            u'MobileLink': u'http: //m.accuweather.com/en/us/denver-co/80203/daily-weather-forecast/347810?day=2&lang=en-us',
+            u'Day': {
+                u'IconPhrase': u'Mostlysunny',
+                u'Icon': 2
+            }
+        },
+        {
+            u'Temperature': {
+                u'Minimum': {
+                    u'UnitType': 18,
+                    u'Unit': u'F',
+                    u'Value': 26.0
+                },
+                u'Maximum': {
+                    u'UnitType': 18,
+                    u'Unit': u'F',
+                    u'Value': 52.0
+                }
+            },
+            u'Sources': [
+                u'AccuWeather'
+            ],
+            u'Link': u'http: //www.accuweather.com/en/us/denver-co/80203/daily-weather-forecast/347810?day=3&lang=en-us',
+            u'Night': {
+                u'IconPhrase': u'Partlycloudy',
+                u'Icon': 35
+            },
+            u'Date': u'2015-03-07T07: 00: 00-07: 00',
+            u'EpochDate': 1425736800,
+            u'MobileLink': u'http: //m.accuweather.com/en/us/denver-co/80203/daily-weather-forecast/347810?day=3&lang=en-us',
+            u'Day': {
+                u'IconPhrase': u'Mostlysunny',
+                u'Icon': 2
+            }
+        },
+        {
+            u'Temperature': {
+                u'Minimum': {
+                    u'UnitType': 18,
+                    u'Unit': u'F',
+                    u'Value': 22.0
+                },
+                u'Maximum': {
+                    u'UnitType': 18,
+                    u'Unit': u'F',
+                    u'Value': 47.0
+                }
+            },
+            u'Sources': [
+                u'AccuWeather'
+            ],
+            u'Link': u'http: //www.accuweather.com/en/us/denver-co/80203/daily-weather-forecast/347810?day=4&lang=en-us',
+            u'Night': {
+                u'IconPhrase': u'Clear',
+                u'Icon': 33
+            },
+            u'Date': u'2015-03-08T07: 00: 00-07: 00',
+            u'EpochDate': 1425823200,
+            u'MobileLink': u'http: //m.accuweather.com/en/us/denver-co/80203/daily-weather-forecast/347810?day=4&lang=en-us',
+            u'Day': {
+                u'IconPhrase': u'Mostlysunny',
+                u'Icon': 2
+            }
+        },
+        {
+            u'Temperature': {
+                u'Minimum': {
+                    u'UnitType': 18,
+                    u'Unit': u'F',
+                    u'Value': 24.0
+                },
+                u'Maximum': {
+                    u'UnitType': 18,
+                    u'Unit': u'F',
+                    u'Value': 58.0
+                }
+            },
+            u'Sources': [
+                u'AccuWeather'
+            ],
+            u'Link': u'http: //www.accuweather.com/en/us/denver-co/80203/daily-weather-forecast/347810?day=5&lang=en-us',
+            u'Night': {
+                u'IconPhrase': u'Partlycloudy',
+                u'Icon': 35
+            },
+            u'Date': u'2015-03-09T07: 00: 00-07: 00',
+            u'EpochDate': 1425909600,
+            u'MobileLink': u'http: //m.accuweather.com/en/us/denver-co/80203/daily-weather-forecast/347810?day=5&lang=en-us',
+            u'Day': {
+                u'IconPhrase': u'Sunny',
+                u'Icon': 1
+            }
+        },
+        {
+            u'Temperature': {
+                u'Minimum': {
+                    u'UnitType': 18,
+                    u'Unit': u'F',
+                    u'Value': 31.0
+                },
+                u'Maximum': {
+                    u'UnitType': 18,
+                    u'Unit': u'F',
+                    u'Value': 62.0
+                }
+            },
+            u'Sources': [
+                u'AccuWeather'
+            ],
+            u'Link': u'http: //www.accuweather.com/en/us/denver-co/80203/daily-weather-forecast/347810?day=6&lang=en-us',
+            u'Night': {
+                u'IconPhrase': u'Clear',
+                u'Icon': 33
+            },
+            u'Date': u'2015-03-10T07: 00: 00-07: 00',
+            u'EpochDate': 1425996000,
+            u'MobileLink': u'http: //m.accuweather.com/en/us/denver-co/80203/daily-weather-forecast/347810?day=6&lang=en-us',
+            u'Day': {
+                u'IconPhrase': u'Mostlysunny',
+                u'Icon': 2
+            }
+        },
+        {
+            u'Temperature': {
+                u'Minimum': {
+                    u'UnitType': 18,
+                    u'Unit': u'F',
+                    u'Value': 34.0
+                },
+                u'Maximum': {
+                    u'UnitType': 18,
+                    u'Unit': u'F',
+                    u'Value': 65.0
+                }
+            },
+            u'Sources': [
+                u'AccuWeather'
+            ],
+            u'Link': u'http: //www.accuweather.com/en/us/denver-co/80203/daily-weather-forecast/347810?day=7&lang=en-us',
+            u'Night': {
+                u'IconPhrase': u'Mostlycloudy',
+                u'Icon': 38
+            },
+            u'Date': u'2015-03-11T07: 00: 00-07: 00',
+            u'EpochDate': 1426082400,
+            u'MobileLink': u'http: //m.accuweather.com/en/us/denver-co/80203/daily-weather-forecast/347810?day=7&lang=en-us',
+            u'Day': {
+                u'IconPhrase': u'Mostlycloudy',
+                u'Icon': 6
+            }
+        },
+        {
+            u'Temperature': {
+                u'Minimum': {
+                    u'UnitType': 18,
+                    u'Unit': u'F',
+                    u'Value': 35.0
+                },
+                u'Maximum': {
+                    u'UnitType': 18,
+                    u'Unit': u'F',
+                    u'Value': 62.0
+                }
+            },
+            u'Sources': [
+                u'AccuWeather'
+            ],
+            u'Link': u'http: //www.accuweather.com/en/us/denver-co/80203/daily-weather-forecast/347810?day=8&lang=en-us',
+            u'Night': {
+                u'IconPhrase': u'Intermittentclouds',
+                u'Icon': 36
+            },
+            u'Date': u'2015-03-12T07: 00: 00-07: 00',
+            u'EpochDate': 1426168800,
+            u'MobileLink': u'http: //m.accuweather.com/en/us/denver-co/80203/daily-weather-forecast/347810?day=8&lang=en-us',
+            u'Day': {
+                u'IconPhrase': u'Mostlycloudy',
+                u'Icon': 6
+            }
+        },
+        {
+            u'Temperature': {
+                u'Minimum': {
+                    u'UnitType': 18,
+                    u'Unit': u'F',
+                    u'Value': 35.0
+                },
+                u'Maximum': {
+                    u'UnitType': 18,
+                    u'Unit': u'F',
+                    u'Value': 58.0
+                }
+            },
+            u'Sources': [
+                u'AccuWeather'
+            ],
+            u'Link': u'http: //www.accuweather.com/en/us/denver-co/80203/daily-weather-forecast/347810?day=9&lang=en-us',
+            u'Night': {
+                u'IconPhrase': u'Mostlycloudy',
+                u'Icon': 38
+            },
+            u'Date': u'2015-03-13T07: 00: 00-07: 00',
+            u'EpochDate': 1426255200,
+            u'MobileLink': u'http: //m.accuweather.com/en/us/denver-co/80203/daily-weather-forecast/347810?day=9&lang=en-us',
+            u'Day': {
+                u'IconPhrase': u'Intermittentclouds',
+                u'Icon': 4
+            }
+        },
+        {
+            u'Temperature': {
+                u'Minimum': {
+                    u'UnitType': 18,
+                    u'Unit': u'F',
+                    u'Value': 34.0
+                },
+                u'Maximum': {
+                    u'UnitType': 18,
+                    u'Unit': u'F',
+                    u'Value': 56.0
+                }
+            },
+            u'Sources': [
+                u'AccuWeather'
+            ],
+            u'Link': u'http: //www.accuweather.com/en/us/denver-co/80203/daily-weather-forecast/347810?day=10&lang=en-us',
+            u'Night': {
+                u'IconPhrase': u'Partlycloudy',
+                u'Icon': 35
+            },
+            u'Date': u'2015-03-14T07: 00: 00-07: 00',
+            u'EpochDate': 1426341600,
+            u'MobileLink': u'http: //m.accuweather.com/en/us/denver-co/80203/daily-weather-forecast/347810?day=10&lang=en-us',
+            u'Day': {
+                u'IconPhrase': u'Partlysunny',
+                u'Icon': 3
+            }
+        }
+    ]
+}
