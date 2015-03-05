@@ -21,20 +21,26 @@ class WeatherData:
             """
         h = httplib2.Http('.tmp')
         (response, content) = h.request(url, "GET")
-        print response
-        print '==========='
+        if response['status'] != '200':
+            print response
+            raise ValueError("AccuWeather API response: %s" % response.status)
         return content
 
     def set_location_key(self, zipcode):
         """ Set / update the location_key value.
             """
         url = 'http://%s/locations/v1/US/search?q=%s&apiKey=%s' % ( self.api_host, zipcode, self.api_key )
-        location_key = self.get(url)
-        print location_key
+        response = self.get(url)
+        self.location_key = response[0]['Key']
+        self.location = response
+        return self.location_key
+
+    def get_forecast(self):
+        pass
 
 def main(options, args):
     wd = WeatherData()
-    wd.set_location_key('80203')
+    wd.set_location_key('Denver')
 
 if __name__ == '__main__':
     parser = OptionParser()
