@@ -4,6 +4,7 @@
 import os
 import csv
 import doctest
+import json
 import httplib2
 from optparse import OptionParser
 
@@ -22,9 +23,8 @@ class WeatherData:
         h = httplib2.Http('.tmp')
         (response, content) = h.request(url, "GET")
         if response['status'] != '200':
-            print response
             raise ValueError("AccuWeather API response: %s" % response.status)
-        return content
+        return json.loads(content)
 
     def set_location_key(self, zipcode):
         """ Set / update the location_key value.
@@ -35,12 +35,15 @@ class WeatherData:
         self.location = response
         return self.location_key
 
-    def get_forecast(self):
-        pass
+    def get_forecast(self, forecast='10day'):
+        url = 'http://%s/forecasts/v1/daily/%s/%s?apikey=%s' % ( self.api_host, forecast, self.location_key, self.api_key )
+        response = self.get(url)
+        print response
 
 def main(options, args):
     wd = WeatherData()
     wd.set_location_key('Denver')
+    wd.get_forecast()
 
 if __name__ == '__main__':
     parser = OptionParser()
