@@ -4,6 +4,13 @@ from __future__ import unicode_literals
 import pytest
 import accuweather
 
+def test_init():
+    """ Test the class' init method.
+        Note: This relies on env vars being set.
+        """
+    weatherdata = accuweather.WeatherData()
+    assert weatherdata != None
+
 '''
 def test_publish():
     """ Test the Sheet's publish method.
