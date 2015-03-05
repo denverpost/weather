@@ -5,7 +5,8 @@ import os
 import csv
 from optparse import OptionParser
 
-class WeatherData():
+class WeatherData:
+
     def __init__(self):
         self.api_key = os.environ.get('API_KEY')
         self.api_url = os.environ.get('API_URL')
