@@ -9,6 +9,8 @@ import httplib2
 from optparse import OptionParser
 
 class WeatherData:
+    """ Methods for getting weather data from Accuweather.
+        """
 
     def __init__(self):
         self.api_key = os.environ.get('API_KEY')
@@ -36,10 +38,19 @@ class WeatherData:
         return self.location_key
 
     def get_forecast(self, forecast='10day'):
+        """ Get the 10-day forecast.
+            """
         url = 'http://%s/forecasts/v1/daily/%s/%s?apikey=%s' % ( self.api_host, forecast, self.location_key, self.api_key )
         response = self.get(url)
         self.forecast = response
         return response
+
+class PublishWeather:
+    """ Methods for turning the WeatherData into something we can use.
+        """
+
+    def __init__(self):
+        pass
 
 def main(options, args):
     wd = WeatherData()
