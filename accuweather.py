@@ -38,7 +38,8 @@ class WeatherData:
     def get_forecast(self, forecast='10day'):
         url = 'http://%s/forecasts/v1/daily/%s/%s?apikey=%s' % ( self.api_host, forecast, self.location_key, self.api_key )
         response = self.get(url)
-        print response
+        self.forecast = response
+        return response
 
 def main(options, args):
     wd = WeatherData()
