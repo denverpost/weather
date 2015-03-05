@@ -49,7 +49,19 @@ class PublishWeather:
     """ Methods for turning the WeatherData into something we can use.
         """
 
-    def __init__(self):
+    def __init__(self, data):
+        self.data = data
+
+    def set_data(self, data):
+        """ Set the object data value.
+            """
+        self.data = data
+        return data
+
+    def load_template(self):
+        pass
+
+    def write_file(self):
         pass
 
 def main(options, args):
