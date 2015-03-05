@@ -1,2 +1,2 @@
-# weather
-Weather publishing tools
+# Weather
+Weather publishing tools.
