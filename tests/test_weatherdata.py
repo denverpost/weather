@@ -9,7 +9,7 @@ def test_init():
         Note: This relies on env vars being set.
         """
     wd = accuweather.WeatherData()
-    assert weatherdata != None
+    assert wd != None
 
 def test_set_location_key():
     """ """
