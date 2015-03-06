@@ -52,13 +52,27 @@ class PublishWeather:
     def __init__(self, data):
         self.data = data
 
-    def set_data(self, data):
+    def set_data(self, value):
         """ Set the object data value.
             """
-        self.data = data
-        return data
+        self.data = value
+        return value
+
+    def set_data_type(self, value):
+        """ Set the object data_type value.
+            """
+        self.data_type = value
+        return value
+
+    def set_location(self, value):
+        """ Set the object location value.
+            """
+        self.location = value
+        return value
 
     def load_template(self):
+        """ Populates template var, the template depends on the data_type.
+            """
         pass
 
     def write_file(self):
@@ -68,6 +82,8 @@ def main(options, args):
     wd = WeatherData()
     wd.set_location_key('Denver')
     wd.get_forecast()
+
+    pub = PublishWeather(wd.data)
 
 if __name__ == '__main__':
     parser = OptionParser()
