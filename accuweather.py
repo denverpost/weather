@@ -51,7 +51,7 @@ class WeatherData:
         else:
             url = 'http://%s/forecasts/v1/daily/%s/%s?apikey=%s' % ( self.api_host, forecast, self.location_key, self.api_key )
             response = self.get(url)
-        self.forecast = response
+        self.response = response
         return response
 
     def get_cache(self, data_type='10day'):
@@ -65,14 +65,14 @@ class WeatherData:
         f.close()
         return data
 
-    def write_cache(self, data=None, data_type='10day'):
+    def write_cache(self, response=None, data_type='10day'):
         """ Cache data so we're not abusing the API.
             """
-        if data == None:
-            data = self.data
-        path = 'cache/%s.json' % self.data_type
+        if response == None:
+            response = self.response
+        path = 'cache/%s.json' % data_type
         f = open(path, 'wb')
-        json.dumps(data, f)
+        json.dump(response, f)
         f.close()
         return True
 
@@ -136,9 +136,9 @@ def main(options, args):
     location = 'Denver'
     wd.set_location_key(location)
     wd.get_forecast()
-    wd.write_cache(wd.data)
+    wd.write_cache(wd.response)
 
-    pub = PublishWeather(wd.data, '10day')
+    pub = PublishWeather(wd.response, '10day')
 
 if __name__ == '__main__':
     parser = OptionParser()
