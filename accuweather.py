@@ -141,13 +141,16 @@ class PublishWeather:
             output = string.replace(output, '{{rows}}', rows)
             output = string.replace(output, '{{location}}', self.location)
             output = string.replace(output, '{{slug}}', self.slug)
-    self.output = output
-    return output
+        self.output = output
+        return output
 
     def write_file(self):
         """ Write the parsed contents of a template to a file.
             """
-        pass
+        path = 'www/output/%s-%s.html' % ( self.data_type, self.slug )
+        f = open(path, 'wb')
+        f.write(self.output)
+        f.close()
 
 def main(options, args):
     wd = WeatherData(options)
@@ -159,6 +162,7 @@ def main(options, args):
     pub = PublishWeather(wd.response, '10day')
     pub.set_location(location)
     pub.write_template()
+    pub.write_file()
 
 if __name__ == '__main__':
     parser = OptionParser()
