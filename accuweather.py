@@ -12,12 +12,13 @@ class WeatherData:
     """ Methods for getting weather data from Accuweather.
         """
 
-    def __init__(self):
+    def __init__(self, options):
         self.api_key = os.environ.get('API_KEY')
         self.api_host = os.environ.get('API_HOST')
         print self.api_key, self.api_host
         if self.api_key == None or self.api_host == None:
             raise ValueError('Both API_KEY and API_HOST environment variables must be set.')
+        self.options = options
 
     def get(self, url):
         """ Wrapper for API requests. Take a URL, return a json array.
@@ -43,10 +44,37 @@ class WeatherData:
         if self.location_key == '':
             raise ValueError("Location Key cannot be blank. Please set it with set_location_key")
 
-        url = 'http://%s/forecasts/v1/daily/%s/%s?apikey=%s' % ( self.api_host, forecast, self.location_key, self.api_key )
-        response = self.get(url)
+        if self.options.cache == True:
+            data = self.get_cache()
+            if data != False:
+                response = data
+        else:
+            url = 'http://%s/forecasts/v1/daily/%s/%s?apikey=%s' % ( self.api_host, forecast, self.location_key, self.api_key )
+            response = self.get(url)
         self.forecast = response
         return response
+
+    def get_cache(self, data_type='10day'):
+        """ Get a serialized json object from the cache directory.
+            """
+        path = 'cache/%s.json' % self.data_type
+        if os.path.isfile(path) == False:
+            return False
+        f = open(path, 'rb')
+        data = json.load(f)
+        f.close()
+        return data
+
+    def write_cache(self, data=None, data_type='10day'):
+        """ Cache data so we're not abusing the API.
+            """
+        if data == None:
+            data = self.data
+        path = 'cache/%s.json' % self.data_type
+        f = open(path, 'wb')
+        json.dumps(data, f)
+        f.close()
+        return True
 
 class PublishWeather:
     """ Methods for turning the WeatherData into something we can use.
@@ -56,7 +84,7 @@ class PublishWeather:
         self.data = data
         if data_type:
             self.data_type = data_type
-            self.template = load_template()
+            self.load_template()
 
     def set_data(self, value):
         """ Set the object data value.
@@ -79,21 +107,43 @@ class PublishWeather:
     def load_template(self):
         """ Populates template var, the template depends on the data_type.
             """
-        pass
+        path = 'html/%s.html' % self.data_type
+        if os.path.isfile(path) == False:
+            raise ValueError("Template file %s does not exist" % path)
+        f = open(path, 'rb')
+        self.template = f.read()
+        return self.template
+
+    def write_template(self):
+        """ Edit the template var with the values from the data var.
+            """
+        if self.template == '':
+            raise ValueError("template var must exist and be something.")
+        #path = 'mappings/%s.json' % self.data_type
+        #if os.path.isfile(path) == False:
+        #    raise ValueError("Mapping file %s does not exist" % path)
+        #f.open(path, 'rb')
+        #self.mapping = f.read()
+        if self.data_type == '10day':
+            for item in self.data['DailyForecasts']:
+                print item
 
     def write_file(self):
         pass
 
 def main(options, args):
-    wd = WeatherData()
-    wd.set_location_key('Denver')
+    wd = WeatherData(options)
+    location = 'Denver'
+    wd.set_location_key(location)
     wd.get_forecast()
+    wd.write_cache(wd.data)
 
     pub = PublishWeather(wd.data, '10day')
 
 if __name__ == '__main__':
     parser = OptionParser()
     parser.add_option("-v", "--verbose", dest="verbose", default=False, action="store_true")
+    parser.add_option("-c", "--cache", dest="cache", default=False, action="store_true")
     (options, args) = parser.parse_args()
 
     if options.verbose:
