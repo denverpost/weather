@@ -6,6 +6,7 @@ import csv
 import doctest
 import json
 import httplib2
+import string
 from optparse import OptionParser
 
 class WeatherData:
@@ -104,10 +105,12 @@ class PublishWeather:
         self.location = value
         return value
 
-    def load_template(self):
+    def load_template(self, data_type=None):
         """ Populates template var, the template depends on the data_type.
             """
-        path = 'html/%s.html' % self.data_type
+        if not data_type:
+            data_type = self.data_type
+        path = 'html/%s.html' % data_type
         if os.path.isfile(path) == False:
             raise ValueError("Template file %s does not exist" % path)
         f = open(path, 'rb')
@@ -119,14 +122,22 @@ class PublishWeather:
             """
         if self.template == '':
             raise ValueError("template var must exist and be something.")
+        content = self.template
         #path = 'mappings/%s.json' % self.data_type
         #if os.path.isfile(path) == False:
         #    raise ValueError("Mapping file %s does not exist" % path)
         #f.open(path, 'rb')
         #self.mapping = f.read()
         if self.data_type == '10day':
-            for item in self.data['DailyForecasts']:
-                print item
+            rows = ''
+            for i, item in enumerate(self.data['DailyForecasts']):
+                content = self.load_template('10day.row')
+                content = string.replace(content, '{{high}}', str(int(item['Temperature']['Maximum']['Value'])))
+                content = string.replace(content, '{{low}}', str(int(item['Temperature']['Minimum']['Value'])))
+                content = string.replace(content, '{{night}}', item['Night']['IconPhrase'])
+                content = string.replace(content, '{{day}}', item['Day']['IconPhrase'])
+                rows += string.replace(content, '{{date}}', str(i))
+            print rows
 
     def write_file(self):
         pass
@@ -139,6 +150,7 @@ def main(options, args):
     wd.write_cache(wd.response)
 
     pub = PublishWeather(wd.response, '10day')
+    pub.write_template()
 
 if __name__ == '__main__':
     parser = OptionParser()
