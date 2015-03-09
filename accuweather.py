@@ -151,20 +151,31 @@ class PublishWeather:
         f = open(path, 'wb')
         f.write(self.output)
         f.close()
+        return "Successfully written to %s" % path
 
 def main(options, args):
     wd = WeatherData(options)
     location = 'Denver'
-    wd.set_location_key(location)
-    wd.get_forecast()
-    wd.write_cache(wd.response)
+    if args:
+        for arg in args:
+            if options.verbose:
+                print arg
+            wd.set_location_key(arg)
+            wd.get_forecast()
+            wd.write_cache(wd.response)
 
-    pub = PublishWeather(wd.response, '10day')
-    pub.set_location(location)
-    pub.write_template()
-    pub.write_file()
+            pub = PublishWeather(wd.response, '10day')
+            pub.set_location(arg)
+            pub.write_template()
+            response = pub.write_file()
+            if options.verbose:
+                print response
 
 if __name__ == '__main__':
+    """ Takes a list of locations, passed as args.
+        Example:
+        $ python accuweather.py Denver Aspen "Grand Junction"
+        """
     parser = OptionParser()
     parser.add_option("-v", "--verbose", dest="verbose", default=False, action="store_true")
     parser.add_option("-c", "--cache", dest="cache", default=False, action="store_true")
