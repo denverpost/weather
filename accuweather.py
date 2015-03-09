@@ -57,7 +57,7 @@ class WeatherData:
     def get_cache(self, data_type='10day'):
         """ Get a serialized json object from the cache directory.
             """
-        path = 'cache/%s.json' % self.data_type
+        path = 'cache/%s.json' % data_type
         if os.path.isfile(path) == False:
             return False
         f = open(path, 'rb')
