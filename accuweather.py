@@ -40,6 +40,9 @@ class WeatherData:
     def get_forecast(self, forecast='10day'):
         """ Get the 10-day forecast.
             """
+        if self.location_key == '':
+            raise ValueError("Location Key cannot be blank. Please set it with set_location_key")
+
         url = 'http://%s/forecasts/v1/daily/%s/%s?apikey=%s' % ( self.api_host, forecast, self.location_key, self.api_key )
         response = self.get(url)
         self.forecast = response
@@ -49,8 +52,11 @@ class PublishWeather:
     """ Methods for turning the WeatherData into something we can use.
         """
 
-    def __init__(self, data):
+    def __init__(self, data, data_type=None):
         self.data = data
+        if data_type:
+            self.data_type = data_type
+            self.template = load_template()
 
     def set_data(self, value):
         """ Set the object data value.
@@ -83,7 +89,7 @@ def main(options, args):
     wd.set_location_key('Denver')
     wd.get_forecast()
 
-    pub = PublishWeather(wd.data)
+    pub = PublishWeather(wd.data, '10day')
 
 if __name__ == '__main__':
     parser = OptionParser()
