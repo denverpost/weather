@@ -103,6 +103,7 @@ class PublishWeather:
         """ Set the object location value.
             """
         self.location = value
+        self.slug = string.lower(string.replace(self.location, ' ', '_'))
         return value
 
     def load_template(self, data_type=None):
@@ -122,7 +123,7 @@ class PublishWeather:
             """
         if self.template == '':
             raise ValueError("template var must exist and be something.")
-        content = self.template
+        output = self.template
         #path = 'mappings/%s.json' % self.data_type
         #if os.path.isfile(path) == False:
         #    raise ValueError("Mapping file %s does not exist" % path)
@@ -137,9 +138,15 @@ class PublishWeather:
                 content = string.replace(content, '{{night}}', item['Night']['IconPhrase'])
                 content = string.replace(content, '{{day}}', item['Day']['IconPhrase'])
                 rows += string.replace(content, '{{date}}', str(i))
-            print rows
+            output = string.replace(output, '{{rows}}', rows)
+            output = string.replace(output, '{{location}}', self.location)
+            output = string.replace(output, '{{slug}}', self.slug)
+    self.output = output
+    return output
 
     def write_file(self):
+        """ Write the parsed contents of a template to a file.
+            """
         pass
 
 def main(options, args):
@@ -150,6 +157,7 @@ def main(options, args):
     wd.write_cache(wd.response)
 
     pub = PublishWeather(wd.response, '10day')
+    pub.set_location(location)
     pub.write_template()
 
 if __name__ == '__main__':
