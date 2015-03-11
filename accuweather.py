@@ -7,6 +7,7 @@ import doctest
 import json
 import httplib2
 import string
+from datetime import date, timedelta
 from optparse import OptionParser
 
 class WeatherData:
@@ -137,12 +138,23 @@ class PublishWeather:
                 content = string.replace(content, '{{low}}', str(int(item['Temperature']['Minimum']['Value'])))
                 content = string.replace(content, '{{night}}', item['Night']['IconPhrase'])
                 content = string.replace(content, '{{day}}', item['Day']['IconPhrase'])
-                rows += string.replace(content, '{{date}}', str(i))
+                rows += string.replace(content, '{{date}}', self.get_date(i))
             output = string.replace(output, '{{rows}}', rows)
             output = string.replace(output, '{{location}}', self.location)
             output = string.replace(output, '{{slug}}', self.slug)
         self.output = output
         return output
+
+    def get_date(self, date_offset, date_format="%a."):
+        """ Helper method for taking an integer (the integer being the offset
+            from the current day, where 0 = today, 1 = tomorrow etc.), and
+            returning a formatted date.
+
+            Format defaults to abbreviated weekday: "Wed."
+            """
+        if date_offset == 0:
+            return "Today"
+        return date.strftime(date.today() + timedelta(date_offset), date_format)
 
     def write_file(self):
         """ Write the parsed contents of a template to a file.
