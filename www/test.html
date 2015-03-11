@@ -406,61 +406,112 @@ dfm.$('head').append('<link rel="stylesheet" type="text/css" href="http://extras
 
 <h2 class="localWeatherTitle" id="localWeatherTitle">Denver Weather</h2><!-- END FREEFORM RENDER, ID 25535221 --></td></tr><tr><td valign="top"><!-- BEGIN FREEFORM RENDER, ID 25463506 --><!-- NOTE: This is the map on the main weather page. It should not be changed. If you want to put the radar map on the homepage, use freeform 25808362-->
 
-<!-- TEST HERE -->
-<h2 id="Denver-10day">Denver 10-day forecast</h2>
-<dl>
-    <dt>Today:</dt>
-        <dd class="day icon">Sunny</dd>
-        <dd class="night icon">Mostly clear</dd>
-        <dd class="high"><dl><dt>High:</dt><dd>67</dd></dl></dd>
-        <dd class="low"><dl><dt>Low:</dt><dd>37</dd></dl></dd>
-    <dt>Thu.:</dt>
-        <dd class="day icon">Mostly cloudy</dd>
-        <dd class="night icon">Showers</dd>
-        <dd class="high"><dl><dt>High:</dt><dd>63</dd></dl></dd>
-        <dd class="low"><dl><dt>Low:</dt><dd>37</dd></dl></dd>
-    <dt>Fri.:</dt>
-        <dd class="day icon">Mostly cloudy w/ showers</dd>
-        <dd class="night icon">Clear</dd>
-        <dd class="high"><dl><dt>High:</dt><dd>53</dd></dl></dd>
-        <dd class="low"><dl><dt>Low:</dt><dd>32</dd></dl></dd>
-    <dt>Sat.:</dt>
-        <dd class="day icon">Sunny</dd>
-        <dd class="night icon">Clear</dd>
-        <dd class="high"><dl><dt>High:</dt><dd>62</dd></dl></dd>
-        <dd class="low"><dl><dt>Low:</dt><dd>38</dd></dl></dd>
-    <dt>Sun.:</dt>
-        <dd class="day icon">Partly sunny</dd>
-        <dd class="night icon">Intermittent clouds</dd>
-        <dd class="high"><dl><dt>High:</dt><dd>72</dd></dl></dd>
-        <dd class="low"><dl><dt>Low:</dt><dd>41</dd></dl></dd>
-    <dt>Mon.:</dt>
-        <dd class="day icon">Mostly cloudy</dd>
-        <dd class="night icon">Mostly cloudy</dd>
-        <dd class="high"><dl><dt>High:</dt><dd>66</dd></dl></dd>
-        <dd class="low"><dl><dt>Low:</dt><dd>39</dd></dl></dd>
-    <dt>Tue.:</dt>
-        <dd class="day icon">Cloudy</dd>
-        <dd class="night icon">Cloudy</dd>
-        <dd class="high"><dl><dt>High:</dt><dd>57</dd></dl></dd>
-        <dd class="low"><dl><dt>Low:</dt><dd>36</dd></dl></dd>
-    <dt>Wed.:</dt>
-        <dd class="day icon">Partly sunny w/ t-storms</dd>
-        <dd class="night icon">Partly cloudy w/ t-storms</dd>
-        <dd class="high"><dl><dt>High:</dt><dd>68</dd></dl></dd>
-        <dd class="low"><dl><dt>Low:</dt><dd>42</dd></dl></dd>
-    <dt>Thu.:</dt>
-        <dd class="day icon">Intermittent clouds</dd>
-        <dd class="night icon">Mostly clear</dd>
-        <dd class="high"><dl><dt>High:</dt><dd>62</dd></dl></dd>
-        <dd class="low"><dl><dt>Low:</dt><dd>38</dd></dl></dd>
-    <dt>Fri.:</dt>
-        <dd class="day icon">Mostly sunny</dd>
-        <dd class="night icon">Intermittent clouds</dd>
-        <dd class="high"><dl><dt>High:</dt><dd>58</dd></dl></dd>
-        <dd class="low"><dl><dt>Low:</dt><dd>37</dd></dl></dd>
+<style type="text/css">
+ul.tenday li { border: 1px solid red!important; display:block; 
+    width: 62px;
+    float: left;
+}
+dd.night,
+dd.high dl dt,
+dd.low dl dt
+{ display: none; }
 
-</dl>
+</style>
+<!-- TEST HERE -->
+<h2 id="denver-10day">Denver 10-day forecast</h2>
+<ul class="tenday">
+    <li>
+        <dl>
+            <dt>Today</dt>
+                <dd class="day icon">Sunny</dd>
+                <dd class="night icon">Mostly clear</dd>
+                <dd class="high"><dl><dt>High:</dt><dd>67</dd></dl></dd>
+                <dd class="low"><dl><dt>Low:</dt><dd>37</dd></dl></dd>
+        </dl>
+    </li>
+    <li>
+        <dl>
+            <dt>Thu.</dt>
+                <dd class="day icon">Mostly cloudy</dd>
+                <dd class="night icon">Showers</dd>
+                <dd class="high"><dl><dt>High:</dt><dd>63</dd></dl></dd>
+                <dd class="low"><dl><dt>Low:</dt><dd>37</dd></dl></dd>
+        </dl>
+    </li>
+    <li>
+        <dl>
+            <dt>Fri.</dt>
+                <dd class="day icon">Mostly cloudy w/ showers</dd>
+                <dd class="night icon">Clear</dd>
+                <dd class="high"><dl><dt>High:</dt><dd>53</dd></dl></dd>
+                <dd class="low"><dl><dt>Low:</dt><dd>32</dd></dl></dd>
+        </dl>
+    </li>
+    <li>
+        <dl>
+            <dt>Sat.</dt>
+                <dd class="day icon">Sunny</dd>
+                <dd class="night icon">Clear</dd>
+                <dd class="high"><dl><dt>High:</dt><dd>62</dd></dl></dd>
+                <dd class="low"><dl><dt>Low:</dt><dd>38</dd></dl></dd>
+        </dl>
+    </li>
+    <li>
+        <dl>
+            <dt>Sun.</dt>
+                <dd class="day icon">Partly sunny</dd>
+                <dd class="night icon">Intermittent clouds</dd>
+                <dd class="high"><dl><dt>High:</dt><dd>72</dd></dl></dd>
+                <dd class="low"><dl><dt>Low:</dt><dd>41</dd></dl></dd>
+        </dl>
+    </li>
+    <li>
+        <dl>
+            <dt>Mon.</dt>
+                <dd class="day icon">Mostly cloudy</dd>
+                <dd class="night icon">Mostly cloudy</dd>
+                <dd class="high"><dl><dt>High:</dt><dd>66</dd></dl></dd>
+                <dd class="low"><dl><dt>Low:</dt><dd>39</dd></dl></dd>
+        </dl>
+    </li>
+    <li>
+        <dl>
+            <dt>Tue.</dt>
+                <dd class="day icon">Cloudy</dd>
+                <dd class="night icon">Cloudy</dd>
+                <dd class="high"><dl><dt>High:</dt><dd>57</dd></dl></dd>
+                <dd class="low"><dl><dt>Low:</dt><dd>36</dd></dl></dd>
+        </dl>
+    </li>
+    <li>
+        <dl>
+            <dt>Wed.</dt>
+                <dd class="day icon">Partly sunny w/ t-storms</dd>
+                <dd class="night icon">Partly cloudy w/ t-storms</dd>
+                <dd class="high"><dl><dt>High:</dt><dd>68</dd></dl></dd>
+                <dd class="low"><dl><dt>Low:</dt><dd>42</dd></dl></dd>
+        </dl>
+    </li>
+    <li>
+        <dl>
+            <dt>Thu.</dt>
+                <dd class="day icon">Intermittent clouds</dd>
+                <dd class="night icon">Mostly clear</dd>
+                <dd class="high"><dl><dt>High:</dt><dd>62</dd></dl></dd>
+                <dd class="low"><dl><dt>Low:</dt><dd>38</dd></dl></dd>
+        </dl>
+    </li>
+    <li>
+        <dl>
+            <dt>Fri.</dt>
+                <dd class="day icon">Mostly sunny</dd>
+                <dd class="night icon">Intermittent clouds</dd>
+                <dd class="high"><dl><dt>High:</dt><dd>58</dd></dl></dd>
+                <dd class="low"><dl><dt>Low:</dt><dd>37</dd></dl></dd>
+        </dl>
+    </li>
+
+</ul>
 
 
 
