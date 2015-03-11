@@ -136,6 +136,8 @@ class PublishWeather:
                 content = self.load_template('10day.row')
                 content = string.replace(content, '{{high}}', str(int(item['Temperature']['Maximum']['Value'])))
                 content = string.replace(content, '{{low}}', str(int(item['Temperature']['Minimum']['Value'])))
+                content = string.replace(content, '{{night_icon}}', str(item['Night']['Icon']))
+                content = string.replace(content, '{{day_icon}}', str(item['Day']['Icon']))
                 content = string.replace(content, '{{night}}', item['Night']['IconPhrase'])
                 content = string.replace(content, '{{day}}', item['Day']['IconPhrase'])
                 rows += string.replace(content, '{{date}}', self.get_date(i))
