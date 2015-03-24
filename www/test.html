@@ -416,6 +416,10 @@ dd.high dl dt,
 dd.low dl dt
 { display: none; }
 
+.accuweather .icon img
+{
+    height: 40px;
+}
 .tenday dt { margin: auto; text-align: center; }
 .tenday dd.high
 {
@@ -427,11 +431,11 @@ dd.low dl dt
     text-indent: 30px; 
 }
 img.icn { }
-.icn_1 { background-image-url: url(); }
+img.icn_1 { background-image: url('https://api.accuweather.com/developers/Media/Default/WeatherIcons/01-s.png'); }
 </style>
 <!-- TEST HERE -->
 <h2 id="denver-10day">Denver 10-day forecast</h2>
-<ul class="tenday">
+<ul class="accuweather tenday">
     <li>
         <dl>
             <dt>Today</dt>
