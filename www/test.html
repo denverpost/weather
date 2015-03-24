@@ -413,16 +413,18 @@ ul.tenday li
     width: 62px;
     float: left;
 }
-dd.night,
 dd.high dl dt,
 dd.low dl dt
 { display: none; }
 
-.accuweather .icon img
+.accuweather .icon 
 {
     width: 62px;
     height: 45px;
+    overflow: hidden;
 }
+.accuweather .day { margin-left: -5px; }
+.accuweather .night { margin-left: 25px; }
 .tenday dt { margin: auto; text-align: center; }
 .tenday dd.high
 {
@@ -439,6 +441,8 @@ img.icn
     background-size: 100%;
     border: 0;
 }
+
+/*
 img.icn_1 { background-image: url('images/accuweather/01-s.png'); }
 img.icn_2 { background-image: url('images/accuweather/02-s.png'); }
 img.icn_3 { background-image: url('images/accuweather/03-s.png'); }
@@ -483,6 +487,7 @@ img.icn_41 { background-image: url('images/accuweather/41-s.png'); }
 img.icn_42 { background-image: url('images/accuweather/42-s.png'); }
 img.icn_43 { background-image: url('images/accuweather/43-s.png'); }
 img.icn_44 { background-image: url('images/accuweather/44-s.png'); }
+*/
 </style>
 <!-- TEST HERE -->
 <h2 id="denver-10day">Denver 10-day forecast</h2>
