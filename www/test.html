@@ -407,7 +407,9 @@ dfm.$('head').append('<link rel="stylesheet" type="text/css" href="http://extras
 <h2 class="localWeatherTitle" id="localWeatherTitle">Denver Weather</h2><!-- END FREEFORM RENDER, ID 25535221 --></td></tr><tr><td valign="top"><!-- BEGIN FREEFORM RENDER, ID 25463506 --><!-- NOTE: This is the map on the main weather page. It should not be changed. If you want to put the radar map on the homepage, use freeform 25808362-->
 
 <style type="text/css">
-ul.tenday li { border: 1px solid red!important; display:block; 
+ul.tenday li 
+{
+    display:block; 
     width: 62px;
     float: left;
 }
@@ -418,7 +420,8 @@ dd.low dl dt
 
 .accuweather .icon img
 {
-    height: 40px;
+    width: 62px;
+    height: 45px;
 }
 .tenday dt { margin: auto; text-align: center; }
 .tenday dd.high
@@ -432,8 +435,9 @@ dd.low dl dt
 }
 img.icn 
 { 
-background-repeat: none;
-background-size: 100%;
+    background-repeat: none;
+    background-size: 100%;
+    border: 0;
 }
 img.icn_1 { background-image: url('images/accuweather/01-s.png'); }
 img.icn_2 { background-image: url('images/accuweather/02-s.png'); }
@@ -486,95 +490,100 @@ img.icn_44 { background-image: url('images/accuweather/44-s.png'); }
     <li>
         <dl>
             <dt>Today</dt>
-                <dd class="day icon"><img src="" class="icn_1" alt="Sunny"></dd>
-                <dd class="night icon"><img src="" class="icn_34" alt="Mostly clear"</dd>
-                <dd class="high temp"><dl><dt>High:</dt><dd>67</dd></dl></dd>
-                <dd class="low temp"><dl><dt>Low:</dt><dd>37</dd></dl></dd>
-        </dl>
-    </li>
-    <li>
-        <dl>
-            <dt>Thu.</dt>
-                <dd class="day icon"><img src="" class="icn_6" alt="Mostly cloudy"></dd>
-                <dd class="night icon"><img src="" class="icn_12" alt="Showers"</dd>
-                <dd class="high temp"><dl><dt>High:</dt><dd>63</dd></dl></dd>
-                <dd class="low temp"><dl><dt>Low:</dt><dd>37</dd></dl></dd>
-        </dl>
-    </li>
-    <li>
-        <dl>
-            <dt>Fri.</dt>
-                <dd class="day icon"><img src="" class="icn_13" alt="Mostly cloudy w/ showers"></dd>
-                <dd class="night icon"><img src="" class="icn_33" alt="Clear"</dd>
-                <dd class="high temp"><dl><dt>High:</dt><dd>53</dd></dl></dd>
-                <dd class="low temp"><dl><dt>Low:</dt><dd>32</dd></dl></dd>
-        </dl>
-    </li>
-    <li>
-        <dl>
-            <dt>Sat.</dt>
-                <dd class="day icon"><img src="" class="icn_1" alt="Sunny"></dd>
-                <dd class="night icon"><img src="" class="icn_33" alt="Clear"</dd>
-                <dd class="high temp"><dl><dt>High:</dt><dd>62</dd></dl></dd>
-                <dd class="low temp"><dl><dt>Low:</dt><dd>38</dd></dl></dd>
-        </dl>
-    </li>
-    <li>
-        <dl>
-            <dt>Sun.</dt>
-                <dd class="day icon"><img src="" class="icn_3" alt="Partly sunny"></dd>
-                <dd class="night icon"><img src="" class="icn_36" alt="Intermittent clouds"</dd>
-                <dd class="high temp"><dl><dt>High:</dt><dd>72</dd></dl></dd>
-                <dd class="low temp"><dl><dt>Low:</dt><dd>41</dd></dl></dd>
-        </dl>
-    </li>
-    <li>
-        <dl>
-            <dt>Mon.</dt>
-                <dd class="day icon"><img src="" class="icn_6" alt="Mostly cloudy"></dd>
-                <dd class="night icon"><img src="" class="icn_38" alt="Mostly cloudy"</dd>
-                <dd class="high temp"><dl><dt>High:</dt><dd>66</dd></dl></dd>
-                <dd class="low temp"><dl><dt>Low:</dt><dd>39</dd></dl></dd>
-        </dl>
-    </li>
-    <li>
-        <dl>
-            <dt>Tue.</dt>
-                <dd class="day icon"><img src="" class="icn_7" alt="Cloudy"></dd>
-                <dd class="night icon"><img src="" class="icn_7" alt="Cloudy"</dd>
-                <dd class="high temp"><dl><dt>High:</dt><dd>57</dd></dl></dd>
-                <dd class="low temp"><dl><dt>Low:</dt><dd>36</dd></dl></dd>
+                <dd class="day icon"><img src="images/accuweather/03-s.png" class="icn icn_03" alt="Partly sunny"></dd>
+                <dd class="high temp"><dl><dt>High:</dt><dd>46</dd></dl></dd>
+                <dd class="low temp"><dl><dt>Low:</dt><dd>27</dd></dl></dd>
+                <dd class="night icon"><img src="images/accuweather/22-s.png" class="icn icn_22" alt="Snow"</dd>
         </dl>
     </li>
     <li>
         <dl>
             <dt>Wed.</dt>
-                <dd class="day icon"><img src="" class="icn_17" alt="Partly sunny w/ t-storms"></dd>
-                <dd class="night icon"><img src="" class="icn_41" alt="Partly cloudy w/ t-storms"</dd>
-                <dd class="high temp"><dl><dt>High:</dt><dd>68</dd></dl></dd>
-                <dd class="low temp"><dl><dt>Low:</dt><dd>42</dd></dl></dd>
+                <dd class="day icon"><img src="images/accuweather/29-s.png" class="icn icn_29" alt="Rain and snow"></dd>
+                <dd class="high temp"><dl><dt>High:</dt><dd>41</dd></dl></dd>
+                <dd class="low temp"><dl><dt>Low:</dt><dd>19</dd></dl></dd>
+                <dd class="night icon"><img src="images/accuweather/34-s.png" class="icn icn_34" alt="Mostly clear"</dd>
         </dl>
     </li>
     <li>
         <dl>
             <dt>Thu.</dt>
-                <dd class="day icon"><img src="" class="icn_4" alt="Intermittent clouds"></dd>
-                <dd class="night icon"><img src="" class="icn_34" alt="Mostly clear"</dd>
-                <dd class="high temp"><dl><dt>High:</dt><dd>62</dd></dl></dd>
-                <dd class="low temp"><dl><dt>Low:</dt><dd>38</dd></dl></dd>
+                <dd class="day icon"><img src="images/accuweather/04-s.png" class="icn icn_04" alt="Intermittent clouds"></dd>
+                <dd class="high temp"><dl><dt>High:</dt><dd>49</dd></dl></dd>
+                <dd class="low temp"><dl><dt>Low:</dt><dd>24</dd></dl></dd>
+                <dd class="night icon"><img src="images/accuweather/35-s.png" class="icn icn_35" alt="Partly cloudy"</dd>
         </dl>
     </li>
     <li>
         <dl>
             <dt>Fri.</dt>
-                <dd class="day icon"><img src="" class="icn_2" alt="Mostly sunny"></dd>
-                <dd class="night icon"><img src="" class="icn_36" alt="Intermittent clouds"</dd>
+                <dd class="day icon"><img src="images/accuweather/04-s.png" class="icn icn_04" alt="Intermittent clouds"></dd>
+                <dd class="high temp"><dl><dt>High:</dt><dd>57</dd></dl></dd>
+                <dd class="low temp"><dl><dt>Low:</dt><dd>28</dd></dl></dd>
+                <dd class="night icon"><img src="images/accuweather/34-s.png" class="icn icn_34" alt="Mostly clear"</dd>
+        </dl>
+    </li>
+    <li>
+        <dl>
+            <dt>Sat.</dt>
+                <dd class="day icon"><img src="images/accuweather/02-s.png" class="icn icn_02" alt="Mostly sunny"></dd>
+                <dd class="high temp"><dl><dt>High:</dt><dd>62</dd></dl></dd>
+                <dd class="low temp"><dl><dt>Low:</dt><dd>32</dd></dl></dd>
+                <dd class="night icon"><img src="images/accuweather/33-s.png" class="icn icn_33" alt="Clear"</dd>
+        </dl>
+    </li>
+    <li>
+        <dl>
+            <dt>Sun.</dt>
+                <dd class="day icon"><img src="images/accuweather/01-s.png" class="icn icn_01" alt="Sunny"></dd>
+                <dd class="high temp"><dl><dt>High:</dt><dd>60</dd></dl></dd>
+                <dd class="low temp"><dl><dt>Low:</dt><dd>31</dd></dl></dd>
+                <dd class="night icon"><img src="images/accuweather/36-s.png" class="icn icn_36" alt="Intermittent clouds"</dd>
+        </dl>
+    </li>
+    <li>
+        <dl>
+            <dt>Mon.</dt>
+                <dd class="day icon"><img src="images/accuweather/06-s.png" class="icn icn_06" alt="Mostly cloudy"></dd>
+                <dd class="high temp"><dl><dt>High:</dt><dd>62</dd></dl></dd>
+                <dd class="low temp"><dl><dt>Low:</dt><dd>32</dd></dl></dd>
+                <dd class="night icon"><img src="images/accuweather/35-s.png" class="icn icn_35" alt="Partly cloudy"</dd>
+        </dl>
+    </li>
+    <li>
+        <dl>
+            <dt>Tue.</dt>
+                <dd class="day icon"><img src="images/accuweather/12-s.png" class="icn icn_12" alt="Showers"></dd>
+                <dd class="high temp"><dl><dt>High:</dt><dd>59</dd></dl></dd>
+                <dd class="low temp"><dl><dt>Low:</dt><dd>33</dd></dl></dd>
+                <dd class="night icon"><img src="images/accuweather/33-s.png" class="icn icn_33" alt="Clear"</dd>
+        </dl>
+    </li>
+    <li>
+        <dl>
+            <dt>Wed.</dt>
+                <dd class="day icon"><img src="images/accuweather/01-s.png" class="icn icn_01" alt="Sunny"></dd>
+                <dd class="high temp"><dl><dt>High:</dt><dd>56</dd></dl></dd>
+                <dd class="low temp"><dl><dt>Low:</dt><dd>31</dd></dl></dd>
+                <dd class="night icon"><img src="images/accuweather/38-s.png" class="icn icn_38" alt="Mostly cloudy"</dd>
+        </dl>
+    </li>
+    <li>
+        <dl>
+            <dt>Thu.</dt>
+                <dd class="day icon"><img src="images/accuweather/07-s.png" class="icn icn_07" alt="Cloudy"></dd>
                 <dd class="high temp"><dl><dt>High:</dt><dd>58</dd></dl></dd>
-                <dd class="low temp"><dl><dt>Low:</dt><dd>37</dd></dl></dd>
+                <dd class="low temp"><dl><dt>Low:</dt><dd>24</dd></dl></dd>
+                <dd class="night icon"><img src="images/accuweather/35-s.png" class="icn icn_35" alt="Partly cloudy"</dd>
         </dl>
     </li>
 
 </ul>
+
+
+
+
+
 
 
 <script>

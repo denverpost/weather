@@ -133,11 +133,19 @@ class PublishWeather:
         if self.data_type == '10day':
             rows = ''
             for i, item in enumerate(self.data['DailyForecasts']):
+                night_icon = str(item['Night']['Icon'])
+                if item['Night']['Icon'] < 10:
+                    night_icon = '0%s' % night_icon
+
+                day_icon = str(item['Day']['Icon'])
+                if item['Day']['Icon'] < 10:
+                    day_icon = '0%s' % day_icon
+
                 content = self.load_template('10day.row')
                 content = string.replace(content, '{{high}}', str(int(item['Temperature']['Maximum']['Value'])))
                 content = string.replace(content, '{{low}}', str(int(item['Temperature']['Minimum']['Value'])))
-                content = string.replace(content, '{{night_icon}}', str(item['Night']['Icon']))
-                content = string.replace(content, '{{day_icon}}', str(item['Day']['Icon']))
+                content = string.replace(content, '{{night_icon}}', night_icon)
+                content = string.replace(content, '{{day_icon}}', day_icon)
                 content = string.replace(content, '{{night}}', item['Night']['IconPhrase'])
                 content = string.replace(content, '{{day}}', item['Day']['IconPhrase'])
                 rows += string.replace(content, '{{date}}', self.get_date(i))
