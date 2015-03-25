@@ -40,8 +40,15 @@ class WeatherData:
         self.location = response
         return self.location_key
 
-    def get_forecast(self, forecast='10day'):
-        """ Get the 10-day forecast.
+    def get_from_api(self, *args, **kwargs):
+        """ Get data from Accuweather.
+            10-day forecast: http://{{api} or {{apidev}}.accuweather.com/forecasts/{version}/daily/10day/{locationKey}{.{format}}?apikey={your key}{&language={language code}}{&details={true or false}}{&metric={true or false}}
+            1-day forecast: http://{{api} or {{apidev}}.accuweather.com/forecasts/{version}/daily/1day/{locationKey}{.{format}}?apikey={your key}{&language={language code}}{&details={true or false}}{&metric={true or false}}
+            240-hour: http://{{api} or {{apidev}}.accuweather.com/forecasts/{version}/hourly/240hour/{locationKey}{.{format}}?apikey={your key}{&language={language code}}{&details={true or false}}{&metric={true or false}}
+            72-hour: http://{{api} or {{apidev}}.accuweather.com/forecasts/{version}/hourly/72hour/{locationKey}{.{format}}?apikey={your key}{&language={language code}}{&details={true or false}}{&metric={true or false}}
+            24-hour: http://{{api} or {{apidev}}.accuweather.com/forecasts/{version}/hourly/24hour/{locationKey}{.{format}}?apikey={your key}{&language={language code}}{&details={true or false}}{&metric={true or false}}
+            12-hour: http://{{api} or {{apidev}}.accuweather.com/forecasts/{version}/hourly/12hour/{locationKey}{.{format}}?apikey={your key}{&language={language code}}{&details={true or false}}{&metric={true or false}}
+            1-hour: http://{{api} or {{apidev}}.accuweather.com/forecasts/{version}/hourly/1hour/{locationKey}{.{format}}?apikey={your key}{&language={language code}}{&details={true or false}}{&metric={true or false}}
             """
         if self.location_key == '':
             raise ValueError("Location Key cannot be blank. Please set it with set_location_key")
@@ -58,6 +65,7 @@ class WeatherData:
 
     def get_current(self):
         """ Get the current conditions.
+            http://{{api} or {{apidev}}.accuweather.com/currentconditions/{version}/{locationKey}{.{format}}?apikey={your key}{&language={language code}}{&details={true or false}}{&getphotos=true or false}
             """
         if self.location_key == '':
             raise ValueError("Location Key cannot be blank. Please set it with set_location_key")
