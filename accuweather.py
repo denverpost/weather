@@ -56,6 +56,22 @@ class WeatherData:
         self.response = response
         return response
 
+    def get_current(self):
+        """ Get the current conditions.
+            """
+        if self.location_key == '':
+            raise ValueError("Location Key cannot be blank. Please set it with set_location_key")
+
+        if self.options.cache == True:
+            data = self.get_cache()
+            if data != False:
+                response = data
+        else:
+            url = 'http://%s/currentconditions/v1/daily/%s/%s?apikey=%s' % ( self.api_host, forecast, self.location_key, self.api_key )
+            response = self.get(url)
+        self.response = response
+        return response
+
     def get_cache(self, data_type='10day'):
         """ Get a serialized json object from the cache directory.
             """
@@ -152,6 +168,8 @@ class PublishWeather:
             output = string.replace(output, '{{rows}}', rows)
             output = string.replace(output, '{{location}}', self.location)
             output = string.replace(output, '{{slug}}', self.slug)
+        elif self.data_type == 'current':
+            pass
         self.output = output
         return output
 
@@ -185,6 +203,8 @@ def main(options, args):
             wd.set_location_key(arg)
             wd.get_forecast()
             wd.write_cache(wd.response)
+            #wd.get_current()
+            #wd.write_cache(wd.response)
 
             pub = PublishWeather(wd.response, '10day')
             pub.set_location(arg)
