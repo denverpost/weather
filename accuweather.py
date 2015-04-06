@@ -17,6 +17,7 @@ class WeatherData:
     def __init__(self, options):
         self.api_key = os.environ.get('API_KEY')
         self.api_host = os.environ.get('API_HOST')
+        self.location_key = ''
         print self.api_key, self.api_host
         if self.api_key == None or self.api_host == None:
             raise ValueError('Both API_KEY and API_HOST environment variables must be set.')
@@ -57,32 +58,15 @@ class WeatherData:
             """
         print "args: ", args
         print "kwargs: ", kwargs
-        if self.location_key == '':
-            raise ValueError("Location Key cannot be blank. Please set it with set_location_key")
+        #if self.location_key == '':
+        #    raise ValueError("Location Key cannot be blank. Please set it with set_location_key")
 
         if self.options.cache == True:
             data = self.get_cache(args)
             if data != False:
                 response = data
         else:
-            url = 'http://%s/forecasts/v1/daily/%s/%s?apikey=%s' % ( self.api_host, forecast, self.location_key, self.api_key )
-            response = self.get(url)
-        self.response = response
-        return response
-
-    def get_current(self):
-        """ Get the current conditions.
-            http://{{api} or {{apidev}}.accuweather.com/currentconditions/{version}/{locationKey}{.{format}}?apikey={your key}{&language={language code}}{&details={true or false}}{&getphotos=true or false}
-            """
-        if self.location_key == '':
-            raise ValueError("Location Key cannot be blank. Please set it with set_location_key")
-
-        if self.options.cache == True:
-            data = self.get_cache()
-            if data != False:
-                response = data
-        else:
-            url = 'http://%s/currentconditions/v1/daily/%s/%s?apikey=%s' % ( self.api_host, forecast, self.location_key, self.api_key )
+            url = 'http://%s/%s/v1/daily/%s%s?apikey=%s' % ( self.api_host, kwargs['type'], kwargs['slug'], self.location_key, self.api_key )
             response = self.get(url)
         self.response = response
         return response
@@ -215,13 +199,13 @@ def main(options, args):
         for arg in args:
             if options.verbose:
                 print arg
-            wd.set_location_key(arg)
+            #wd.set_location_key(arg)
             #wd.get_forecast()
             request = { 
-                'type': 'forecast',
-                'forecast': '10day'
+                'type': 'forecasts',
+                'slug': 'daily/10day/'
             }
-            wd.get_from_api('forecast', 'hey', request)
+            wd.get_from_api('forecast', 'hey', **request)
             wd.write_cache(wd.response)
             #wd.get_current()
             #wd.write_cache(wd.response)
