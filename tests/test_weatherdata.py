@@ -8,18 +8,25 @@ def test_init():
     """ Test the class' init method.
         Note: This relies on env vars being set.
         """
-    wd = accuweather.WeatherData()
+    options = {}
+    wd = accuweather.WeatherData(options)
     assert wd != None
 
 def test_set_location_key():
     """ """
-    wd = accuweather.WeatherData()
+    options = {}
+    wd = accuweather.WeatherData(options)
     key = wd.set_location_key('Denver')
     assert key == '347810'
 
-def test_get_forecast():
+def test_get_from_api():
     """ """
-    wd = accuweather.WeatherData()
+    options = {}
+    wd = accuweather.WeatherData(options)
     wd.set_location_key('Denver')
-    forecast = wd.get_forecast('10day')
+    request = {
+        'type': 'forecasts',
+        'slug': 'daily/10day/'
+    }
+    forecast = wd.get_from_api(request)
     assert forecast['Headline']['Link'] == 'http: //www.accuweather.com/en/us/denver-co/80203/daily-weather-forecast/347810?lang=en-us'
