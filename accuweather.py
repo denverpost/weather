@@ -56,13 +56,11 @@ class WeatherData:
             Local Weather (maybe we use this instead, see what details=true gives us): http://{{api} or {{apidev}}.accuweather.com/localweather/{version}/{locationKey}{.{format}}?apikey={your key}{&language={language code}}{&details={true or false}}{&getphotos=true or false}{&metric=true or false}
             Current Conditions: http://{{api} or {{apidev}}.accuweather.com/currentconditions/{version}/{locationKey}{.{format}}?apikey={your key}{&language={language code}}{&details={true or false}}{&getphotos=true or false}
             """
-        print "args: ", args
-        print "kwargs: ", kwargs
         #if self.location_key == '':
         #    raise ValueError("Location Key cannot be blank. Please set it with set_location_key")
 
         if self.options.cache == True:
-            data = self.get_cache(args)
+            data = self.get_cache(args[0], kwargs['type'], kwargs['slug'])
             if data != False:
                 response = data
         else:
@@ -71,10 +69,14 @@ class WeatherData:
         self.response = response
         return response
 
-    def get_cache(self, data_type='10day'):
+    def get_cache(self, *args):
         """ Get a serialized json object from the cache directory.
             """
-        path = 'cache/%s.json' % data_type
+        slug = ''
+        for arg in args:
+            if arg != '':
+                slug += arg.replace('/', '-').lower()
+        path = 'cache/%s.json' % slug
         if os.path.isfile(path) == False:
             return False
         f = open(path, 'rb')
@@ -205,9 +207,14 @@ def main(options, args):
                 'type': 'forecasts',
                 'slug': 'daily/10day/'
             }
-            wd.get_from_api('forecast', 'hey', **request)
+            wd.get_from_api(arg, **request)
             wd.write_cache(wd.response)
-            #wd.get_current()
+
+            request = { 
+                'type': 'currentconditions',
+                'slug': ''
+            }
+            wd.get_from_api(arg, **request)
             #wd.write_cache(wd.response)
 
             pub = PublishWeather(wd.response, '10day')
