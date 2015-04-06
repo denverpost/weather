@@ -56,8 +56,8 @@ class WeatherData:
             Local Weather (maybe we use this instead, see what details=true gives us): http://{{api} or {{apidev}}.accuweather.com/localweather/{version}/{locationKey}{.{format}}?apikey={your key}{&language={language code}}{&details={true or false}}{&getphotos=true or false}{&metric=true or false}
             Current Conditions: http://{{api} or {{apidev}}.accuweather.com/currentconditions/{version}/{locationKey}{.{format}}?apikey={your key}{&language={language code}}{&details={true or false}}{&getphotos=true or false}
             """
-        #if self.location_key == '':
-        #    raise ValueError("Location Key cannot be blank. Please set it with set_location_key")
+        if self.location_key == '':
+            raise ValueError("Location Key cannot be blank. Please set it with set_location_key")
 
         if self.options.cache == True:
             data = self.get_cache(args[0], kwargs['type'], kwargs['slug'])
@@ -201,8 +201,8 @@ def main(options, args):
         for arg in args:
             if options.verbose:
                 print arg
-            #wd.set_location_key(arg)
-            #wd.get_forecast()
+            wd.set_location_key(arg)
+
             request = { 
                 'type': 'forecasts',
                 'slug': 'daily/10day/'
