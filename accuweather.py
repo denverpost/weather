@@ -35,7 +35,10 @@ class WeatherData:
         """ Set / update the location_key value.
             """
         url = 'http://%s/locations/v1/US/search?q=%s&apiKey=%s' % ( self.api_host, zipcode, self.api_key )
-        response = self.get(url)
+        try:
+            response = self.get(url)
+        except ValueError:
+            print url
         self.location_key = response[0]['Key']
         self.location = response
         return self.location_key
@@ -50,12 +53,15 @@ class WeatherData:
             12-hour: http://{{api} or {{apidev}}.accuweather.com/forecasts/{version}/hourly/12hour/{locationKey}{.{format}}?apikey={your key}{&language={language code}}{&details={true or false}}{&metric={true or false}}
             1-hour: http://{{api} or {{apidev}}.accuweather.com/forecasts/{version}/hourly/1hour/{locationKey}{.{format}}?apikey={your key}{&language={language code}}{&details={true or false}}{&metric={true or false}}
             Local Weather (maybe we use this instead, see what details=true gives us): http://{{api} or {{apidev}}.accuweather.com/localweather/{version}/{locationKey}{.{format}}?apikey={your key}{&language={language code}}{&details={true or false}}{&getphotos=true or false}{&metric=true or false}
+            Current Conditions: http://{{api} or {{apidev}}.accuweather.com/currentconditions/{version}/{locationKey}{.{format}}?apikey={your key}{&language={language code}}{&details={true or false}}{&getphotos=true or false}
             """
+        print "args: ", args
+        print "kwargs: ", kwargs
         if self.location_key == '':
             raise ValueError("Location Key cannot be blank. Please set it with set_location_key")
 
         if self.options.cache == True:
-            data = self.get_cache()
+            data = self.get_cache(args)
             if data != False:
                 response = data
         else:
@@ -210,7 +216,12 @@ def main(options, args):
             if options.verbose:
                 print arg
             wd.set_location_key(arg)
-            wd.get_forecast()
+            #wd.get_forecast()
+            request = { 
+                'type': 'forecast',
+                'forecast': '10day'
+            }
+            wd.get_from_api('forecast', 'hey', request)
             wd.write_cache(wd.response)
             #wd.get_current()
             #wd.write_cache(wd.response)
