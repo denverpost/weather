@@ -35,7 +35,7 @@ class WeatherData:
     def set_location_key(self, zipcode):
         """ Set / update the location_key value.
             """
-        url = 'http://%s/locations/v1/US/search?q=%s&apiKey=%s' % ( self.api_host, zipcode, self.api_key )
+        url = 'http://%s/locations/v1/US/search?q=%s&apikey=%s' % ( self.api_host, zipcode, self.api_key )
         try:
             response = self.get(url)
         except ValueError:
