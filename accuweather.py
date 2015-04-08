@@ -195,7 +195,7 @@ class PublishWeather:
                 output = string.replace(output, '{{precipitation}}', '')
 
         # These replacements hold true for all templates
-        output = string.replace(output, '{{location}}', self.location)
+        output = string.replace(output, '{{location}}', string.replace(self.location, '+', ' '))
         output = string.replace(output, '{{slug}}', self.slug)
 
         self.output = output
