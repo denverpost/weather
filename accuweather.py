@@ -145,11 +145,7 @@ class PublishWeather:
         if self.template == '':
             raise ValueError("template var must exist and be something.")
         output = self.template
-        #path = 'mappings/%s.json' % self.data_type
-        #if os.path.isfile(path) == False:
-        #    raise ValueError("Mapping file %s does not exist" % path)
-        #f.open(path, 'rb')
-        #self.mapping = f.read()
+
         if self.data_type == '10day':
             rows = ''
             for i, item in enumerate(self.data['DailyForecasts']):
@@ -170,10 +166,35 @@ class PublishWeather:
                 content = string.replace(content, '{{day}}', item['Day']['IconPhrase'])
                 rows += string.replace(content, '{{date}}', self.get_date(i))
             output = string.replace(output, '{{rows}}', rows)
-            output = string.replace(output, '{{location}}', self.location)
-            output = string.replace(output, '{{slug}}', self.slug)
-        elif self.data_type == 'current':
-            pass
+        elif self.data_type == 'currentconditions':
+            self.data = self.data[0]
+
+            icon = str(self.data['WeatherIcon'])
+            if self.data['WeatherIcon'] < 10:
+                icon = '0%s' % icon
+            temperature = self.data['Temperature']['Imperial']['Value']
+            windchill = self.data['WindChillTemperature']['Imperial']['Value']
+            precip = self.data['PrecipitationSummary']['Past24Hours']['Imperial']['Value']
+
+            print temperature, windchill, precip
+            output = string.replace(output, '{{temperature}}', str(temperature))
+
+            if temperature != windchill:
+                output = string.replace(output, '{{windchill}}', '(Feels like %s&deg; with the wind)' % str(windchill))
+            else:
+                output = string.replace(output, '{{windchill}}', '')
+
+            output = string.replace(output, '{{cloudclover}}', str(self.data['CloudCover']))
+
+            if precip > 0.0:
+                output = string.replace(output, '{{precipitation}}', '<p>Precipitation in the past 24 hours: %f"</p>' % str(precip))
+            else:
+                output = string.replace(output, '{{precipitation}}', '')
+
+        # These replacements hold true for all templates
+        output = string.replace(output, '{{location}}', self.location)
+        output = string.replace(output, '{{slug}}', self.slug)
+
         self.output = output
         return output
 
@@ -227,7 +248,7 @@ def main(options, args):
                 'suffix': '&details=true'
             }
             wd.get_from_api(arg, **request)
-            wd.write_cache(wd.response)
+            wd.write_cache(wd.response, 'currentconditions')
 
             pub = PublishWeather(wd.response, 'currentconditions')
             pub.set_location(arg)
