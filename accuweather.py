@@ -62,7 +62,7 @@ class WeatherData:
             raise ValueError("Location Key cannot be blank. Please set it with set_location_key")
 
         if self.options.cache == True:
-            data = self.get_cache(args[0], kwargs['type'], kwargs['slug'])
+            data = self.get_cache(args[0], **kwargs)
             if data != False:
                 response = data
         else:
@@ -71,14 +71,11 @@ class WeatherData:
         self.response = response
         return response
 
-    def get_cache(self, *args):
+    def get_cache(self, location, **kwargs):
         """ Get a serialized json object from the cache directory.
             """
-        slug = ''
-        for arg in args:
-            if arg != '':
-                slug += arg.replace('/', '-').lower()
-        path = 'cache/%s.json' % slug
+        cachename = '%s-%s%s' % ( location.lower(), kwargs['type'], string.replace(kwargs['slug'], '/', ''))
+        path = 'cache/%s.json' % cachename 
         if os.path.isfile(path) == False:
             return False
         f = open(path, 'rb')
@@ -86,14 +83,13 @@ class WeatherData:
         f.close()
         return data
 
-    def write_cache(self, response=None, data_type='10day'):
+    def write_cache(self, location, **kwargs):
         """ Cache data so we're not abusing the API.
             """
-        if response == None:
-            response = self.response
-        path = 'cache/%s.json' % data_type
+        cachename = '%s-%s%s' % ( location.lower(), kwargs['type'], string.replace(kwargs['slug'], '/', ''))
+        path = 'cache/%s.json' % cachename
         f = open(path, 'wb')
-        json.dump(response, f)
+        json.dump(self.response, f)
         f.close()
         return True
 
@@ -235,7 +231,7 @@ def main(options, args):
                 'suffix': ''
             }
             wd.get_from_api(arg, **request)
-            wd.write_cache(wd.response)
+            wd.write_cache(arg, **request)
 
             pub = PublishWeather(wd.response, '10day')
             pub.set_location(arg)
@@ -250,7 +246,7 @@ def main(options, args):
                 'suffix': '&details=true'
             }
             wd.get_from_api(arg, **request)
-            wd.write_cache(wd.response, 'currentconditions')
+            wd.write_cache(arg, **request)
 
             pub = PublishWeather(wd.response, 'currentconditions')
             pub.set_location(arg)
