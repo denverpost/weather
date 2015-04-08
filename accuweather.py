@@ -177,13 +177,17 @@ class PublishWeather:
             precip = self.data['PrecipitationSummary']['Past24Hours']['Imperial']['Value']
 
             output = string.replace(output, '{{temperature}}', str(temperature))
+            output = string.replace(output, '{{icon}}', icon)
+            output = string.replace(output, '{{conditions}}', self.data['WeatherText'])
+            output = string.replace(output, '{{last24_high}}', str(int(self.data['TemperatureSummary']['Past24HourRange']['Maximum']['Imperial']['Value'])))
+            output = string.replace(output, '{{last24_low}}', str(int(self.data['TemperatureSummary']['Past24HourRange']['Minimum']['Imperial']['Value'])))
 
             if temperature != windchill:
                 output = string.replace(output, '{{windchill}}', '(Feels like %s&deg; with the wind)' % str(windchill))
             else:
                 output = string.replace(output, '{{windchill}}', '')
 
-            output = string.replace(output, '{{cloudclover}}', str(self.data['CloudCover']))
+            output = string.replace(output, '{{cloudcover}}', str(self.data['CloudCover']))
 
             if precip > 0.0:
                 output = string.replace(output, '{{precipitation}}', '<p>Precipitation in the past 24 hours: %f"</p>' % str(precip))

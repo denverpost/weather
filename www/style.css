@@ -40,3 +40,5 @@ img.icn
     background-size: 100%;
     border: 0;
 }
+
+div.icon img { float: left; }
