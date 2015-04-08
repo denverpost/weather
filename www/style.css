@@ -1,0 +1,42 @@
+ul.tenday li 
+{
+    display:block; 
+    width: 62px;
+    float: left;
+}
+dd.high dl dt,
+dd.low dl dt
+{ display: none; }
+
+.accuweather .icon 
+{
+    width: 62px;
+    height: 45px;
+    overflow: hidden;
+}
+.accuweather .day { margin-left: -5px; }
+.accuweather .night { margin-left: 31px; line-height: 0; }
+.tenday dt { margin: auto; text-align: center; }
+.tenday dd
+{
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 600;
+    font-size: 26px;
+    line-height: 6px;
+}
+.tenday dd.high
+{
+    color: #FFBF00;
+    margin-left: 7px;
+}
+.tenday dd.low 
+{
+    color: #000066;
+    text-indent: 25px; 
+}
+img.icn 
+{ 
+    background-repeat: none;
+    background-size: 100%;
+    border: 0;
+}
