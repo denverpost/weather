@@ -1,11 +1,57 @@
 {
-    u'LocalObservationDateTime': u'2015-04-08T10: 01: 00-06: 00',
-    u'EpochTime': 1428508860,
-    u'WeatherText': u'Partlysunny',
+    u'EpochTime': 1428510300,
+    u'RealFeelTemperature': {
+        u'Metric': {
+            u'UnitType': 17,
+            u'Unit': u'C',
+            u'Value': 11.0
+        },
+        u'Imperial': {
+            u'UnitType': 18,
+            u'Unit': u'F',
+            u'Value': 52.0
+        }
+    },
     u'WeatherIcon': 3,
-    u'IsDayTime': True,
-    u'Link': u'http: //www.accuweather.com/en/us/denver-co/80203/current-weather/347810?lang=en-us',
-    u'MobileLink': u'http: //m.accuweather.com/en/us/denver-co/80203/current-weather/347810?lang=en-us',
+    u'CloudCover': 40,
+    u'WindGust': {
+        u'Speed': {
+            u'Metric': {
+                u'UnitType': 7,
+                u'Unit': u'km/h',
+                u'Value': 13.0
+            },
+            u'Imperial': {
+                u'UnitType': 9,
+                u'Unit': u'mi/h',
+                u'Value': 8.1
+            }
+        }
+    },
+    u'RealFeelTemperatureShade': {
+        u'Metric': {
+            u'UnitType': 17,
+            u'Unit': u'C',
+            u'Value': 6.4
+        },
+        u'Imperial': {
+            u'UnitType': 18,
+            u'Unit': u'F',
+            u'Value': 43.0
+        }
+    },
+    u'WindChillTemperature': {
+        u'Metric': {
+            u'UnitType': 17,
+            u'Unit': u'C',
+            u'Value': 6.7
+        },
+        u'Imperial': {
+            u'UnitType': 18,
+            u'Unit': u'F',
+            u'Value': 44.0
+        }
+    },
     u'Temperature': {
         u'Metric': {
             u'UnitType': 17,
@@ -17,5 +63,311 @@
             u'Unit': u'F',
             u'Value': 48.0
         }
+    },
+    u'Ceiling': {
+        u'Metric': {
+            u'UnitType': 5,
+            u'Unit': u'm',
+            u'Value': 9114.0
+        },
+        u'Imperial': {
+            u'UnitType': 0,
+            u'Unit': u'ft',
+            u'Value': 29900.0
+        }
+    },
+    u'PrecipitationSummary': {
+        u'Past24Hours': {
+            u'Metric': {
+                u'UnitType': 3,
+                u'Unit': u'mm',
+                u'Value': 0.0
+            },
+            u'Imperial': {
+                u'UnitType': 1,
+                u'Unit': u'in',
+                u'Value': 0.0
+            }
+        },
+        u'Past12Hours': {
+            u'Metric': {
+                u'UnitType': 3,
+                u'Unit': u'mm',
+                u'Value': 0.0
+            },
+            u'Imperial': {
+                u'UnitType': 1,
+                u'Unit': u'in',
+                u'Value': 0.0
+            }
+        },
+        u'Past18Hours': {
+            u'Metric': {
+                u'UnitType': 3,
+                u'Unit': u'mm',
+                u'Value': 0.0
+            },
+            u'Imperial': {
+                u'UnitType': 1,
+                u'Unit': u'in',
+                u'Value': 0.0
+            }
+        },
+        u'Past9Hours': {
+            u'Metric': {
+                u'UnitType': 3,
+                u'Unit': u'mm',
+                u'Value': 0.0
+            },
+            u'Imperial': {
+                u'UnitType': 1,
+                u'Unit': u'in',
+                u'Value': 0.0
+            }
+        },
+        u'PastHour': {
+            u'Metric': {
+                u'UnitType': 3,
+                u'Unit': u'mm',
+                u'Value': 0.0
+            },
+            u'Imperial': {
+                u'UnitType': 1,
+                u'Unit': u'in',
+                u'Value': 0.0
+            }
+        },
+        u'Precipitation': {
+            u'Metric': {
+                u'UnitType': 3,
+                u'Unit': u'mm',
+                u'Value': 0.0
+            },
+            u'Imperial': {
+                u'UnitType': 1,
+                u'Unit': u'in',
+                u'Value': 0.0
+            }
+        },
+        u'Past3Hours': {
+            u'Metric': {
+                u'UnitType': 3,
+                u'Unit': u'mm',
+                u'Value': 0.0
+            },
+            u'Imperial': {
+                u'UnitType': 1,
+                u'Unit': u'in',
+                u'Value': 0.0
+            }
+        },
+        u'Past6Hours': {
+            u'Metric': {
+                u'UnitType': 3,
+                u'Unit': u'mm',
+                u'Value': 0.0
+            },
+            u'Imperial': {
+                u'UnitType': 1,
+                u'Unit': u'in',
+                u'Value': 0.0
+            }
+        }
+    },
+    u'Visibility': {
+        u'Metric': {
+            u'UnitType': 6,
+            u'Unit': u'km',
+            u'Value': 16.1
+        },
+        u'Imperial': {
+            u'UnitType': 2,
+            u'Unit': u'mi',
+            u'Value': 10.0
+        }
+    },
+    u'Pressure': {
+        u'Metric': {
+            u'UnitType': 14,
+            u'Unit': u'mb',
+            u'Value': 1004.5
+        },
+        u'Imperial': {
+            u'UnitType': 12,
+            u'Unit': u'inHg',
+            u'Value': 29.66
+        }
+    },
+    u'Link': u'http: //www.accuweather.com/en/us/denver-co/80203/current-weather/347810?lang=en-us',
+    u'Past24HourTemperatureDeparture': {
+        u'Metric': {
+            u'UnitType': 17,
+            u'Unit': u'C',
+            u'Value': 0.0
+        },
+        u'Imperial': {
+            u'UnitType': 18,
+            u'Unit': u'F',
+            u'Value': 0.0
+        }
+    },
+    u'Precip1hr': {
+        u'Metric': {
+            u'UnitType': 3,
+            u'Unit': u'mm',
+            u'Value': 0.0
+        },
+        u'Imperial': {
+            u'UnitType': 1,
+            u'Unit': u'in',
+            u'Value': 0.0
+        }
+    },
+    u'RelativeHumidity': 67,
+    u'LocalObservationDateTime': u'2015-04-08T10: 25: 00-06: 00',
+    u'DewPoint': {
+        u'Metric': {
+            u'UnitType': 17,
+            u'Unit': u'C',
+            u'Value': 3.3
+        },
+        u'Imperial': {
+            u'UnitType': 18,
+            u'Unit': u'F',
+            u'Value': 38.0
+        }
+    },
+    u'UVIndexText': u'Moderate',
+    u'IsDayTime': True,
+    u'WeatherText': u'Partlysunny',
+    u'ObstructionsToVisibility': u'',
+    u'WetBulbTemperature': {
+        u'Metric': {
+            u'UnitType': 17,
+            u'Unit': u'C',
+            u'Value': 6.4
+        },
+        u'Imperial': {
+            u'UnitType': 18,
+            u'Unit': u'F',
+            u'Value': 44.0
+        }
+    },
+    u'MobileLink': u'http: //m.accuweather.com/en/us/denver-co/80203/current-weather/347810?lang=en-us',
+    u'Wind': {
+        u'Direction': {
+            u'Degrees': 113,
+            u'Localized': u'ESE',
+            u'English': u'ESE'
+        },
+        u'Speed': {
+            u'Metric': {
+                u'UnitType': 7,
+                u'Unit': u'km/h',
+                u'Value': 13.0
+            },
+            u'Imperial': {
+                u'UnitType': 9,
+                u'Unit': u'mi/h',
+                u'Value': 8.1
+            }
+        }
+    },
+    u'TemperatureSummary': {
+        u'Past24HourRange': {
+            u'Minimum': {
+                u'Metric': {
+                    u'UnitType': 17,
+                    u'Unit': u'C',
+                    u'Value': 3.9
+                },
+                u'Imperial': {
+                    u'UnitType': 18,
+                    u'Unit': u'F',
+                    u'Value': 39.0
+                }
+            },
+            u'Maximum': {
+                u'Metric': {
+                    u'UnitType': 17,
+                    u'Unit': u'C',
+                    u'Value': 19.4
+                },
+                u'Imperial': {
+                    u'UnitType': 18,
+                    u'Unit': u'F',
+                    u'Value': 67.0
+                }
+            }
+        },
+        u'Past6HourRange': {
+            u'Minimum': {
+                u'Metric': {
+                    u'UnitType': 17,
+                    u'Unit': u'C',
+                    u'Value': 3.9
+                },
+                u'Imperial': {
+                    u'UnitType': 18,
+                    u'Unit': u'F',
+                    u'Value': 39.0
+                }
+            },
+            u'Maximum': {
+                u'Metric': {
+                    u'UnitType': 17,
+                    u'Unit': u'C',
+                    u'Value': 9.8
+                },
+                u'Imperial': {
+                    u'UnitType': 18,
+                    u'Unit': u'F',
+                    u'Value': 50.0
+                }
+            }
+        },
+        u'Past12HourRange': {
+            u'Minimum': {
+                u'Metric': {
+                    u'UnitType': 17,
+                    u'Unit': u'C',
+                    u'Value': 3.9
+                },
+                u'Imperial': {
+                    u'UnitType': 18,
+                    u'Unit': u'F',
+                    u'Value': 39.0
+                }
+            },
+            u'Maximum': {
+                u'Metric': {
+                    u'UnitType': 17,
+                    u'Unit': u'C',
+                    u'Value': 9.8
+                },
+                u'Imperial': {
+                    u'UnitType': 18,
+                    u'Unit': u'F',
+                    u'Value': 50.0
+                }
+            }
+        }
+    },
+    u'ApparentTemperature': {
+        u'Metric': {
+            u'UnitType': 17,
+            u'Unit': u'C',
+            u'Value': 10.0
+        },
+        u'Imperial': {
+            u'UnitType': 18,
+            u'Unit': u'F',
+            u'Value': 50.0
+        }
+    },
+    u'UVIndex': 4,
+    u'PressureTendency': {
+        u'Code': u'F',
+        u'LocalizedText': u'Falling'
     }
 }

@@ -66,7 +66,7 @@ class WeatherData:
             if data != False:
                 response = data
         else:
-            url = 'http://%s/%s/v1/%s%s?apikey=%s' % ( self.api_host, kwargs['type'], kwargs['slug'], self.location_key, self.api_key )
+            url = 'http://%s/%s/v1/%s%s?apikey=%s%s' % ( self.api_host, kwargs['type'], kwargs['slug'], self.location_key, self.api_key, kwargs['suffix'] )
             response = self.get(url)
         self.response = response
         return response
@@ -96,6 +96,7 @@ class WeatherData:
         json.dump(response, f)
         f.close()
         return True
+
 
 class PublishWeather:
     """ Methods for turning the WeatherData into something we can use.
@@ -207,7 +208,8 @@ def main(options, args):
 
             request = { 
                 'type': 'forecasts',
-                'slug': 'daily/10day/'
+                'slug': 'daily/10day/',
+                'suffix': ''
             }
             wd.get_from_api(arg, **request)
             wd.write_cache(wd.response)
@@ -221,7 +223,8 @@ def main(options, args):
 
             request = { 
                 'type': 'currentconditions',
-                'slug': ''
+                'slug': '',
+                'suffix': '&details=true'
             }
             wd.get_from_api(arg, **request)
             wd.write_cache(wd.response)
