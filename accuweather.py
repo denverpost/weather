@@ -176,7 +176,6 @@ class PublishWeather:
             windchill = self.data['WindChillTemperature']['Imperial']['Value']
             precip = self.data['PrecipitationSummary']['Past24Hours']['Imperial']['Value']
 
-            print temperature, windchill, precip
             output = string.replace(output, '{{temperature}}', str(temperature))
 
             if temperature != windchill:
@@ -220,7 +219,6 @@ class PublishWeather:
 
 def main(options, args):
     wd = WeatherData(options)
-    location = 'Denver'
     if args:
         for arg in args:
             if options.verbose:
