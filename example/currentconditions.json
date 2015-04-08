@@ -1,0 +1,21 @@
+{
+    u'LocalObservationDateTime': u'2015-04-08T10: 01: 00-06: 00',
+    u'EpochTime': 1428508860,
+    u'WeatherText': u'Partlysunny',
+    u'WeatherIcon': 3,
+    u'IsDayTime': True,
+    u'Link': u'http: //www.accuweather.com/en/us/denver-co/80203/current-weather/347810?lang=en-us',
+    u'MobileLink': u'http: //m.accuweather.com/en/us/denver-co/80203/current-weather/347810?lang=en-us',
+    u'Temperature': {
+        u'Metric': {
+            u'UnitType': 17,
+            u'Unit': u'C',
+            u'Value': 8.9
+        },
+        u'Imperial': {
+            u'UnitType': 18,
+            u'Unit': u'F',
+            u'Value': 48.0
+        }
+    }
+}

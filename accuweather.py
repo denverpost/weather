@@ -29,6 +29,8 @@ class WeatherData:
         h = httplib2.Http('.tmp')
         (response, content) = h.request(url, "GET")
         if response['status'] != '200':
+            if self.options.verbose:
+                print "URL: %s" % url
             raise ValueError("AccuWeather API response: %s" % response.status)
         return json.loads(content)
 
@@ -64,7 +66,7 @@ class WeatherData:
             if data != False:
                 response = data
         else:
-            url = 'http://%s/%s/v1/daily/%s%s?apikey=%s' % ( self.api_host, kwargs['type'], kwargs['slug'], self.location_key, self.api_key )
+            url = 'http://%s/%s/v1/%s%s?apikey=%s' % ( self.api_host, kwargs['type'], kwargs['slug'], self.location_key, self.api_key )
             response = self.get(url)
         self.response = response
         return response
@@ -210,19 +212,27 @@ def main(options, args):
             wd.get_from_api(arg, **request)
             wd.write_cache(wd.response)
 
-            request = { 
-                'type': 'currentconditions',
-                'slug': ''
-            }
-            wd.get_from_api(arg, **request)
-            #wd.write_cache(wd.response)
-
             pub = PublishWeather(wd.response, '10day')
             pub.set_location(arg)
             pub.write_template()
             response = pub.write_file()
             if options.verbose:
                 print response
+
+            request = { 
+                'type': 'currentconditions',
+                'slug': ''
+            }
+            wd.get_from_api(arg, **request)
+            wd.write_cache(wd.response)
+
+            pub = PublishWeather(wd.response, 'currentconditions')
+            pub.set_location(arg)
+            pub.write_template()
+            response = pub.write_file()
+            if options.verbose:
+                print response
+
 
 if __name__ == '__main__':
     """ Takes a list of locations, passed as args.
