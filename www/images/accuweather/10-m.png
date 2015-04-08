@@ -1,0 +1,26 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<style type="text/css">
+body, div, h1,h2, p, a { margin:0; padding:0; }
+h1,h2,p,a { font-family:Arial, Helvetica, sans-serif; }
+#wrapper { width:700px; height:350px; margin:100px auto 0; background:url("http://vortex.accuweather.com/adc2010/images/404.jpg"); position:relative; }
+h1, h2, p { left:365px; color:#fff; position:absolute; }
+h1 { font-size:50px; top:85px; }
+h2 { font-size:22px; top:140px; }
+p { font-size:18px; top:170px; font-weight:normal; width:300px; }
+a { font-size:19px; width:auto; height:auto; display:block; color:#285db5; position:absolute; left:365px; top:297px; }
+a span { font-weight:bold;}
+</style>
+</head>
+<body>
+<div id="wrapper">
+	<h1>ERROR 404</h1>
+    <h2>PAGE CANNOT BE FOUND</h2>
+    <p>The page you requested has either been blown away or it never existed.</p>
+	<a href="http://www.accuweather.com"><span>AccuWeather.com</span> Home Page</a>
+</div>
+</body>
+</html>
