@@ -1,4 +1,4 @@
 #!/bin/bash
 # Update the weather data.
 source source.bash
-python accuweather.py Denver Golden Lakewood
+for CITY in `cat colorado-cities.txt`; do echo $CITY; python accuweather.py $CITY; done
