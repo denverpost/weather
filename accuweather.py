@@ -18,7 +18,6 @@ class WeatherData:
         self.api_key = os.environ.get('API_KEY')
         self.api_host = os.environ.get('API_HOST')
         self.location_key = ''
-        print self.api_key, self.api_host
         if self.api_key == None or self.api_host == None:
             raise ValueError('Both API_KEY and API_HOST environment variables must be set.')
         self.options = options
@@ -186,7 +185,7 @@ class PublishWeather:
             output = string.replace(output, '{{cloudcover}}', str(self.data['CloudCover']))
 
             if precip > 0.0:
-                output = string.replace(output, '{{precipitation}}', '<p>Precipitation in the past 24 hours: %f"</p>' % str(precip))
+                output = string.replace(output, '{{precipitation}}', '<p>Precipitation in the past 24 hours: %s"</p>' % str(precip))
             else:
                 output = string.replace(output, '{{precipitation}}', '')
 
