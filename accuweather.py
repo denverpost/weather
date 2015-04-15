@@ -224,6 +224,7 @@ def main(options, args):
                 print arg
             wd.set_location_key(arg)
 
+            # Each data display looks something like this:
             request = { 
                 'type': 'forecasts',
                 'slug': 'daily/10day/',
@@ -239,6 +240,7 @@ def main(options, args):
             if options.verbose:
                 print response
 
+            # ... or this:
             request = { 
                 'type': 'currentconditions',
                 'slug': '',
@@ -253,6 +255,24 @@ def main(options, args):
             response = pub.write_file()
             if options.verbose:
                 print response
+
+            # ... or this. We should probably abstract this into a method.
+            """
+            request = { 
+                'type': 'forecasts',
+                'slug': 'hourly/24hour/',
+                'suffix': ''
+            }
+            wd.get_from_api(arg, **request)
+            wd.write_cache(arg, **request)
+
+            pub = PublishWeather(wd.response, '24hour')
+            pub.set_location(arg)
+            pub.write_template()
+            response = pub.write_file()
+            if options.verbose:
+                print response
+            """
 
 
 if __name__ == '__main__':
