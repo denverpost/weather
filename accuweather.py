@@ -99,9 +99,16 @@ class PublishWeather:
 
     def __init__(self, data, data_type=None):
         self.data = data
+        self.limit = 0
         if data_type:
             self.data_type = data_type
             self.load_template()
+
+    def set_limit(self, value):
+        """ Set the object limit value.
+            """
+        self.limit = value
+        return value
 
     def set_data(self, value):
         """ Set the object data value.
@@ -144,6 +151,9 @@ class PublishWeather:
         if self.data_type == '10day':
             rows = ''
             for i, item in enumerate(self.data['DailyForecasts']):
+                if i > self.limit > 0:
+                    continue
+
                 night_icon = str(item['Night']['Icon'])
                 if item['Night']['Icon'] < 10:
                     night_icon = '0%s' % night_icon
@@ -236,6 +246,14 @@ def main(options, args):
             pub = PublishWeather(wd.response, '10day')
             pub.set_location(arg)
             pub.write_template()
+            response = pub.write_file()
+            if options.verbose:
+                print response
+
+            # We also want to write a five-day version:
+            pub.set_limit(5)
+            pub.write_template()
+            pub.set_data_type('5day')
             response = pub.write_file()
             if options.verbose:
                 print response
