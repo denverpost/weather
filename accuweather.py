@@ -220,6 +220,7 @@ class PublishWeather:
     def write_file(self):
         """ Write the parsed contents of a template to a file.
             """
+        self.slug = self.slug.replace('+', '_')
         path = 'www/output/%s-%s.html' % ( self.data_type, self.slug )
         f = open(path, 'wb')
         f.write(self.output)
@@ -253,7 +254,6 @@ def main(options, args):
             # We also want to write a five-day version:
             pub.set_limit(5)
             pub.write_template()
-            pub.set_data_type('5day')
             response = pub.write_file()
             if options.verbose:
                 print response
