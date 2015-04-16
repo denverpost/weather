@@ -253,8 +253,8 @@ def main(options, args):
 
             # We also want to write a five-day version:
             pub.set_limit(5)
-            pub.write_template()
-            response = pub.write_file()
+            #pub.write_template()
+            #response = pub.write_file()
             if options.verbose:
                 print response
 
