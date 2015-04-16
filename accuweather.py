@@ -144,11 +144,12 @@ class PublishWeather:
     def write_template(self):
         """ Edit the template var with the values from the data var.
             """
+        # The template is loaded in the init method.
         if self.template == '':
             raise ValueError("template var must exist and be something.")
         output = self.template
 
-        if self.data_type == '10day':
+        if self.data_type in ['10day', '5day']:
             rows = ''
             for i, item in enumerate(self.data['DailyForecasts']):
                 if i > self.limit > 0:
@@ -251,10 +252,12 @@ def main(options, args):
             if options.verbose:
                 print response
 
-            # We also want to write a five-day version:
+            # We also want to write a five-day version with the data:
+            pub = PublishWeather(wd.response, '5day')
+            pub.set_location(arg)
             pub.set_limit(5)
-            #pub.write_template()
-            #response = pub.write_file()
+            pub.write_template()
+            response = pub.write_file()
             if options.verbose:
                 print response
 
