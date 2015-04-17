@@ -182,14 +182,14 @@ class PublishWeather:
             windchill = self.data['WindChillTemperature']['Imperial']['Value']
             precip = self.data['PrecipitationSummary']['Past24Hours']['Imperial']['Value']
 
-            output = string.replace(output, '{{temperature}}', str(temperature))
+            output = string.replace(output, '{{temperature}}', str(int(temperature)))
             output = string.replace(output, '{{icon}}', icon)
             output = string.replace(output, '{{conditions}}', self.data['WeatherText'].lower())
             output = string.replace(output, '{{last24_high}}', str(int(self.data['TemperatureSummary']['Past24HourRange']['Maximum']['Imperial']['Value'])))
             output = string.replace(output, '{{last24_low}}', str(int(self.data['TemperatureSummary']['Past24HourRange']['Minimum']['Imperial']['Value'])))
 
             if temperature != windchill:
-                output = string.replace(output, '{{windchill}}', '(Feels like %s&deg; with the wind)' % str(windchill))
+                output = string.replace(output, '{{windchill}}', '(Feels like %s&deg; with the wind)' % str(int(windchill)))
             else:
                 output = string.replace(output, '{{windchill}}', '')
 
