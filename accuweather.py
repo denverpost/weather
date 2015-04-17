@@ -202,6 +202,14 @@ class PublishWeather:
 
         # These replacements hold true for all templates
         output = string.replace(output, '{{location}}', string.replace(self.location, '+', ' '))
+
+        # Make sure the grammar on possesives ("Colorado Springs'") is correct.
+        if self.location[-1] == 's':
+            output = string.replace(output, '{{s}}', '')
+        else:
+            output = string.replace(output, '{{s}}', 's')
+
+        output = string.replace(output, '{{location}}', string.replace(self.location, '+', ' '))
         output = string.replace(output, '{{slug}}', self.slug)
 
         self.output = output
