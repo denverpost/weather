@@ -42,3 +42,16 @@ img.icn
 }
 
 div.icon img { float: left; }
+
+#weather_widget { width: 300px; }
+#weather_widget ul 
+{
+    padding-left: 0!important;
+    margin: 0!important; 
+}
+#weather_widget ul li { width: 55px; }
+#weather_widget h3 
+{ 
+    margin: 15px 0 0 0; 
+}
+#weather_widget h3.tenday { clear: both; }
