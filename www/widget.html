@@ -9,7 +9,7 @@
 
     <div id="weather_current"></div>
     <div id="weather_forecast"></div>
-    <p><a href="/weather" id="weather_link">10-day forecast</a></p>
+    <p><a href="/weather" id="weather_link"><span></span> 10-day forecast</a></p>
 </div>
 <script>
 var load_weather = {
@@ -32,6 +32,16 @@ var load_weather = {
             .replace(/[^-a-zA-Z0-9\s]+/ig, '')
             .replace(/\s/gi, "_");
     },
+    clean_data: function(data)
+    {
+        // The markup we're ingesting is specific to standalone presentations, not widgets.
+        // We need to clean it up a little.
+        // Strip the city name because it's repetitive
+
+        // Lower the headers
+        data = data.replace('h2', 'h3');
+        return data;
+    },
     load_all: function(city, type)
     {
         $('#weather_city').text(city);
@@ -39,12 +49,21 @@ var load_weather = {
         if ( typeof type === 'undefined' ) var type = '5day';
         var slug = this.slugify(city);
 
-        $( "#weather_current" ).load("http://denverpostplus.com/app/weather/www/output/currentconditions-" + slug + ".html", 
-            function () {});
-        $( "#weather_forecast" ).load("http://denverpostplus.com/app/weather/www/output/" + type + "-" + slug + ".html", 
-            function () {});
+        var data = $.get("http://denverpostplus.com/app/weather/www/output/currentconditions-" + slug + ".html", 
+            function (data) 
+            { 
+                data = window.load_weather.clean_data(data);
+                $( "#weather_current" ).html(data);
+            });
+        var data = $.get("http://denverpostplus.com/app/weather/www/output/" + type + "-" + slug + ".html", 
+            function (data) 
+            {
+                data = window.load_weather.clean_data(data);
+                $( "#weather_forecast" ).html(data);
+            });
 
         $('#weather_link').attr('href', '/weather#' + slug);
+        $('#weather_link span').text('The ' + city);
     }
 };
 // Default to Denver
