@@ -114,6 +114,10 @@ $('#colorado_cities .typeahead').typeahead({
 {
     name: 'cities',
     displayKey: 'value',
-    source: substringMatcher(cities)
+    source: substringMatcher(cities),
+    templates: {
+        header: '',
+        footer: ''
+    }
 });
 </script>
