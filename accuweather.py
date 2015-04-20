@@ -263,7 +263,7 @@ def main(options, args):
             # We also want to write a five-day version with the data:
             pub = PublishWeather(wd.response, '5day')
             pub.set_location(arg)
-            pub.set_limit(5)
+            pub.set_limit(4)
             pub.write_template()
             response = pub.write_file()
             if options.verbose:
