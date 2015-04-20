@@ -4,7 +4,7 @@
     <h2><a href="/weather"><span id="weather_city">Denver</span> Weather</a></h2>
 
     <div id="colorado_cities">
-        <input class="typeahead" type="text" placeholder="Colorado Cities">
+        <input id="city_input" class="typeahead" type="text" placeholder="Type your city / town here" size="30">
     </div>
 
     <div id="weather_current"></div>
@@ -52,6 +52,9 @@ load_weather.load_all('Denver', '5day');
 
 $('.typeahead').on('typeahead:autocompleted', function(evt, item) {
     load_weather.load_all(item.value, '5day');
+})
+$('.typeahead').on('typeahead:closed', function() {
+    load_weather.load_all($('#city_input').val(), '5day');
 })
 
 // Typeahead code from http://twitter.github.io/typeahead.js/examples/
