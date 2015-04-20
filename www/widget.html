@@ -12,6 +12,43 @@
     <p><a href="/weather" id="weather_link">10-day forecast</a></p>
 </div>
 <script>
+var load_weather = {
+    slugify: function(str)
+    {
+        // Cribbed from https://github.com/andrefarzat/slugify/blob/master/slugify.js
+        var from = 'àáäãâèéëêìíïîòóöôõùúüûñç·/_,:;',
+        to = 'aaaaaeeeeiiiiooooouuuunc------';
+
+        var i = 0,
+            len = from.length;
+
+        str = str.toLowerCase();
+
+        for( ; i < len; i++ ){
+            str = str.replace(new RegExp(from.charAt(i), 'g'), to.charAt(i));
+        }
+
+        return str.replace(/^\s+|\s+$/g, '') //trim
+            .replace(/[^-a-zA-Z0-9\s]+/ig, '')
+            .replace(/\s/gi, "_");
+    },
+    load_all: function(city, type)
+    {
+        if ( typeof type === 'undefined' ) var type = '5day';
+        var slug = this.slugify(city);
+
+        $( "#weather_current" ).load("http://denverpostplus.com/app/weather/www/output/currentconditions-" + slug + ".html", 
+            function () {});
+        $( "#weather_forecast" ).load("http://denverpostplus.com/app/weather/www/output/" + type + "-" + slug + ".html", 
+            function () {});
+    }
+};
+$('.typeahead').on('typeahead:autocompleted', function(evt, item) {
+    load_weather.load_all(item.value, '5day');
+    console.log(evt, item);
+})
+
+// Typeahead code from http://twitter.github.io/typeahead.js/examples/
 var substringMatcher = function(strs) {
   return function findMatches(q, cb) {
     var matches, substrRegex;
@@ -43,6 +80,7 @@ $('#colorado_cities .typeahead').typeahead({
     highlight: true,
     minLength: 1
 },
+{
     name: 'cities',
     displayKey: 'value',
     source: substringMatcher(cities)
