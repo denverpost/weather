@@ -1,7 +1,7 @@
 <!-- Weather Widget -->
 <script src="http://extras.denverpost.com/app/weather/js/typeahead.bundle.min.js"></script>
 <div id="weather_widget" class="weather_widget">
-    <h2><a href="/weather">Denver Weather</a></h2>
+    <h2><a href="/weather"><span id="weather_city">Denver</span> Weather</a></h2>
 
     <div id="colorado_cities">
         <input class="typeahead" type="text" placeholder="Colorado Cities">
@@ -34,6 +34,8 @@ var load_weather = {
     },
     load_all: function(city, type)
     {
+        $('#weather_city').text(city);
+
         if ( typeof type === 'undefined' ) var type = '5day';
         var slug = this.slugify(city);
 
@@ -41,11 +43,15 @@ var load_weather = {
             function () {});
         $( "#weather_forecast" ).load("http://denverpostplus.com/app/weather/www/output/" + type + "-" + slug + ".html", 
             function () {});
+
+        $('#weather_link').attr('href', '/weather#' + slug);
     }
 };
+// Default to Denver
+load_weather.load_all('Denver', '5day');
+
 $('.typeahead').on('typeahead:autocompleted', function(evt, item) {
     load_weather.load_all(item.value, '5day');
-    console.log(evt, item);
 })
 
 // Typeahead code from http://twitter.github.io/typeahead.js/examples/
