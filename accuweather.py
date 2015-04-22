@@ -286,7 +286,6 @@ def main(options, args):
                 print response
 
             # ... or this. We should probably abstract this into a method.
-            """
             request = { 
                 'type': 'forecasts',
                 'slug': 'hourly/24hour/',
@@ -301,7 +300,6 @@ def main(options, args):
             response = pub.write_file()
             if options.verbose:
                 print response
-            """
 
 
 if __name__ == '__main__':
