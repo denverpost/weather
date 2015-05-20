@@ -93,6 +93,22 @@ class WeatherData:
         return True
 
 
+class LogWeather:
+    """ Methods for keeping track of WeatherData over a day.
+        We only use this with a location's currentconditions.
+        Data logged: Cloudiness, highs, lows, precipitation.
+        """
+
+    def __init__(self, data):
+        self.data = data
+
+    def set_data(self, value):
+        """ Set the object data value.
+            """
+        self.data = value
+        return value
+
+
 class PublishWeather:
     """ Methods for turning the WeatherData into something we can use.
         """
@@ -300,6 +316,8 @@ def main(options, args):
             response = pub.write_file()
             if options.verbose:
                 print response
+
+            log = LogWeather(wd.response)
 
 
 if __name__ == '__main__':

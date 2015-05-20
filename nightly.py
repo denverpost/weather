@@ -20,7 +20,36 @@ def main(args):
             }
             wd.get_from_api(arg, **request)
             wd.write_cache(arg, **request)
-            print wd.respose
+            print wd.response
+
+            output = self.template
+            output = string.replace(output, '{{last24_high}}', str(int(self.data['TemperatureSummary']['Past24HourRange']['Maximum']['Imperial']['Value'])))
+            output = string.replace(output, '{{last24_low}}', str(int(self.data['TemperatureSummary']['Past24HourRange']['Minimum']['Imperial']['Value'])))
+            precip = self.data['PrecipitationSummary']['Past24Hours']['Imperial']['Value']
+            if precip > 0.0:
+                output = string.replace(output, '{{precipitation}}', '<p>Precipitation in the past 24 hours: %s"</p>' % str(precip))
+            else:
+                output = string.replace(output, '{{precipitation}}', '')
+
+            # These replacements hold true for all templates
+            output = string.replace(output, '{{location}}', string.replace(self.location, '+', ' '))
+
+            # Make sure the grammar on possesives ("Colorado Springs'") is correct.
+            if self.location[-1] == 's':
+                output = string.replace(output, '{{s}}', '')
+            else:
+                output = string.replace(output, '{{s}}', 's')
+
+            output = string.replace(output, '{{location}}', string.replace(self.location, '+', ' '))
+            output = string.replace(output, '{{slug}}', self.slug)
+
+            self.output = output
+            return output
+            self.slug = self.slug.replace('+', '_')
+            path = 'www/output/%s-%s.html' % ( self.data_type, self.slug )
+            f = open(path, 'wb')
+            f.write(self.output)
+            f.close()
 
 
 
