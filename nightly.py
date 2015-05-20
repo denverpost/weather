@@ -3,52 +3,59 @@
 # Write our nightly weather files
 import doctest
 import argparse
+import string
+from datetime import date
 from accuweather import WeatherData, PublishWeather
 
 def main(args):
     wd = WeatherData(args)
     content = []
     if args:
-        for arg in args.locations[0]:
+        for location in args.locations[0]:
             if args.verbose:
-                print arg
-            wd.set_location_key(arg)
+                print location
+            wd.set_location_key(location)
             request = { 
                 'type': 'currentconditions',
                 'slug': '',
                 'suffix': '&details=true'
             }
-            wd.get_from_api(arg, **request)
-            wd.write_cache(arg, **request)
-            print wd.response
+            wd.get_from_api(location, **request)
+            wd.write_cache(location, **request)
+            data = wd.response[0]
+            slug = string.lower(string.replace(location, ' ', '_'))
 
-            output = self.template
-            output = string.replace(output, '{{last24_high}}', str(int(self.data['TemperatureSummary']['Past24HourRange']['Maximum']['Imperial']['Value'])))
-            output = string.replace(output, '{{last24_low}}', str(int(self.data['TemperatureSummary']['Past24HourRange']['Minimum']['Imperial']['Value'])))
-            precip = self.data['PrecipitationSummary']['Past24Hours']['Imperial']['Value']
+            data_type = 'dailyconditions'
+            path = 'html/%s.html' % data_type
+            f = open(path, 'rb')
+            template = f.read()
+            f.close()
+
+            output = template
+            output = string.replace(output, '{{last24_high}}', str(int(data['TemperatureSummary']['Past24HourRange']['Maximum']['Imperial']['Value'])))
+            output = string.replace(output, '{{last24_low}}', str(int(data['TemperatureSummary']['Past24HourRange']['Minimum']['Imperial']['Value'])))
+            precip = data['PrecipitationSummary']['Past24Hours']['Imperial']['Value']
             if precip > 0.0:
-                output = string.replace(output, '{{precipitation}}', '<p>Precipitation in the past 24 hours: %s"</p>' % str(precip))
+                output = string.replace(output, '{{precipitation}}', '<p>Precipitation on this day: %s"</p>' % str(precip))
             else:
-                output = string.replace(output, '{{precipitation}}', '')
+                output = string.replace(output, '{{precipitation}}', '<p>There was no precipitation on this day.</p>')
 
-            # These replacements hold true for all templates
-            output = string.replace(output, '{{location}}', string.replace(self.location, '+', ' '))
+            output = string.replace(output, '{{location}}', string.replace(location, '+', ' '))
+            output = string.replace(output, '{{day}}', date.strftime(date.today(), '%B %-m, %Y'))
 
             # Make sure the grammar on possesives ("Colorado Springs'") is correct.
-            if self.location[-1] == 's':
+            if location[-1] == 's':
                 output = string.replace(output, '{{s}}', '')
             else:
                 output = string.replace(output, '{{s}}', 's')
 
-            output = string.replace(output, '{{location}}', string.replace(self.location, '+', ' '))
-            output = string.replace(output, '{{slug}}', self.slug)
+            output = string.replace(output, '{{location}}', string.replace(location, '+', ' '))
+            output = string.replace(output, '{{slug}}', slug)
 
-            self.output = output
-            return output
-            self.slug = self.slug.replace('+', '_')
-            path = 'www/output/%s-%s.html' % ( self.data_type, self.slug )
+            slug = slug.replace('+', '_')
+            path = 'www/output/daily-weather-%s.html' % ( slug )
             f = open(path, 'wb')
-            f.write(self.output)
+            f.write(output)
             f.close()
 
 
