@@ -67,7 +67,6 @@ class FtpWrapper():
 
         file_h = open(fp, 'r')
         #blocksize = len(file_h.read())
-        #print file_h.read()
         blocksize = 4096
         fn = fp.split('/')[-1]
 

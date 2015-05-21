@@ -42,17 +42,40 @@ def main(args):
             else:
                 output = string.replace(output, '{{precipitation}}', '<p>There was no precipitation on this day.</p>')
 
-            output = string.replace(output, '{{location}}', string.replace(location, '+', ' '))
-            output = string.replace(output, '{{day}}', date.strftime(date.today(), '%B %-m, %Y'))
 
             # Make sure the grammar on possesives ("Colorado Springs'") is correct.
+            s = ''
             if location[-1] == 's':
                 output = string.replace(output, '{{s}}', '')
             else:
+                s = 's'
                 output = string.replace(output, '{{s}}', 's')
 
+
+            # Stick this into the page wrapper.
+            data_type = 'page'
+            path = 'html/%s.html' % data_type
+            f = open(path, 'rb')
+            template = f.read()
+            f.close()
+            day = date.strftime(date.today(), '%B %-m, %Y')
+            output = string.replace(template, '{{content}}', output)
             output = string.replace(output, '{{location}}', string.replace(location, '+', ' '))
+            output = string.replace(output, '{{day}}', day)
             output = string.replace(output, '{{slug}}', slug)
+            title = "%s'%s weather on %s" % (location, s, day)
+            output = string.replace(output, '{{title}}', title)
+            description = "Here's the historical weather data for %s on %s" % (location, day)
+            output = string.replace(output, '{{description}}', description)
+            path_vars = {
+                'location': slug,
+                'year': date.today().year,
+                'month': date.strftime(date.today(), '%B').lower(),
+                'day': date.today().day,
+                'slug': slug
+            }
+            url = 'http://extras.denverpost.com/weather/historical/%(location)s/%(year)s/%(month)s/%(day)s/daily-weather-%(slug)s.html' % path_vars
+            output = string.replace(output, '{{url}}', url)
 
             slug = slug.replace('+', '_')
             path = 'www/output/daily-weather-%s.html' % ( slug )
@@ -61,12 +84,6 @@ def main(args):
             f.close()
 
             # FTP this.
-            path_vars = {
-                'location': slug,
-                'year': date.today().year,
-                'month': date.strftime(date.today(), '%B').lower(),
-                'day': date.today().day
-            }
             ftp_path = '/DenverPost/weather/historical/%(location)s/%(year)s/%(month)s/%(day)s/' % path_vars
             ftp_config = {
                 'user': os.environ.get('FTP_USER'),
