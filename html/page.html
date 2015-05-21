@@ -44,17 +44,29 @@
 
     <meta name="google-site-verification" content="2bKNvyyGh6DUlOvH1PYsmKN4KRlb-0ZI7TvFtuKLeAc" />
 
-    <link href="style.css" type="text/css" rel="stylesheet">
+<!--
     <link href="http://extras.denverpost.com/app/mapgame/normalize.css" type="text/css" rel="stylesheet">
     <link href="http://extras.denverpost.com/weather/style.css" type="text/css" rel="stylesheet">
+-->
     <style type="text/css">
-        body { margin:2%; }
         @media only screen and (max-width:650px) {
         }
+        body { margin:0; }
+        #wrapper { width:1008px; margin:0 auto; margin-top:10px; margin-bottom:10px; }
+        #dfmEndFooterLinks ul li { list-style-type:none; margin-left:15px!important; }
+        @media only screen and (max-width:650px) {
+            #dfmHeader div.foot, #dfmHeader div.sub-navigation, #dfmHeader #dfmMasthead #dfmPageTitle, #dfmHeader #dfmMasthead #dfmSearch, #dfmHeader #dfmMasthead #weatherBoxReal, #dfmHeader #dfmLeaderboardAd { display:none; }
+            #dfmHeader #dfmMasthead h3 { margin-left:.5em; }
+            #dfmHeader div.page-head div.body { background:none; border:none; }
+            #dfmHeader div.page-head div.body div.margin { width:100%; }
+            #wrapper { width:100%; overflow:hidden; }
+        }
+        footer { clear: both; }
     </style>
 
     
     <script type="text/javascript" src="http://extras.denverpost.com/media/js/jquery-min.js"></script>
+    <script type="text/javascript" src="http://extras.denverpost.com/media/js/dputils-min.js?v=3"></script>
     <script type="text/javascript" src="http://www.googletagservices.com/tag/js/gpt.js"></script>
 
     <script type="text/javascript">
@@ -81,26 +93,66 @@
         </script>
         <noscript><img src="http://denverpost.112.2O7.net/b/ss/denverpost/1/H.17--NS/0" height="1" width="1" alt="" /></noscript>
     </div>
+    <div id="dfmHeader"><!--Header Goes Here--></div>
+    
+    <div id="wrapper">
+
+        <div id="breadcrumbs">
+            <a href="http://www.denverpost.com/">Home</a>
+            &rsaquo; <a href="http://www.denverpost.com/weather">Weather</a>
+            &rsaquo; <a href="http://extras.denverpost.com/weather">Historical Weather</a>
+        </div>
     <h1>{{title}}</h1>
     {{content}}
+        <div class="rightRail" id="rightRail" style="float:right;width:300px;margin-left:20px;">
+
+            <!-- Begin DFP Premium ad uniqueId: dfp-20 -->
+            <div id='dfp-20' style="margin-bottom:10px;">
+                <script type='text/javascript'>
+                    googletag.defineSlot('/8013/denverpost.com/News',[[300,250],[300,600],[160,600],[300,1050]], 'dfp-20').addService(googletag.pubads()).setTargeting('pos',['Cube1_RRail_ATF']).setTargeting('kv','weather');                                          
+                    googletag.pubads().enableSyncRendering();
+                    googletag.enableServices();                                         
+                    googletag.display('dfp-20');
+                </script>
+            </div>
+            <!-- End DFP Premium ad uniqueId: dfp-20 -->
+
+            <!-- Begin DFP Premium ad uniqueId: dfp-21 -->
+            <div id='dfp-21' style="margin-bottom:10px;">
+                <script type='text/javascript'>
+                    googletag.defineSlot('/8013/denverpost.com/News',[[300,250]], 'dfp-21').addService(googletag.pubads()).setTargeting('pos',['Cube2_RRail_mid']).setTargeting('kv','weather');
+                    googletag.pubads().enableSyncRendering();
+                    googletag.enableServices();                                         
+                    googletag.display('dfp-21');
+                </script>
+            </div>
+            <!-- End DFP Premium ad uniqueId: dfp-21 -->
+
+            <!-- Begin DFP Premium ad uniqueId: dfp-22 -->
+            <div id='dfp-22' style="margin-bottom:10px;">
+                <script type='text/javascript'>
+                    googletag.defineSlot('/8013/denverpost.com/News',[[300,250]], 'dfp-22').addService(googletag.pubads()).setTargeting('pos',['Cube3_RRail_lower']).setTargeting('kv','weather');
+                    googletag.pubads().enableSyncRendering();
+                    googletag.enableServices();                                         
+                    googletag.display('dfp-22');
+                </script>
+            </div>
+            <!-- End DFP Premium ad uniqueId: dfp-22 -->
+
+        </div><!-- END rightRail -->
+
+        <div class="clear" style="height:0;width:100%;clear:both;"></div>
+
+    </div><!-- END wrapper -->
+
+    <div id="dfmFooter" style="border-top:1px solid #ddd;"><!--Footer Goes Here--></div>
+    
+    <script type="text/javascript" src="http://local.denverpost.com/common/dfm/dfm-nav/dfm-nav-core.js"></script>
+    <script>
+        var waitingforGodot = setTimeout(function(){dfmNav.initParams("mode|article", "site|denverpost", "pageTitle|Weather", "leaderboard|true", "thirdParty|false")},5);
+    </script>
 
     <footer>
-    <div id='dfp-20' style="margin-bottom:10px;">
-        <script type='text/javascript'>
-            googletag.defineSlot('/8013/denverpost.com/News',[[300,250],[300,600],[160,600],[300,1050]], 'dfp-20').addService(googletag.pubads()).setTargeting('pos',['Cube1_RRail_ATF']).setTargeting('kv','weather');                                          
-            googletag.pubads().enableSyncRendering();
-            googletag.enableServices();                                         
-            googletag.display('dfp-20');
-        </script>
-    </div>
-    <div id='dfp-21' style="margin-bottom:10px;">
-        <script type='text/javascript'>
-            googletag.defineSlot('/8013/denverpost.com/News',[[300,250]], 'dfp-21').addService(googletag.pubads()).setTargeting('pos',['Cube2_RRail_mid']).setTargeting('kv','weather');
-            googletag.pubads().enableSyncRendering();
-            googletag.enableServices();                                         
-            googletag.display('dfp-21');
-        </script>
-    </div>
     <script type="text/javascript">
         //Chartbeat stuff
         _sf_async_config.uid = 2671;
