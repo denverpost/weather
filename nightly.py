@@ -4,8 +4,10 @@
 import doctest
 import argparse
 import string
+import os
 from datetime import date
 from accuweather import WeatherData, PublishWeather
+from FtpWrapper import FtpWrapper
 
 def main(args):
     wd = WeatherData(args)
@@ -57,6 +59,26 @@ def main(args):
             f = open(path, 'wb')
             f.write(output)
             f.close()
+
+            # FTP this.
+            path_vars = {
+                'location': slug,
+                'year': date.today().year,
+                'month': date.strftime(date.today(), '%B').lower(),
+                'day': date.today().day
+            }
+            ftp_path = '/DenverPost/weather/historical/%(location)s/%(year)s/%(month)s/%(day)s/' % path_vars
+            ftp_config = {
+                'user': os.environ.get('FTP_USER'),
+                'host': os.environ.get('FTP_HOST'),
+                'port': os.environ.get('FTP_PORT'),
+                'upload_dir': ftp_path
+            }
+            ftp = FtpWrapper(**ftp_config)
+            ftp.mkdir()
+            ftp.send_file(path)
+            ftp.disconnect()
+
 
 
 
