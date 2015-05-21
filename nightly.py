@@ -83,6 +83,11 @@ def main(args):
             f.write(output)
             f.close()
 
+            # Write the index file
+            #f = open('www/output/historical-weather-index.html', 'wb')
+            #f.write(output)
+            #f.close()
+
             # FTP this.
             ftp_path = '/DenverPost/weather/historical/%(location)s/%(year)s/%(month)s/%(day)s/' % path_vars
             ftp_config = {
@@ -104,8 +109,6 @@ if __name__ == '__main__':
                                      description='Takes a list of locations passed as args.',
                                      epilog='')
     parser.add_argument("-v", "--verbose", dest="verbose", default=False, action="store_true")
-    parser.add_argument("-c", "--cache", dest="cache", default=False, action="store_true",
-                        help="Pull from local cached data, make no external calls to Accuweather's API")
     parser.add_argument("locations", action="append", nargs="*")
     args = parser.parse_args()
 
