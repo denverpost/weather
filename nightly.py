@@ -63,7 +63,7 @@ def main(args):
             output = string.replace(output, '{{location}}', string.replace(location, '+', ' '))
             output = string.replace(output, '{{day}}', day)
             output = string.replace(output, '{{slug}}', slug)
-            title = "%s'%s weather on %s" % (location, s, day)
+            title = "%s'%s weather on %s" % (string.replace(location, '+', ' '), s, day)
             output = string.replace(output, '{{title}}', title)
             description = "Here's the historical weather data for %s on %s" % (location, day)
             output = string.replace(output, '{{description}}', description)
