@@ -12,15 +12,18 @@ def main(args):
         'day': date.today().day
     }
     url = '%(year)s/%(month)s/%(day)s' % path_vars
-    day = date.strftime(date.today(), '%Y,%B,%-m')
-    record = "%s,%s" % (day,url)
+    day = date.strftime(date.today(), '%Y,%B,%-d').lower()
+    record = "%s,%s\n" % (day,url)
 
     # Write the log file. 
-    f = open('log_daily.csv', 'wb')
-    f.write(output)
+    f = open('log_daily.csv', 'ab')
+    f.write(record)
     f.close()
 
 if __name__ == '__main__':
+    parser = argparse.ArgumentParser(usage='$ python log.py',
+                                     description='Add an entry to a CSV of days we have logged the weather',
+                                     epilog='')
     parser.add_argument("-v", "--verbose", dest="verbose", default=False, action="store_true")
     args = parser.parse_args()
 
