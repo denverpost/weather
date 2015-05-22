@@ -68,13 +68,12 @@ def main(args):
             description = "Here's the historical weather data for %s on %s" % (location, day)
             output = string.replace(output, '{{description}}', description)
             path_vars = {
-                'location': slug,
+                'location': string.replace(slug, '+', '_'),
                 'year': date.today().year,
                 'month': date.strftime(date.today(), '%B').lower(),
-                'day': date.today().day,
-                'slug': slug
+                'day': date.today().day
             }
-            url = 'http://extras.denverpost.com/weather/historical/%(location)s/%(year)s/%(month)s/%(day)s/daily-weather-%(slug)s.html' % path_vars
+            url = 'http://extras.denverpost.com/weather/historical/%(location)s/%(year)s/%(month)s/%(day)s/daily-weather-%(location)s.html' % path_vars
             output = string.replace(output, '{{url}}', url)
 
             slug = slug.replace('+', '_')

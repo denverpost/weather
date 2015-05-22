@@ -27,7 +27,7 @@ class FtpWrapper():
         print
         print
         print
-        print data
+        print ''
  
     def connect(self):
         """ Connect to a server.
