@@ -58,7 +58,7 @@ def main(args):
             f = open(path, 'rb')
             template = f.read()
             f.close()
-            day = date.strftime(date.today(), '%B %-m, %Y')
+            day = date.strftime(date.today(), '%B %-d, %Y')
             output = string.replace(template, '{{content}}', output)
             output = string.replace(output, '{{location}}', string.replace(location, '+', ' '))
             output = string.replace(output, '{{day}}', day)
