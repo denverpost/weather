@@ -13,10 +13,11 @@ from FtpWrapper import FtpWrapper
 class WeatherLog():
     """ Publish flat files based on csv logs of data."""
 
-    def __init__(self):
+    def __init__(self, data_type):
         """
             """
-        self.cities = self.read_file('colorado-cities.txt').split('\n')
+        self.data_type = data_type
+        self.locations = self.read_file('colorado-cities.txt').split('\n')
         dates = self.read_file('log_daily.csv').split('\n')
         self.header = dates[0]
         self.dates = dates[1:]
@@ -29,22 +30,55 @@ class WeatherLog():
         f.close()
         return content
 
-    def parse_template(self, template):
-        """
+    def build_content(self, template):
+        """ Put together the content we're writing to the page.
             """
+        if template = '':
+            template = self.data_type
+
+        fn = 'html/%s.row.html' % template
+        template = self.read_file(fn)
+        
+        content = []
+        for location in self.locations:
+            item = string.replace(template, '{{location}}', location)
+
+            if self.data_type == 'index'
+                item = string.replace(item, '{{url}}', string.replace(location, '+', '_').lower())
+            elif self.data_type == 'index_city'
+                pass
+            elif self.data_type == 'index_year'
+                pass
+            elif self.data_type == 'index_month'
+                pass
+            content.append(item)
+        return content.join("\n")
+
+    def parse_template(self, template):
+        """ Take the content put together in build_content() and put it in 
+            the content wrapper (which is then put in the page wrapper).
+            """
+        if template = '':
+            template = self.data_type
+
         fn = 'html/%s.html' % template
         template = self.read_file(fn)
+        content = self.build_content('')
+        template = string.replace(template, '{{content}}', content)
+
+        #page = self.read_file('html/page.html')
+        #template = string.replace(page, '{{content}}', template)
         return template
 
-    def write_html(self):
-        """
+    def write_html(self, content):
+        """ Take the markup and put it in a file.
             """
         pass
 
 def indexes(args):
     """ Build the indexes for everything leading up to the daily page views.
         """
-    log = WeatherLog()
+    log = WeatherLog('index')
     
     pass
 
