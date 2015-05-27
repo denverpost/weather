@@ -13,10 +13,11 @@ from FtpWrapper import FtpWrapper
 class WeatherLog():
     """ Publish flat files based on csv logs of data."""
 
-    def __init__(self, data_type):
+    def __init__(self, data_type, **metadata):
         """
             """
         self.data_type = data_type
+        self.metadata = metadata
         self.locations = self.read_file('colorado-cities.txt').split('\n')
         dates = self.read_file('log_daily.csv').split('\n')
         self.header = dates[0]
@@ -33,7 +34,7 @@ class WeatherLog():
     def build_content(self, template):
         """ Put together the content we're writing to the page.
             """
-        if template = '':
+        if template == '':
             template = self.data_type
 
         fn = 'html/%s.row.html' % template
@@ -43,31 +44,33 @@ class WeatherLog():
         for location in self.locations:
             item = string.replace(template, '{{location}}', location)
 
-            if self.data_type == 'index'
+            if self.data_type == 'index':
                 item = string.replace(item, '{{url}}', string.replace(location, '+', '_').lower())
-            elif self.data_type == 'index_city'
+            elif self.data_type == 'index_city':
                 pass
-            elif self.data_type == 'index_year'
+            elif self.data_type == 'index_year':
                 pass
-            elif self.data_type == 'index_month'
+            elif self.data_type == 'index_month':
                 pass
             content.append(item)
-        return content.join("\n")
+        return "\n".join(content)
 
-    def parse_template(self, template):
+    def parse_template(self):
         """ Take the content put together in build_content() and put it in 
             the content wrapper (which is then put in the page wrapper).
             """
-        if template = '':
-            template = self.data_type
+        template = self.data_type
 
         fn = 'html/%s.html' % template
         template = self.read_file(fn)
         content = self.build_content('')
         template = string.replace(template, '{{content}}', content)
 
-        #page = self.read_file('html/page.html')
-        #template = string.replace(page, '{{content}}', template)
+        page = self.read_file('html/page.html')
+        template = string.replace(page, '{{content}}', template)
+        template = string.replace(template, '{{url}}', self.metadata['url'])
+        template = string.replace(template, '{{title}}', self.metadata['title'])
+        template = string.replace(template, '{{description}}', self.metadata['description'])
         return template
 
     def write_html(self, content):
@@ -78,7 +81,13 @@ class WeatherLog():
 def indexes(args):
     """ Build the indexes for everything leading up to the daily page views.
         """
-    log = WeatherLog('index')
+    metadata = {
+        'url': 'http://extras.denverpost.com/weather/historical/',
+        'title': 'Colorado\'s Historical Weather Archives',
+        'description': 'Find weather temperatures and rainfall data for Colorado\'s cities and towns.'
+    }
+    log = WeatherLog('index', **metadata)
+    content = log.parse_template()
     
     pass
 
@@ -182,6 +191,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(usage='$ python nightly.py Denver Aspen "Grand Junction"',
                                      description='Takes a list of locations passed as args.',
                                      epilog='')
+    parser.add_argument("-i", "--indexes", dest="indexes", default=False, action="store_true")
     parser.add_argument("-v", "--verbose", dest="verbose", default=False, action="store_true")
     parser.add_argument("locations", action="append", nargs="*")
     args = parser.parse_args()
@@ -189,5 +199,7 @@ if __name__ == '__main__':
     if args.verbose:
         doctest.testmod(verbose=args.verbose)
 
-    #main(args)
-    indexes(args)
+    if args.indexes:
+        indexes(args)
+    else:
+        main(args)
