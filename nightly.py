@@ -73,10 +73,29 @@ class WeatherLog():
         template = string.replace(template, '{{description}}', self.metadata['description'])
         return template
 
-    def write_html(self, content):
+    def write_html(self, output):
         """ Take the markup and put it in a file.
             """
-        pass
+        path = 'www/output/%s.html' % ( self.data_type )
+        f = open(path, 'wb')
+        f.write(output)
+        f.close()
+        return path
+
+    def ftp_page(self, path):
+        """ Take the file and FTP it to prod.
+            """
+        ftp_path = '/DenverPost/weather/historical/'
+        ftp_config = {
+            'user': os.environ.get('FTP_USER'),
+            'host': os.environ.get('FTP_HOST'),
+            'port': os.environ.get('FTP_PORT'),
+            'upload_dir': ftp_path
+        }
+        ftp = FtpWrapper(**ftp_config)
+        ftp.mkdir()
+        ftp.send_file(path)
+        ftp.disconnect()
 
 def indexes(args):
     """ Build the indexes for everything leading up to the daily page views.
@@ -88,8 +107,9 @@ def indexes(args):
     }
     log = WeatherLog('index', **metadata)
     content = log.parse_template()
-    
-    pass
+    path = log.write_html(content)
+    print path
+    log.ftp_page(path)
 
 def main(args):
     wd = WeatherData(args)
@@ -181,8 +201,6 @@ def main(args):
             ftp.mkdir()
             ftp.send_file(path)
             ftp.disconnect()
-
-            # Re-build the weather index
 
 
 
