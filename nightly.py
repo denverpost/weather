@@ -20,7 +20,7 @@ class WeatherLog():
         self.metadata = metadata
         self.locations = self.read_file('colorado-cities.txt').split('\n')
         dates = self.read_file('log_daily.csv').split('\n')
-        self.header = dates[0]
+        self.header = dates[0].split(',')
         self.dates = dates[1:]
 
     def read_file(self, fn):
@@ -41,18 +41,32 @@ class WeatherLog():
         template = self.read_file(fn)
         
         content = []
-        for location in self.locations:
-            item = string.replace(template, '{{location}}', string.replace(location, '+', ' '))
 
-            if self.data_type == 'index':
+        if self.data_type == 'index':
+            for location in self.locations:
+                item = string.replace(template, '{{location}}', string.replace(location, '+', ' '))
                 item = string.replace(item, '{{url}}', string.replace(location, '+', '_').lower())
-            elif self.data_type == 'index_city':
-                pass
-            elif self.data_type == 'index_year':
-                pass
-            elif self.data_type == 'index_month':
-                pass
+                content.append(item)
+        elif self.data_type == 'index_city':
+            item = string.replace(template, '{{location}}', self.metadata['location'])
+            years = []
+            months = []
+            for date in self.dates:
+                d = dict(zip(self.header, date.split(',')))
+                # returns {'date': '27', 'path': '2015/may/27', 'month': 'may', 'year': '2015'}
+                if d['year'] == '':
+                    continue
+                years.append(d['year'])
+                months.append(d['month'])
+            years = set(years)
+            months = set(months)
+            item = string.replace(item, '{{url}}', '2015')
+            item = string.replace(item, '{{year}}', '2015')
             content.append(item)
+        elif self.data_type == 'index_year':
+            pass
+        elif self.data_type == 'index_month':
+            pass
         return "\n".join(content)
 
     def parse_template(self):
@@ -68,24 +82,27 @@ class WeatherLog():
 
         page = self.read_file('html/page.html')
         template = string.replace(page, '{{content}}', template)
+        if 'location' in self.metadata:
+            template = string.replace(template, '{{location}}', self.metadata['location'])
         template = string.replace(template, '{{url}}', self.metadata['url'])
         template = string.replace(template, '{{title}}', self.metadata['title'])
         template = string.replace(template, '{{description}}', self.metadata['description'])
         return template
 
-    def write_html(self, output):
+    def write_html(self, output, fn):
         """ Take the markup and put it in a file.
             """
-        path = 'www/output/%s.html' % ( self.data_type )
+        if fn == '':
+            fn = self.data_type
+        path = 'www/output/%s.html' % ( fn )
         f = open(path, 'wb')
         f.write(output)
         f.close()
         return path
 
-    def ftp_page(self, path):
+    def ftp_page(self, file_path, ftp_path):
         """ Take the file and FTP it to prod.
             """
-        ftp_path = '/DenverPost/weather/historical/'
         ftp_config = {
             'user': os.environ.get('FTP_USER'),
             'host': os.environ.get('FTP_HOST'),
@@ -94,7 +111,7 @@ class WeatherLog():
         }
         ftp = FtpWrapper(**ftp_config)
         ftp.mkdir()
-        ftp.send_file(path)
+        ftp.send_file(file_path)
         ftp.disconnect()
 
 def indexes(args):
@@ -107,9 +124,28 @@ def indexes(args):
     }
     log = WeatherLog('index', **metadata)
     content = log.parse_template()
-    path = log.write_html(content)
-    print path
-    log.ftp_page(path)
+    path = log.write_html(content, '')
+    ftp_path = '/DenverPost/weather/historical/'
+    log.ftp_page(path, ftp_path)
+
+    f = open('colorado-cities.txt', 'rb')
+    content = f.read()
+    f.close()
+    for location in content.split('\n'):
+        if location == '':
+            continue
+        slug = string.replace(location, '+', '_').lower()
+        metadata = {
+            'location': location,
+            'url': 'http://extras.denverpost.com/weather/historical/%s/' % slug,
+            'title': '%s, Colorado\'s Historical Weather Archives' % location,
+            'description': 'Find weather temperatures and rainfall data for %s, Colorado.' % location
+        }
+        log = WeatherLog('index_city', **metadata)
+        content = log.parse_template()
+        path = log.write_html(content, 'index')
+        ftp_path = '/DenverPost/weather/historical/%s/' % slug
+        log.ftp_page(path, ftp_path)
 
 def main(args):
     wd = WeatherData(args)
