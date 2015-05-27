@@ -5,9 +5,33 @@ import doctest
 import argparse
 import string
 import os
+import csv
 from datetime import date
 from accuweather import WeatherData, PublishWeather
 from FtpWrapper import FtpWrapper
+
+class WeatherLog():
+    """ Publish flat files based on csv logs of data."""
+
+    def __init__(self):
+        """
+            """
+        pass
+
+    def read_csv(self):
+        """
+            """
+        pass
+
+    def parse_template(self):
+        """
+            """
+        pass
+
+    def write_html(self):
+        """
+            """
+        pass
 
 def main(args):
     wd = WeatherData(args)
