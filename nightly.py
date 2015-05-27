@@ -16,22 +16,37 @@ class WeatherLog():
     def __init__(self):
         """
             """
-        pass
+        self.cities = self.read_file('colorado-cities.txt').split('\n')
+        dates = self.read_file('log_daily.csv').split('\n')
+        self.header = dates[0]
+        self.dates = dates[1:]
 
-    def read_csv(self):
+    def read_file(self, fn):
         """
             """
-        pass
+        f = open(fn, 'rb')
+        content = f.read()
+        f.close()
+        return content
 
-    def parse_template(self):
+    def parse_template(self, template):
         """
             """
-        pass
+        fn = 'html/%s.html' % template
+        template = self.read_file(fn)
+        return template
 
     def write_html(self):
         """
             """
         pass
+
+def indexes(args):
+    """ Build the indexes for everything leading up to the daily page views.
+        """
+    log = WeatherLog()
+    
+    pass
 
 def main(args):
     wd = WeatherData(args)
@@ -124,6 +139,8 @@ def main(args):
             ftp.send_file(path)
             ftp.disconnect()
 
+            # Re-build the weather index
+
 
 
 
@@ -138,4 +155,5 @@ if __name__ == '__main__':
     if args.verbose:
         doctest.testmod(verbose=args.verbose)
 
-    main(args)
+    #main(args)
+    indexes(args)
