@@ -42,7 +42,7 @@ class WeatherLog():
         
         content = []
         for location in self.locations:
-            item = string.replace(template, '{{location}}', location)
+            item = string.replace(template, '{{location}}', string.replace(location, '+', ' '))
 
             if self.data_type == 'index':
                 item = string.replace(item, '{{url}}', string.replace(location, '+', '_').lower())
