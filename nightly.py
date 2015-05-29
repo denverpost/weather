@@ -138,7 +138,7 @@ def indexes(args):
         metadata = {
             'location': location,
             'url': 'http://extras.denverpost.com/weather/historical/%s/' % slug,
-            'title': '%s, Colorado\'s Historical Weather Archives' % location,
+            'title': '%s, Colorado\'s Historical Weather Archive' % location,
             'description': 'Find weather temperatures and rainfall data for %s, Colorado.' % location
         }
         log = WeatherLog('index_city', **metadata)
@@ -146,6 +146,30 @@ def indexes(args):
         path = log.write_html(content, 'index')
         ftp_path = '/DenverPost/weather/historical/%s/' % slug
         log.ftp_page(path, ftp_path)
+
+
+        # Now we write the year and month indexes
+        f = open('log_daily.csv', 'rb')
+        dates = f.read().split('\n')
+        f.close()
+        date_header = dates[0].split(',')
+        dates = dates[1:]
+        current_year = 0
+        current_month = ''
+        current_days = []
+
+        for date in dates:
+            d = dict(zip(date_header, date.split(',')))
+            # returns {'date': '27', 'path': '2015/may/27', 'month': 'may', 'year': '2015'}
+            
+            # MONTH
+            metadata = {
+                'location': location,
+                'url': 'http://extras.denverpost.com/weather/historical/%s/%s/' % slug,
+                'title': '%s, Colorado\'s Historical Weather Archive' % location,
+                'description': '%s %s temperatures and rainfall data for %s, Colorado.' % (d['month'], d['year'], location)
+            }
+            pass
 
 def main(args):
     wd = WeatherData(args)
