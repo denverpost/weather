@@ -65,8 +65,9 @@ class WeatherLog():
                     item = string.replace(item, '{{path}}', path)
                     item = string.replace(item, '{{slug}}', self.slug)
                     content.append(item)
+            else:
+                content.append(item)
 
-            content.append(item)
         return "\n".join(content)
 
     def parse_template(self):
@@ -87,7 +88,7 @@ class WeatherLog():
         template = string.replace(template, '{{title}}', self.metadata['title'])
         template = string.replace(template, '{{description}}', self.metadata['description'])
         template = string.replace(template, '{{year}}', self.metadata['year'])
-        template = string.replace(template, '{{month}}', self.metadata['month'])
+        template = string.replace(template, '{{month}}', self.metadata['month'].title())
         template = string.replace(template, '{{s}}', self.metadata['s'])
         return template
 
