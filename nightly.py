@@ -68,7 +68,7 @@ class WeatherLog():
                     content.append(item)
             elif self.metadata['days'] != '':
                 item_original = item
-                for day, path in iter(sortedself.metadata['days'].iteritems())):
+                for day, path in iter(sorted(self.metadata['days'].iteritems())):
                     item = string.replace(item_original, '{{day}}', day)
                     item = string.replace(item, '{{path}}', path)
                     content.append(item)

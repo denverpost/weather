@@ -16,4 +16,6 @@ if [ "$NIGHTLY" -eq 0 ]; then
 else
     for CITY in `cat colorado-cities.txt`; do echo $CITY; python nightly.py $CITY; done
     python log.py
+    # Also build the indexes
+    python nightly.py --indexes
 fi
