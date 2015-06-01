@@ -61,7 +61,7 @@ class WeatherLog():
             years = set(years)
             months = set(months)
             item = string.replace(item, '{{url}}', '2015')
-            item = string.replace(item, '{{year}}', '2015')
+            item = string.replace(item, '{{year}}', self.metadata['year'])
             item = string.replace(item, '{{month}}', self.metadata['month'])
             item = string.replace(item, '{{s}}', self.metadata['s'])
             content.append(item)
@@ -89,6 +89,9 @@ class WeatherLog():
         template = string.replace(template, '{{url}}', self.metadata['url'])
         template = string.replace(template, '{{title}}', self.metadata['title'])
         template = string.replace(template, '{{description}}', self.metadata['description'])
+        template = string.replace(template, '{{year}}', self.metadata['year'])
+        template = string.replace(template, '{{month}}', self.metadata['month'])
+        template = string.replace(template, '{{s}}', self.metadata['s'])
         return template
 
     def write_html(self, output, fn):
