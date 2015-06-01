@@ -60,7 +60,7 @@ class WeatherData:
         if self.location_key == '':
             raise ValueError("Location Key cannot be blank. Please set it with set_location_key")
 
-        if 'cache' in self.options:
+        if self.options.cache == True:
             data = self.get_cache(args[0], **kwargs)
             if data != False:
                 response = data
@@ -302,6 +302,7 @@ def main(options, args):
                 print response
 
             # ... or this. We should probably abstract this into a method.
+            """
             request = { 
                 'type': 'forecasts',
                 'slug': 'hourly/24hour/',
@@ -316,6 +317,7 @@ def main(options, args):
             response = pub.write_file()
             if options.verbose:
                 print response
+            """
 
             log = LogWeather(wd.response)
 
