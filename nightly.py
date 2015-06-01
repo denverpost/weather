@@ -19,6 +19,8 @@ class WeatherLog():
         self.data_type = data_type
         self.metadata = metadata
         self.locations = self.read_file('colorado-cities.txt').split('\n')
+        if self.metadata['location'] != '':
+            self.slug = string.replace(self.metadata['location'], ' ', '_').lower()
         dates = self.read_file('log_daily.csv').split('\n')
         self.header = dates[0].split(',')
         self.dates = dates[1:]
@@ -53,6 +55,17 @@ class WeatherLog():
             item = string.replace(item, '{{year}}', self.metadata['year'])
             item = string.replace(item, '{{month}}', self.metadata['month'].title())
             item = string.replace(item, '{{s}}', self.metadata['s'])
+            item = string.replace(item, '{{slug}}', self.slug)
+
+            # Some fields are dicts. 
+            if self.metadata['days'] != '':
+                item_original = item
+                for day, path in self.metadata['days'].iteritems():
+                    item = string.replace(item_original, '{{day}}', day)
+                    item = string.replace(item, '{{path}}', path)
+                    item = string.replace(item, '{{slug}}', self.slug)
+                    content.append(item)
+
             content.append(item)
         return "\n".join(content)
 
