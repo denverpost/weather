@@ -58,12 +58,19 @@ class WeatherLog():
             item = string.replace(item, '{{slug}}', self.slug)
 
             # Some fields are dicts. 
-            if self.metadata['days'] != '':
+            # They're dicts because they're meant to be looped through.
+            # They're meant to be looped through to give people a list of the available data.
+            if self.metadata['months'] != '':
+                item_original = item
+                for month, days in self.metadata['months'].iteritems():
+                    item = string.replace(item_original, '{{path}}', month)
+                    item = string.replace(item, '{{Month}}', month.title())
+                    content.append(item)
+            elif self.metadata['days'] != '':
                 item_original = item
                 for day, path in self.metadata['days'].iteritems():
                     item = string.replace(item_original, '{{day}}', day)
                     item = string.replace(item, '{{path}}', path)
-                    item = string.replace(item, '{{slug}}', self.slug)
                     content.append(item)
             else:
                 content.append(item)
@@ -205,7 +212,7 @@ def indexes(args):
                 's': s,
                 'year': year,
                 'months': day_dict[year],
-                'month': '',
+                'month': '{{month}}',
                 'days': '',
                 'location': location,
                 'url': 'http://extras.denverpost.com/weather/historical/%s/%s/' % (slug, year),
