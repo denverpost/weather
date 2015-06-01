@@ -49,17 +49,6 @@ class WeatherLog():
                 content.append(item)
         elif self.data_type in ['index_city', 'index_year']:
             item = string.replace(template, '{{location}}', self.metadata['location'])
-            years = []
-            months = []
-            for date in self.dates:
-                d = dict(zip(self.header, date.split(',')))
-                # returns {'date': '27', 'path': '2015/may/27', 'month': 'may', 'year': '2015'}
-                if d['year'] == '':
-                    continue
-                years.append(d['year'])
-                months.append(d['month'])
-            years = set(years)
-            months = set(months)
             item = string.replace(item, '{{url}}', '2015')
             item = string.replace(item, '{{year}}', self.metadata['year'])
             item = string.replace(item, '{{month}}', self.metadata['month'])
@@ -84,8 +73,7 @@ class WeatherLog():
 
         page = self.read_file('html/page.html')
         template = string.replace(page, '{{content}}', template)
-        if 'location' in self.metadata:
-            template = string.replace(template, '{{location}}', self.metadata['location'])
+        template = string.replace(template, '{{location}}', self.metadata['location'])
         template = string.replace(template, '{{url}}', self.metadata['url'])
         template = string.replace(template, '{{title}}', self.metadata['title'])
         template = string.replace(template, '{{description}}', self.metadata['description'])
