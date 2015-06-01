@@ -123,6 +123,12 @@ def indexes(args):
     """ Build the indexes for everything leading up to the daily page views.
         """
     metadata = {
+        's': '',
+        'year': '',
+        'months': '',
+        'month': '',
+        'days': '',
+        'location': '',
         'url': 'http://extras.denverpost.com/weather/historical/',
         'title': 'Colorado\'s Historical Weather Archives',
         'description': 'Find weather temperatures and rainfall data for Colorado\'s cities and towns.'
