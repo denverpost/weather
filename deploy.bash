@@ -17,5 +17,6 @@ else
     for CITY in `cat colorado-cities.txt`; do echo $CITY; python nightly.py $CITY; done
     RECORD=`python log.py`
     # Also build the indexes
-    python nightly.py --indexes
+    python nightly.py --indexes # This runs all the indexes
+    #python nightly.py --index $RECORD
 fi
