@@ -3,6 +3,7 @@
 # Log the days we've written our nightly weather files.
 import doctest
 import argparse
+import pickle
 from datetime import date
 
 def main(args):
@@ -12,13 +13,15 @@ def main(args):
         'day': date.today().day
     }
     url = '%(year)s/%(month)s/%(day)s' % path_vars
-    day = date.strftime(date.today(), '%Y,%B,%-d').lower()
+    path_vars['path'] = url
+    day = date.strftime(date.today(), '%Y,%B,%d').lower()
     record = "%s,%s\n" % (day,url)
 
     # Write the log file. 
     f = open('log_daily.csv', 'ab')
     f.write(record)
     f.close()
+    print pickle.dumps(path_vars)
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(usage='$ python log.py',
