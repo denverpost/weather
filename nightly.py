@@ -51,7 +51,7 @@ class WeatherLog():
             item = string.replace(template, '{{location}}', self.metadata['location'])
             item = string.replace(item, '{{url}}', '2015')
             item = string.replace(item, '{{year}}', self.metadata['year'])
-            item = string.replace(item, '{{month}}', self.metadata['month'])
+            item = string.replace(item, '{{month}}', self.metadata['month'].title())
             item = string.replace(item, '{{s}}', self.metadata['s'])
             content.append(item)
         return "\n".join(content)
@@ -206,7 +206,6 @@ def indexes(args):
 
             for month in day_dict[year]:
                 # MONTH
-                month = month.title()
                 metadata = {
                     's': s,
                     'year': year,
@@ -215,8 +214,8 @@ def indexes(args):
                     'days': day_dict[year][month],
                     'location': location,
                     'url': 'http://extras.denverpost.com/weather/historical/%s/%s/%s/' % (slug, year, month),
-                    'title': '%s %s weather in %s, Colorado' % (month, year, location),
-                    'description': '%s %s temperatures and rainfall data for %s, Colorado.' % (month, year, location)
+                    'title': '%s %s weather in %s, Colorado' % (month.title(), year, location),
+                    'description': '%s %s temperatures and rainfall data for %s, Colorado.' % (month.title(), year, location)
                 }
                 log = WeatherLog('index_month', **metadata)
                 content = log.parse_template()
