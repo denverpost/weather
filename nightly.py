@@ -97,6 +97,8 @@ class WeatherLog():
         template = string.replace(template, '{{year}}', self.metadata['year'])
         template = string.replace(template, '{{month}}', self.metadata['month'].title())
         template = string.replace(template, '{{s}}', self.metadata['s'])
+        if self.metadata['location'] != '':
+            template = string.replace(template, '{{slug}}', self.slug)
         return template
 
     def write_html(self, output, fn):
