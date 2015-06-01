@@ -47,17 +47,13 @@ class WeatherLog():
                 item = string.replace(template, '{{location}}', string.replace(location, '+', ' '))
                 item = string.replace(item, '{{url}}', string.replace(location, '+', '_').lower())
                 content.append(item)
-        elif self.data_type in ['index_city', 'index_year']:
+        elif self.data_type in ['index_city', 'index_year', 'index_month']:
             item = string.replace(template, '{{location}}', self.metadata['location'])
             item = string.replace(item, '{{url}}', '2015')
             item = string.replace(item, '{{year}}', self.metadata['year'])
             item = string.replace(item, '{{month}}', self.metadata['month'])
             item = string.replace(item, '{{s}}', self.metadata['s'])
             content.append(item)
-        elif self.data_type == 'index_year':
-            pass
-        elif self.data_type == 'index_month':
-            pass
         return "\n".join(content)
 
     def parse_template(self):
@@ -198,8 +194,8 @@ def indexes(args):
                 'month': '',
                 'days': '',
                 'location': location,
-                'url': 'http://extras.denverpost.com/weather/historical/%s/%s/' % (year, slug),
-                'title': '%s %s, Colorado\'s Historical Weather Archive' % (location, year),
+                'url': 'http://extras.denverpost.com/weather/historical/%s/%s/' % (slug, year),
+                'title': 'Weather in %s, in %s, Colorado' % (year, location),
                 'description': '%s temperatures and rainfall data for %s, Colorado.' % (year, location)
             }
             log = WeatherLog('index_year', **metadata)
@@ -210,6 +206,7 @@ def indexes(args):
 
             for month in day_dict[year]:
                 # MONTH
+                month = month.title()
                 metadata = {
                     's': s,
                     'year': year,
@@ -217,10 +214,16 @@ def indexes(args):
                     'month': month,
                     'days': day_dict[year][month],
                     'location': location,
-                    'url': 'http://extras.denverpost.com/weather/historical/%s/%s/' % (year, slug),
-                    'title': '%s %s, Colorado\'s Historical Weather Archive' % (location, year),
-                    'description': '%s temperatures and rainfall data for %s, Colorado.' % (year, location)
+                    'url': 'http://extras.denverpost.com/weather/historical/%s/%s/%s/' % (slug, year, month),
+                    'title': '%s %s weather in %s, Colorado' % (month, year, location),
+                    'description': '%s %s temperatures and rainfall data for %s, Colorado.' % (month, year, location)
                 }
+                log = WeatherLog('index_month', **metadata)
+                content = log.parse_template()
+                path = log.write_html(content, 'index')
+                ftp_path = '/DenverPost/weather/historical/%s/%s/%s/' % (slug, year, month)
+                log.ftp_page(path, ftp_path)
+
                 for day, path in day_dict[year][month].iteritems():
                     print year, month, day, path
             
