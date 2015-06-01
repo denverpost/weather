@@ -62,6 +62,8 @@ class WeatherLog():
             months = set(months)
             item = string.replace(item, '{{url}}', '2015')
             item = string.replace(item, '{{year}}', '2015')
+            item = string.replace(item, '{{month}}', self.metadata['month'])
+            item = string.replace(item, '{{s}}', self.metadata['s'])
             content.append(item)
         elif self.data_type == 'index_year':
             pass
@@ -134,8 +136,21 @@ def indexes(args):
     for location in content.split('\n'):
         if location == '':
             continue
+
+        # Make sure the grammar on possesives ("Colorado Springs'") is correct.
+        s = ''
+        if location[-1] == 's':
+            s = ''
+        else:
+            s = 's'
+
         slug = string.replace(location, '+', '_').lower()
         metadata = {
+            's': s,
+            'year': '',
+            'months': '',
+            'month': '',
+            'days': '',
             'location': location,
             'url': 'http://extras.denverpost.com/weather/historical/%s/' % slug,
             'title': '%s, Colorado\'s Historical Weather Archive' % location,
@@ -180,8 +195,11 @@ def indexes(args):
         for year in day_dict:
             # YEAR
             metadata = {
+                's': s,
                 'year': year,
                 'months': day_dict[year],
+                'month': '',
+                'days': '',
                 'location': location,
                 'url': 'http://extras.denverpost.com/weather/historical/%s/%s/' % (year, slug),
                 'title': '%s %s, Colorado\'s Historical Weather Archive' % (location, year),
@@ -196,7 +214,9 @@ def indexes(args):
             for month in day_dict[year]:
                 # MONTH
                 metadata = {
+                    's': s,
                     'year': year,
+                    'months': '',
                     'month': month,
                     'days': day_dict[year][month],
                     'location': location,
