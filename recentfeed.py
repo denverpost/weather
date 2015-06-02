@@ -58,12 +58,17 @@ class RecentFeed:
 def main(args):
     rf = RecentFeed(args)
     if args:
+        articles = []
         for arg in args.urls[0]:
             if args.verbose:
                 print arg
             rf.get(arg)
             rf.parse('')
-            rf.recently()
+            articles.append(rf.recently())
+
+
+        for article in articles:
+            pass
 
 
 if __name__ == '__main__':
