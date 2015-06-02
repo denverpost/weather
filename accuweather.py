@@ -7,20 +7,20 @@ import doctest
 import json
 import httplib2
 import string
+import argparse
 from datetime import date, timedelta
-from optparse import OptionParser
 
 class WeatherData:
     """ Methods for getting weather data from Accuweather.
         """
 
-    def __init__(self, options):
+    def __init__(self, args):
         self.api_key = os.environ.get('API_KEY')
         self.api_host = os.environ.get('API_HOST')
         self.location_key = ''
         if self.api_key == None or self.api_host == None:
             raise ValueError('Both API_KEY and API_HOST environment variables must be set.')
-        self.options = options
+        self.args = args
 
     def get(self, url):
         """ Wrapper for API requests. Take a URL, return a json array.
@@ -28,7 +28,7 @@ class WeatherData:
         h = httplib2.Http('.tmp')
         (response, content) = h.request(url, "GET")
         if response['status'] != '200':
-            if self.options.verbose:
+            if self.args.verbose:
                 print "URL: %s" % url
             raise ValueError("AccuWeather API response: %s" % response.status)
         return json.loads(content)
@@ -60,7 +60,7 @@ class WeatherData:
         if self.location_key == '':
             raise ValueError("Location Key cannot be blank. Please set it with set_location_key")
 
-        if 'cache' in self.options:
+        if 'cache' in self.args:
             data = self.get_cache(args[0], **kwargs)
             if data != False:
                 response = data
@@ -252,11 +252,11 @@ class PublishWeather:
         f.close()
         return "Successfully written to %s" % path
 
-def main(options, args):
-    wd = WeatherData(options)
+def main(args):
+    wd = WeatherData(args)
     if args:
-        for arg in args:
-            if options.verbose:
+        for arg in args.locations[0]:
+            if args.verbose:
                 print arg
             wd.set_location_key(arg)
 
@@ -273,7 +273,7 @@ def main(options, args):
             pub.set_location(arg)
             pub.write_template()
             response = pub.write_file()
-            if options.verbose:
+            if args.verbose:
                 print response
 
             # We also want to write a five-day version with the data:
@@ -282,7 +282,7 @@ def main(options, args):
             pub.set_limit(4)
             pub.write_template()
             response = pub.write_file()
-            if options.verbose:
+            if args.verbose:
                 print response
 
             # ... or this:
@@ -298,7 +298,7 @@ def main(options, args):
             pub.set_location(arg)
             pub.write_template()
             response = pub.write_file()
-            if options.verbose:
+            if args.verbose:
                 print response
 
             # ... or this. We should probably abstract this into a method.
@@ -315,7 +315,7 @@ def main(options, args):
             pub.set_location(arg)
             pub.write_template()
             response = pub.write_file()
-            if options.verbose:
+            if args.verbose:
                 print response
             """
 
@@ -327,12 +327,15 @@ if __name__ == '__main__':
         Example:
         $ python accuweather.py Denver Aspen "Grand Junction"
         """
-    parser = OptionParser()
-    parser.add_option("-v", "--verbose", dest="verbose", default=False, action="store_true")
-    parser.add_option("-c", "--cache", dest="cache", default=False, action="store_true")
-    (options, args) = parser.parse_args()
+    parser = argparse.ArgumentParser(usage='$ python accuweather.py Denver Aspen "Grand Junction"',
+                                     description='Takes a list of locations passed as args.',
+                                     epilog='')
+    parser.add_argument("-v", "--verbose", dest="verbose", default=False, action="store_true")
+    parser.add_argument("-c", "--cache", dest="cache", default=False, action="store_true")
+    parser.add_argument("locations", action="append", nargs="*")
+    args = parser.parse_args()
 
-    if options.verbose:
-        doctest.testmod(verbose=options.verbose)
+    if args.verbose:
+        doctest.testmod(verbose=args.verbose)
 
-    main(options, args)
+    main(args)
