@@ -1,13 +1,14 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# Return recent items from a RSS feed.`
+# Return recent items from a RSS feed. Recent means "In the last X days."
 import os
 import doctest
 import json
 import httplib2
 import feedparser
 import argparse
-from datetime import date, timedelta
+from datetime import datetime, timedelta
+from time import mktime
 
 class RecentFeed:
     """ Methods for ingesting and publishing RSS feeds.
@@ -18,21 +19,51 @@ class RecentFeed:
 
     def get(self, url):
         """ Wrapper for API requests. Take a URL, return a json array.
+            >>> http://rss.denverpost.com/mngi/rss/CustomRssServlet/36/213601.xml
             """
         h = httplib2.Http('.tmp')
-        (response, content) = h.request(url, "GET")
+        (response, xml) = h.request(url, "GET")
         if response['status'] != '200':
-            if self.options.verbose:
+            if self.args.verbose:
                 print "URL: %s" % url
             raise ValueError("URL %s response: %s" % (url, response.status))
-        return json.loads(content)
+        self.xml = xml
+        return xml
+
+    def parse(self, xml):
+        """ Turn the xml into an object.
+            """
+        if xml == '':
+            xml = self.xml
+        p = feedparser.parse(xml)
+        self.p = p
+        return p
+
+    def recently(self):
+        """ Return a json representation of the last X days of feed items.
+            """
+        items = []
+        for item in self.p.entries:
+            dt = datetime.fromtimestamp(mktime(item.published_parsed))
+            delta = datetime.today() - dt
+
+            if delta.days > self.args.days:
+                continue
+            items.append(item)
+            if self.args.verbose:
+                print delta.days, dt
+        self.items = items
+        return items
 
 def main(args):
     rf = RecentFeed(args)
     if args:
-        for arg in args.urls:
+        for arg in args.urls[0]:
             if args.verbose:
                 print arg
+            rf.get(arg)
+            rf.parse('')
+            rf.recently()
 
 
 if __name__ == '__main__':
