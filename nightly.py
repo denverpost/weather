@@ -290,7 +290,7 @@ def main(args):
                 weathernews = ''
             f.close()
             if weathernews == '':
-                weathernews = '<p>Sorry, no <a href="http://www.denverpost.com/weathernews">weather news in Colorado</a> today.</p>'
+                weathernews = '<p>Nope, no <a href="http://www.denverpost.com/weathernews">weather news in Colorado</a> today.</p>'
             else:
                 weathernews = '<ul>%s</ul>' % weathernews
             output = string.replace(output, '{{weathernews}}', weathernews)
