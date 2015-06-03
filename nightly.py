@@ -21,7 +21,6 @@ class WeatherLog():
         self.locations = self.read_file('colorado-cities.txt').split('\n')
         if self.metadata['location'] != '':
             self.slug = string.replace(self.metadata['location'], ' ', '_').lower()
-        dates = self.read_file('log_daily.csv').split('\n')
 
     def read_file(self, fn):
         """
