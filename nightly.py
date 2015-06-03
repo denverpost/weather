@@ -6,7 +6,7 @@ import argparse
 import string
 import os
 import csv
-from datetime import date
+from datetime import date, datetime
 from accuweather import WeatherData, PublishWeather
 from FtpWrapper import FtpWrapper
 
@@ -281,6 +281,21 @@ def main(args):
                 output = string.replace(output, '{{precipitation}}', '<p>There was no precipitation on this day.</p>')
 
 
+            # Get the weather news headlines
+            date_slug = datetime.strftime(date.today(), "%Y-%m-%d")
+            f = open('www/output/headlines_%s.html' % date_slug)
+            try:
+                weathernews = f.read()
+            except:
+                weathernews = ''
+            f.close()
+            if weathernews == '':
+                weathernews = '<p>Sorry, no <a href="http://www.denverpost.com/weathernews">weather news in Colorado</a> today.</p>'
+            else:
+                weathernews = '<ul>%s</ul>' % weathernews
+            output = string.replace(output, '{{weathernews}}', weathernews)
+
+            
             # Make sure the grammar on possesives ("Colorado Springs'") is correct.
             s = ''
             if location[-1] == 's':
