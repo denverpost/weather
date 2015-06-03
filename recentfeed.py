@@ -16,10 +16,19 @@ class RecentFeed:
 
     def __init__(self, args):
         self.args = args
+        if 'days' not in self.args:
+            self.args.days = 0
 
     def get(self, url):
         """ Wrapper for API requests. Take a URL, return a json array.
-            >>> http://rss.denverpost.com/mngi/rss/CustomRssServlet/36/213601.xml
+            >>> url = 'http://rss.denverpost.com/mngi/rss/CustomRssServlet/36/213601.xml'
+            # re the below, it's hard to spoof an argparse object without going to the hassle of creating your own argparse object...
+            # ... which ought to be addressed should this be implemented in any other way than directly on the command line.
+            #>>> rf = RecentFeed({'args': {'days': 0}})
+            #>>> rf = RecentFeed({})
+            #>>> rf.get(url)
+            #>>> rf.parse('')
+            #>>> articles = rf.recently()
             """
         h = httplib2.Http('.tmp')
         (response, xml) = h.request(url, "GET")
@@ -40,7 +49,7 @@ class RecentFeed:
         return p
 
     def recently(self):
-        """ Return a json representation of the last X days of feed items.
+        """ Return a feedparser entry object for the last X days of feed entries.
             """
         items = []
         for item in self.p.entries:
@@ -68,7 +77,11 @@ def main(args):
 
 
         for article in articles:
-            pass
+            article = article[0]
+            if args.output == 'html':
+                print '<li><a href="%(id)s">%(title)s</a></li>' % article
+            elif args.output == 'json':
+                json.dumps({'title': article['title'], 'url': article['id']})
 
 
 if __name__ == '__main__':
@@ -80,6 +93,7 @@ if __name__ == '__main__':
                                      epilog='')
     parser.add_argument("-v", "--verbose", dest="verbose", default=False, action="store_true")
     parser.add_argument("-d", "--days", dest="days", default=0, action="count")
+    parser.add_argument("-o", "--output", dest="output", default="html", type=str)
     parser.add_argument("urls", action="append", nargs="*")
     args = parser.parse_args()
 
