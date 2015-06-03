@@ -22,8 +22,6 @@ class WeatherLog():
         if self.metadata['location'] != '':
             self.slug = string.replace(self.metadata['location'], ' ', '_').lower()
         dates = self.read_file('log_daily.csv').split('\n')
-        self.header = dates[0].split(',')
-        self.dates = dates[1:]
 
     def read_file(self, fn):
         """
@@ -342,15 +340,19 @@ def main(args):
             ftp.disconnect()
 
 
-
-
-if __name__ == '__main__':
+def build_parser():
+    """ This method allows us to test. You gotta write tests for this Joe.
+        """
     parser = argparse.ArgumentParser(usage='$ python nightly.py Denver Aspen "Grand Junction"',
                                      description='Takes a list of locations passed as args.',
                                      epilog='')
     parser.add_argument("-i", "--indexes", dest="indexes", default=False, action="store_true")
     parser.add_argument("-v", "--verbose", dest="verbose", default=False, action="store_true")
     parser.add_argument("locations", action="append", nargs="*")
+    return parser
+
+if __name__ == '__main__':
+    parser = build_parser()
     args = parser.parse_args()
 
     if args.verbose:
