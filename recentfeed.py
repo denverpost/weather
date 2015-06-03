@@ -22,12 +22,12 @@ class RecentFeed:
     def get(self, url):
         """ Wrapper for API requests. Take a URL, return a json array.
             >>> url = 'http://rss.denverpost.com/mngi/rss/CustomRssServlet/36/213601.xml'
-            # re the below, it's hard to spoof an argparse object without going to the hassle of creating your own argparse object...
-            # ... which ought to be addressed should this be implemented in any other way than directly on the command line.
-            #>>> rf = RecentFeed({'args': {'days': 0}})
-            #>>> rf = RecentFeed({})
-            #>>> rf.get(url)
-            #>>> rf.parse('')
+            >>> parser = build_parser()
+            >>> args = parser.parse_args([url])
+            >>> rf = RecentFeed(args)
+            >>> rf.get(url)
+            True
+            >>> rf.parse()
             #>>> articles = rf.recently()
             """
         h = httplib2.Http('.tmp')
@@ -37,14 +37,12 @@ class RecentFeed:
                 print "URL: %s" % url
             raise ValueError("URL %s response: %s" % (url, response.status))
         self.xml = xml
-        return xml
+        return True
 
-    def parse(self, xml):
+    def parse(self):
         """ Turn the xml into an object.
             """
-        if xml == '':
-            xml = self.xml
-        p = feedparser.parse(xml)
+        p = feedparser.parse(self.xml)
         self.p = p
         return p
 
@@ -72,7 +70,7 @@ def main(args):
             if args.verbose:
                 print arg
             rf.get(arg)
-            rf.parse('')
+            rf.parse()
             articles.append(rf.recently())
 
 
@@ -84,8 +82,9 @@ def main(args):
                 json.dumps({'title': article['title'], 'url': article['id']})
 
 
-if __name__ == '__main__':
-    """ 
+def build_parser():
+    """ We put the argparse in a method so we can test it
+        outside of the command-line.
         """
     parser = argparse.ArgumentParser(usage='$ python recentfeed.py http://domain.com/rss/',
                                      description='''Takes a list of URLs passed as args.
@@ -95,6 +94,12 @@ if __name__ == '__main__':
     parser.add_argument("-d", "--days", dest="days", default=0, action="count")
     parser.add_argument("-o", "--output", dest="output", default="html", type=str)
     parser.add_argument("urls", action="append", nargs="*")
+    return parser
+
+if __name__ == '__main__':
+    """ 
+        """
+    parser = build_parser()
     args = parser.parse_args()
 
     if args.verbose:
