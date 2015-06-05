@@ -74,8 +74,7 @@ def main(args):
             articles.append(rf.recently())
 
 
-        for article in articles:
-            article = article[0]
+        for article in articles[0]:
             if args.output == 'html':
                 print '<li><a href="%(id)s">%(title)s</a></li>' % article
             elif args.output == 'json':
