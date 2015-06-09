@@ -7,6 +7,7 @@ import json
 import httplib2
 import feedparser
 import argparse
+import types
 from datetime import datetime, timedelta
 from time import mktime
 
@@ -76,7 +77,9 @@ def main(args):
 
         for article in articles[0]:
             if args.output == 'html':
-                print '<li><a href="%(id)s">%(title)s</a></li>' % article
+                if type(article['title']) is types.UnicodeType:
+                    article['title'] = article['title'].encode('utf-8', 'replace')
+                print '<li><a href="{0}">{1}</a></li>'.format(article['id'], article['title'])
             elif args.output == 'json':
                 json.dumps({'title': article['title'], 'url': article['id']})
 
