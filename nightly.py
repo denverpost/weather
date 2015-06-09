@@ -87,8 +87,8 @@ class WeatherLog():
 
         page = self.read_file('html/page.html')
         template = string.replace(page, '{{content}}', template)
-        template = string.replace(template, '{{location}}', self.metadata['location'])
-        template = string.replace(template, '{{url}}', self.metadata['url'])
+        template = string.replace(template, '{{location}}', string.replace(self.metadata['location'], '+', ' '))
+        template = string.replace(template, '{{url}}', string.replace(self.metadata['url'], '+', '_'))
         template = string.replace(template, '{{title}}', self.metadata['title'])
         template = string.replace(template, '{{description}}', self.metadata['description'])
         template = string.replace(template, '{{year}}', self.metadata['year'])
@@ -135,7 +135,7 @@ def indexes(args):
         'location': '',
         'url': 'http://extras.denverpost.com/weather/historical/',
         'title': 'Colorado\'s Historical Weather Archives',
-        'description': 'Find weather temperatures and rainfall data for Colorado\'s cities and towns.'
+        'description': 'Find weather temperatures and rainfall data for each of Colorado\'s cities and towns.'
     }
     log = WeatherLog('index', **metadata)
     content = log.parse_template()
@@ -158,6 +158,7 @@ def indexes(args):
             s = 's'
 
         slug = string.replace(location, '+', '_').lower()
+        location_display = string.replace(location, '+', ' ')
         metadata = {
             's': s,
             'year': '',
@@ -166,8 +167,8 @@ def indexes(args):
             'days': '',
             'location': location,
             'url': 'http://extras.denverpost.com/weather/historical/%s/' % slug,
-            'title': '%s, Colorado\'s Historical Weather Archive' % location,
-            'description': 'Find weather temperatures and rainfall data for %s, Colorado.' % location
+            'title': '%s, Colorado\'s Historical Weather Archive' % location_display,
+            'description': 'Find weather temperatures and rainfall data for %s, Colorado.' % location_display
         }
         log = WeatherLog('index_city', **metadata)
         content = log.parse_template()
@@ -215,8 +216,8 @@ def indexes(args):
                 'days': '',
                 'location': location,
                 'url': 'http://extras.denverpost.com/weather/historical/%s/%s/' % (slug, year),
-                'title': 'Weather in %s, in %s, Colorado' % (year, location),
-                'description': '%s temperatures and rainfall data for %s, Colorado.' % (year, location)
+                'title': 'Weather in %s, in %s, Colorado' % (year, location_display),
+                'description': '%s temperatures and rainfall data for %s, Colorado.' % (year, location_display)
             }
             log = WeatherLog('index_year', **metadata)
             content = log.parse_template()
@@ -234,8 +235,8 @@ def indexes(args):
                     'days': day_dict[year][month],
                     'location': location,
                     'url': 'http://extras.denverpost.com/weather/historical/%s/%s/%s/' % (slug, year, month),
-                    'title': '%s %s weather in %s, Colorado' % (month.title(), year, location),
-                    'description': '%s %s temperatures and rainfall data for %s, Colorado.' % (month.title(), year, location)
+                    'title': '%s %s weather in %s, Colorado' % (month.title(), year, location_display),
+                    'description': '%s %s temperatures and rainfall data for %s, Colorado.' % (month.title(), year, location_display)
                 }
                 log = WeatherLog('index_month', **metadata)
                 content = log.parse_template()
@@ -327,7 +328,7 @@ def main(args):
                 'day': date.today().day
             }
             url = 'http://extras.denverpost.com/weather/historical/%(location)s/%(year)s/%(month)s/%(day)s/daily-weather-%(location)s.html' % path_vars
-            output = string.replace(output, '{{url}}', url)
+            output = string.replace(output, '{{url}}', string.replace(url, '+', '_'))
 
             slug = slug.replace('+', '_')
             path = 'www/output/daily-weather-%s.html' % ( slug )
@@ -357,7 +358,7 @@ def main(args):
 def build_parser():
     """ This method allows us to test. You gotta write tests for this Joe.
         """
-    parser = argparse.ArgumentParser(usage='$ python nightly.py Denver Aspen "Grand Junction"',
+    parser = argparse.ArgumentParser(usage='$ python nightly.py Denver Aspen Grand+Junction',
                                      description='Takes a list of locations passed as args.',
                                      epilog='')
     parser.add_argument("-i", "--indexes", dest="indexes", default=False, action="store_true")
@@ -372,7 +373,9 @@ if __name__ == '__main__':
     if args.verbose:
         doctest.testmod(verbose=args.verbose)
 
+    # The list pages: /denver/, /denver/2015/, /denver/2015/june/
     if args.indexes:
         indexes(args)
     else:
+        # The detail page: /denver/2015/june/8/daily-weather-denver.html
         main(args)
