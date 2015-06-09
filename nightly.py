@@ -249,6 +249,8 @@ def indexes(args):
             
 
 def main(args):
+    """ Write the the-weather-on-this-day page, upload it.
+        """
     wd = WeatherData(args)
     content = []
     if args:
@@ -265,6 +267,17 @@ def main(args):
             wd.write_cache(location, **request)
             data = wd.response[0]
             slug = string.lower(string.replace(location, ' ', '_'))
+
+            """
+            # RETURNS 403's rn
+            request = {
+                'type': 'climo',
+                'slug': '/records/2015/06/',
+                'suffix': ''
+            }
+            wd.get_from_api(location, **request)
+            climo_data = wd.response[0]
+            """
 
             data_type = 'dailyconditions'
             path = 'html/%s.html' % data_type

@@ -47,15 +47,40 @@ class WeatherData:
 
     def get_from_api(self, *args, **kwargs):
         """ Get data from Accuweather.
-            10-day forecast: http://{{api} or {{apidev}}.accuweather.com/forecasts/{version}/daily/10day/{locationKey}{.{format}}?apikey={your key}{&language={language code}}{&details={true or false}}{&metric={true or false}}
-            1-day forecast: http://{{api} or {{apidev}}.accuweather.com/forecasts/{version}/daily/1day/{locationKey}{.{format}}?apikey={your key}{&language={language code}}{&details={true or false}}{&metric={true or false}}
-            240-hour: http://{{api} or {{apidev}}.accuweather.com/forecasts/{version}/hourly/240hour/{locationKey}{.{format}}?apikey={your key}{&language={language code}}{&details={true or false}}{&metric={true or false}}
-            72-hour: http://{{api} or {{apidev}}.accuweather.com/forecasts/{version}/hourly/72hour/{locationKey}{.{format}}?apikey={your key}{&language={language code}}{&details={true or false}}{&metric={true or false}}
-            24-hour: http://{{api} or {{apidev}}.accuweather.com/forecasts/{version}/hourly/24hour/{locationKey}{.{format}}?apikey={your key}{&language={language code}}{&details={true or false}}{&metric={true or false}}
-            12-hour: http://{{api} or {{apidev}}.accuweather.com/forecasts/{version}/hourly/12hour/{locationKey}{.{format}}?apikey={your key}{&language={language code}}{&details={true or false}}{&metric={true or false}}
-            1-hour: http://{{api} or {{apidev}}.accuweather.com/forecasts/{version}/hourly/1hour/{locationKey}{.{format}}?apikey={your key}{&language={language code}}{&details={true or false}}{&metric={true or false}}
-            Local Weather (maybe we use this instead, see what details=true gives us): http://{{api} or {{apidev}}.accuweather.com/localweather/{version}/{locationKey}{.{format}}?apikey={your key}{&language={language code}}{&details={true or false}}{&getphotos=true or false}{&metric=true or false}
-            Current Conditions: http://{{api} or {{apidev}}.accuweather.com/currentconditions/{version}/{locationKey}{.{format}}?apikey={your key}{&language={language code}}{&details={true or false}}{&getphotos=true or false}
+            FORECASTS:
+            10-day forecast
+                http://{{api} or {{apidev}}.accuweather.com/forecasts/{version}/daily/10day/{locationKey}{.{format}}?apikey={your key}{&language={language code}}{&details={true or false}}{&metric={true or false}}
+            1-day forecast
+                http://{{api} or {{apidev}}.accuweather.com/forecasts/{version}/daily/1day/{locationKey}{.{format}}?apikey={your key}{&language={language code}}{&details={true or false}}{&metric={true or false}}
+            240-hour
+                http://{{api} or {{apidev}}.accuweather.com/forecasts/{version}/hourly/240hour/{locationKey}{.{format}}?apikey={your key}{&language={language code}}{&details={true or false}}{&metric={true or false}}
+            72-hour
+                http://{{api} or {{apidev}}.accuweather.com/forecasts/{version}/hourly/72hour/{locationKey}{.{format}}?apikey={your key}{&language={language code}}{&details={true or false}}{&metric={true or false}}
+            24-hour
+                http://{{api} or {{apidev}}.accuweather.com/forecasts/{version}/hourly/24hour/{locationKey}{.{format}}?apikey={your key}{&language={language code}}{&details={true or false}}{&metric={true or false}}
+            12-hour
+                http://{{api} or {{apidev}}.accuweather.com/forecasts/{version}/hourly/12hour/{locationKey}{.{format}}?apikey={your key}{&language={language code}}{&details={true or false}}{&metric={true or false}}
+            1-hour
+                http://{{api} or {{apidev}}.accuweather.com/forecasts/{version}/hourly/1hour/{locationKey}{.{format}}?apikey={your key}{&language={language code}}{&details={true or false}}{&metric={true or false}}
+            Local Weather (maybe we use this instead, see what details=true gives us)
+                http://{{api} or {{apidev}}.accuweather.com/localweather/{version}/{locationKey}{.{format}}?apikey={your key}{&language={language code}}{&details={true or false}}{&getphotos=true or false}{&metric=true or false}
+            Current Conditions
+                http://{{api} or {{apidev}}.accuweather.com/currentconditions/{version}/{locationKey}{.{format}}?apikey={your key}{&language={language code}}{&details={true or false}}{&getphotos=true or false}
+
+            CLIMATOLOGICAL / HISTORICAL:
+            Climo Actuals For Month or Day By Location Key 
+                http://{{api} or {{apidev}}.accuweather.com/climo/{version}/actuals/yyyy/mm/{dd}/{locationKey}{.{format}}?apikey={your key}
+                http://api.accuweather.com/climo/v1/actuals/2012/12/17/350540?apikey={your key} 
+            Climo Records For Month or Day By Location Key
+                http://{{api} or {{apidev}}.accuweather.com/climo/{version}/records/yyyy/mm/{dd}/{locationKey}{.{format}}?apikey={your key}
+                http://api.accuweather.com/climo/v1/records/2012/12/15/350540?apikey={your key}
+            Climo Normals For Month or Day By Location Key 
+                http://{{api} or {{apidev}}.accuweather.com/climo/{version}/normals/yyyy/mm/{dd}/{locationKey}{.{format}}?apikey={your key}
+                http://api.accuweather.com/climo/v1/normals/2012/12/25/350540?apikey={your key}
+            Climo Month Summary By Location Key 
+                http://{{api} or {{apidev}}.accuweather.com/climo/{version}/summary/yyyy/mm/{locationKey}{.{format}} ? details={true/false} & apikey={your key}
+                http://api.accuweather.com/climo/v1/summary/2014/02/350540?apikey={your key}    
+
             """
         if self.location_key == '':
             raise ValueError("Location Key cannot be blank. Please set it with set_location_key")
