@@ -135,6 +135,7 @@ def indexes(args):
         'location': '',
         'url': 'http://extras.denverpost.com/weather/historical/',
         'title': 'Colorado\'s Historical Weather Archives',
+        'breadcrumbs': '',
         'description': 'Find weather temperatures and rainfall data for each of Colorado\'s cities and towns.'
     }
     log = WeatherLog('index', **metadata)
@@ -168,6 +169,7 @@ def indexes(args):
             'location': location,
             'url': 'http://extras.denverpost.com/weather/historical/%s/' % slug,
             'title': '%s, Colorado: Historical Weather' % location_display,
+            'breadcrumbs': '',
             'description': 'Find weather temperatures and rainfall data for %s, Colorado.' % location_display
         }
         log = WeatherLog('index_city', **metadata)
@@ -217,6 +219,7 @@ def indexes(args):
                 'location': location,
                 'url': 'http://extras.denverpost.com/weather/historical/%s/%s/' % (slug, year),
                 'title': 'Weather in %s, in %s, Colorado' % (year, location_display),
+                'breadcrumbs': '',
                 'description': '%s temperatures and rainfall data for %s, Colorado.' % (year, location_display)
             }
             log = WeatherLog('index_year', **metadata)
@@ -236,6 +239,7 @@ def indexes(args):
                     'location': location,
                     'url': 'http://extras.denverpost.com/weather/historical/%s/%s/%s/' % (slug, year, month),
                     'title': '%s %s weather in %s, Colorado' % (month.title(), year, location_display),
+                    'breadcrumbs': '',
                     'description': '%s %s temperatures and rainfall data for %s, Colorado.' % (month.title(), year, location_display)
                 }
                 log = WeatherLog('index_month', **metadata)
