@@ -161,7 +161,7 @@ def indexes(args):
         location_display = string.replace(location, '+', ' ')
         metadata = {
             's': s,
-            'year': '',
+            'year': '2015',
             'months': '',
             'month': '',
             'days': '',
