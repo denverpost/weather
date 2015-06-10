@@ -167,7 +167,7 @@ def indexes(args):
             'days': '',
             'location': location,
             'url': 'http://extras.denverpost.com/weather/historical/%s/' % slug,
-            'title': '%s, Colorado\'s Historical Weather Archive' % location_display,
+            'title': '%s, Colorado: Historical Weather' % location_display,
             'description': 'Find weather temperatures and rainfall data for %s, Colorado.' % location_display
         }
         log = WeatherLog('index_city', **metadata)
