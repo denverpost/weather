@@ -52,7 +52,7 @@ class WeatherLog():
             item = string.replace(item, '{{year}}', self.metadata['year'])
             item = string.replace(item, '{{month}}', self.metadata['month'].title())
             item = string.replace(item, '{{s}}', self.metadata['s'])
-            item = string.replace(item, '{{slug}}', self.slug)
+            item = string.replace(item, '{{slug}}', string.replace(self.slug, '+', '_'))
 
             # Some fields are dicts. 
             # They're dicts because they're meant to be looped through.
@@ -103,7 +103,7 @@ class WeatherLog():
             """
         if fn == '':
             fn = self.data_type
-        path = 'www/output/%s.html' % ( fn )
+        path = 'www/output/%s.html' % fn
         f = open(path, 'wb')
         f.write(output)
         f.close()
@@ -267,6 +267,7 @@ def main(args):
             wd.write_cache(location, **request)
             data = wd.response[0]
             slug = string.lower(string.replace(location, ' ', '_'))
+            slug = string.lower(string.replace(slug, '+', '_'))
 
             """
             # RETURNS 403's rn
