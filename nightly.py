@@ -134,9 +134,9 @@ def indexes(args):
         'days': '',
         'location': '',
         'url': 'http://extras.denverpost.com/weather/historical/',
-        'title': 'Colorado\'s Historical Weather Archives',
+        'title': 'Colorado\'s Historical Weather Data',
         'breadcrumbs': '',
-        'description': 'Find weather temperatures and rainfall data for each of Colorado\'s cities and towns.'
+        'description': 'Weather temperatures and rainfall data for each of Colorado\'s cities and towns.'
     }
     log = WeatherLog('index', **metadata)
     content = log.parse_template()
@@ -170,7 +170,7 @@ def indexes(args):
             'url': 'http://extras.denverpost.com/weather/historical/%s/' % slug,
             'title': '%s, Colorado: Historical Weather' % location_display,
             'breadcrumbs': '',
-            'description': 'Find weather temperatures and rainfall data for %s, Colorado.' % location_display
+            'description': '%s weather temperatures and rainfall data.' % location_display
         }
         log = WeatherLog('index_city', **metadata)
         content = log.parse_template()
