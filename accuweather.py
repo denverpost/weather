@@ -92,6 +92,10 @@ class WeatherData:
         else:
             url = 'http://%s/%s/v1/%s%s?apikey=%s%s' % ( self.api_host, kwargs['type'], kwargs['slug'], self.location_key, self.api_key, kwargs['suffix'] )
             response = self.get(url)
+
+        if self.args.verbose:
+            print "Response: %s" % response
+
         self.response = response
         return response
 
