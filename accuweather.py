@@ -85,7 +85,9 @@ class WeatherData:
         if self.location_key == '':
             raise ValueError("Location Key cannot be blank. Please set it with set_location_key")
 
+        cache = False
         if 'cache' in self.args:
+            cache = True
             data = self.get_cache(args[0], **kwargs)
             if data != False:
                 response = data
@@ -94,7 +96,8 @@ class WeatherData:
             response = self.get(url)
 
         if self.args.verbose:
-            print "Response: %s" % response
+            print "From cache: %r" % cache
+            print "API Response: %s" % response
 
         self.response = response
         return response
