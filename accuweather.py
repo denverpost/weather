@@ -86,7 +86,7 @@ class WeatherData:
             raise ValueError("Location Key cannot be blank. Please set it with set_location_key")
 
         cache = False
-        if 'cache' in self.args:
+        if 'cache' in self.args and self.args.cache is True:
             cache = True
             data = self.get_cache(args[0], **kwargs)
             if data != False:
