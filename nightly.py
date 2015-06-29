@@ -15,6 +15,16 @@ class WeatherCsv():
             1. Get a list of months per year.
             2. Get a list of days per month.
             3. Get a list of years.
+        >>> wc = WeatherCsv()
+        >>> years = wc.get_years()
+        >>> print years[0]
+        2015
+        >>> months = wc.get_months(years[0])
+        >>> print months[0]
+        'may'
+        >>> dates = wc.get_dates(years[0], months[0])
+        >>> print dates[0]
+        24
         """
 
     def __init__(self):
@@ -25,7 +35,7 @@ class WeatherCsv():
         self.dates = dates[1:]
 
     def get_years(self):
-        """ Return a set of years.
+        """ Return a list of unique years.
             """
         years = []
         for date in self.dates:
@@ -34,10 +44,10 @@ class WeatherCsv():
             if d['year'] == '':
                 continue
             years.append(d['year'])
-        return set(years)
+        return list(set(years))
 
     def get_months(self, year):
-        """ Return a set of months for a particular year.
+        """ Return a list of unique months for a particular year.
             """
         months = []
         for date in self.dates:
@@ -46,19 +56,19 @@ class WeatherCsv():
             if d['year'] != year:
                 continue
             months.append(d['month'])
-        return set(months)
+        return list(set(months))
 
-    def get_days(self, year, month):
-        """ Return a set of days for a particular year/month.
+    def get_dates(self, year, month):
+        """ Return a list of unique dates for a particular year/month.
             """
-        days = []
+        dates = []
         for date in self.dates:
             d = dict(zip(self.date_header, date.split(',')))
             # returns {'date': '27', 'path': '2015/may/27', 'month': 'may', 'year': '2015'}
             if d['year'] != year or d['month'] != month:
                 continue
-            days.append(d['date'])
-        return set(days)
+            dates.append(d['date'])
+        return list(set(dates))
 
 class WeatherLog():
     """ Publish flat files based on csv logs of data."""
