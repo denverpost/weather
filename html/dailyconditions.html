@@ -1,5 +1,5 @@
 <div id="{{slug}}"></div>
-<h2 id="{{slug}}-dailyconditions" class="dailyconditions">{{location}}, Colorado's daily weather, {{day}}</h2>
+<h2 id="{{slug}}-dailyconditions" class="dailyconditions">{{location}}, Colorado's weather for the day: {{day}}</h2>
 <p>Here is the historical weather data for {{location}} on {{day}}.</p>
 <!--
 <p>
@@ -9,6 +9,7 @@
 <p>
     On this day {{location}}'{{s}} high temperature was {{last24_high}}&deg;, and the low was {{last24_low}}&deg;.
 </p>
+{{precipitation}}
 <!--
 <div class="icon"><img src="http://extras.denverpost.com/app/weather/images/accuweather/{{icon}}-m.png" class="icn icn_{{icon}}" alt="{{overall_conditions}} in {{location}}"></div>
 <h3>
@@ -16,9 +17,8 @@
 </h3>
 <p>Cloud cover: {{cloudcover_low}}% &ndash; {{cloudcover_high}}%</p>
 -->
-{{precipitation}}
 
-<h3>Today's Colorado Weather News Headlines</h3>
+<h3 style="margin-top:50px;">Today's Colorado Weather News Headlines</h3>
 <p>If there was any weather news in Colorado today, here it is.</p>
 {{weathernews}}
 
