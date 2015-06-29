@@ -25,13 +25,40 @@ class WeatherCsv():
         self.dates = dates[1:]
 
     def get_years(self):
-        pass
+        """ Return a set of years.
+            """
+        years = []
+        for date in self.dates:
+            d = dict(zip(self.date_header, date.split(',')))
+            # returns {'date': '27', 'path': '2015/may/27', 'month': 'may', 'year': '2015'}
+            if d['year'] == '':
+                continue
+            years.append(d['year'])
+        return set(years)
 
     def get_months(self, year):
-        pass
+        """ Return a set of months for a particular year.
+            """
+        months = []
+        for date in self.dates:
+            d = dict(zip(self.date_header, date.split(',')))
+            # returns {'date': '27', 'path': '2015/may/27', 'month': 'may', 'year': '2015'}
+            if d['year'] != year:
+                continue
+            months.append(d['month'])
+        return set(months)
 
     def get_days(self, year, month):
-        pass
+        """ Return a set of days for a particular year/month.
+            """
+        days = []
+        for date in self.dates:
+            d = dict(zip(self.date_header, date.split(',')))
+            # returns {'date': '27', 'path': '2015/may/27', 'month': 'may', 'year': '2015'}
+            if d['year'] != year or d['month'] != month:
+                continue
+            days.append(d['date'])
+        return set(days)
 
 class WeatherLog():
     """ Publish flat files based on csv logs of data."""
