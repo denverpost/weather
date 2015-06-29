@@ -10,6 +10,29 @@ from datetime import date, datetime
 from accuweather import WeatherData, PublishWeather
 from FtpWrapper import FtpWrapper
 
+class WeatherCsv():
+    """ Query the log_daily.csv file:
+            1. Get a list of months per year.
+            2. Get a list of days per month.
+            3. Get a list of years.
+        """
+
+    def __init__(self):
+        f = open('log_daily.csv', 'rb')
+        dates = f.read().split('\n')
+        f.close()
+        self.date_header = dates[0].split(',')
+        self.dates = dates[1:]
+
+    def get_years(self):
+        pass
+
+    def get_months(self, year):
+        pass
+
+    def get_days(self, year, month):
+        pass
+
 class WeatherLog():
     """ Publish flat files based on csv logs of data."""
 
