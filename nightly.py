@@ -15,20 +15,24 @@ class WeatherCsv():
             1. Get a list of months per year.
             2. Get a list of days per month.
             3. Get a list of years.
-        >>> wc = WeatherCsv()
+        >>> wc = WeatherCsv('log_daily.test.csv')
         >>> years = wc.get_years()
         >>> print years[0]
         2015
         >>> months = wc.get_months(years[0])
         >>> print months[0]
-        'may'
+        january
         >>> dates = wc.get_dates(years[0], months[0])
         >>> print dates[0]
-        24
+        01
         """
 
-    def __init__(self):
-        f = open('log_daily.csv', 'rb')
+    def __init__(self, fn):
+        try:
+            f = open(fn, 'rb')
+        except:
+            f = open('log_daily.csv', 'rb')
+
         dates = f.read().split('\n')
         f.close()
         self.date_header = dates[0].split(',')
