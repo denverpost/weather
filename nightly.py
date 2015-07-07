@@ -96,27 +96,40 @@ class WeatherLog():
 
     def build_content(self, template):
         """ Put together the content we're writing to the page.
+            This method takes the markup in the row template and stores it
+            in a var named item, which is appended to a list named content,
+            which is returned in one giant text blob at the end of the method.
             """
         if template == '':
             template = self.data_type
 
         fn = 'html/%s.row.html' % template
-        template = self.read_file(fn)
+        item_tmp = self.read_file(fn)
         
         content = []
 
         if self.data_type == 'index':
             for location in self.locations:
-                item = string.replace(template, '{{location}}', string.replace(location, '+', ' '))
+                item = string.replace(item_tmp, '{{location}}', string.replace(location, '+', ' '))
                 item = string.replace(item, '{{url}}', string.replace(location, '+', '_').lower())
                 content.append(item)
         elif self.data_type in ['index_city', 'index_year', 'index_month']:
-            item = string.replace(template, '{{location}}', string.replace(self.metadata['location'], '+', ' '))
+            item = string.replace(item_tmp, '{{location}}', string.replace(self.metadata['location'], '+', ' '))
             item = string.replace(item, '{{url}}', '2015')
             item = string.replace(item, '{{year}}', self.metadata['year'])
             item = string.replace(item, '{{month}}', self.metadata['month'].title())
             item = string.replace(item, '{{s}}', self.metadata['s'])
             item = string.replace(item, '{{slug}}', string.replace(self.slug, '+', '_'))
+
+            if self.data_type == 'index_city':
+                wc = WeatherCsv('log_daily.csv')
+                years = wc.get_years()
+                months_list = wc.get_months(years[0])
+                months = []
+                for month in months_list:
+                    months.append('<a href="%s/%s/">%s</a>' % (years[0], month, month.title()))
+                months_blurb = " ".join(months)
+                item = string.replace(item, '{{months}}', months_blurb)
 
             # Some fields are dicts. 
             # They're dicts because they're meant to be looped through.
@@ -208,10 +221,16 @@ def indexes(args):
     ftp_path = '/DenverPost/weather/historical/'
     log.ftp_page(path, ftp_path)
 
-    f = open('colorado-cities.txt', 'rb')
-    content = f.read()
-    f.close()
-    for location in content.split('\n'):
+    # Allow us to specify the locations via args, or else just run it on all the cities.
+    if 'locations' not in args:
+        f = open('colorado-cities.txt', 'rb')
+        content = f.read()
+        f.close()
+        locations = content.split('\n')
+    else:
+        locations = args.locations[0]
+
+    for location in locations:
         if location == '':
             continue
 
@@ -366,8 +385,8 @@ def main(args):
 
             # Get the weather news headlines
             date_slug = datetime.strftime(date.today(), "%Y-%m-%d")
-            f = open('www/output/headlines_%s.html' % date_slug)
             try:
+                f = open('www/output/headlines_%s.html' % date_slug)
                 weathernews = f.read()
             except:
                 weathernews = ''
