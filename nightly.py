@@ -222,13 +222,13 @@ def indexes(args):
     log.ftp_page(path, ftp_path)
 
     # Allow us to specify the locations via args, or else just run it on all the cities.
-    if 'locations' not in args:
+    if 'locations' in args and len(args.locations[0]) > 0:
+        locations = args.locations[0]
+    else:
         f = open('colorado-cities.txt', 'rb')
         content = f.read()
         f.close()
         locations = content.split('\n')
-    else:
-        locations = args.locations[0]
 
     for location in locations:
         if location == '':
