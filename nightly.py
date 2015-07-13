@@ -121,6 +121,7 @@ class WeatherLog():
             item = string.replace(item, '{{s}}', self.metadata['s'])
             item = string.replace(item, '{{slug}}', string.replace(self.slug, '+', '_'))
 
+
             if self.data_type == 'index_city':
                 wc = WeatherCsv('log_daily.csv')
                 years = wc.get_years()
