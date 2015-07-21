@@ -149,6 +149,7 @@
             <a href="http://www.denverpost.com/">Home</a>
             &rsaquo; <a href="http://www.denverpost.com/weather">Weather</a>
             &rsaquo; <a href="http://extras.denverpost.com/weather/historical/">Historical Weather</a>
+            <!-- {{breadcrumb_one}} {{breadcrumb_two}} {{breadcrumb_three}} -->
         </div>
     <h1>{{title}}</h1>
     {{content}}
@@ -205,7 +206,7 @@
         //Chartbeat stuff
         _sf_async_config.uid = 2671;
         _sf_async_config.domain = 'denverpost.com';
-        _sf_async_config.sections = 'weather';
+        _sf_async_config.sections = 'weather,data';
         _sf_async_config.useCanonical = true;
         (function(){
             function loadChartbeat() {
