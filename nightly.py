@@ -247,6 +247,9 @@ def indexes(args):
         else:
             s = 's'
 
+        #++++++++++++++++++++++++++++++++++++++++
+        # City Weather Index
+        #++++++++++++++++++++++++++++++++++++++++
         slug = string.replace(location, '+', '_').lower()
         location_display = string.replace(location, '+', ' ')
         metadata = {
@@ -299,8 +302,10 @@ def indexes(args):
             # Each date's only in the dict once, this we know.
             day_dict[d['year']][d['month']][d['date']] = d['path']
 
+        #++++++++++++++++++++++++++++++++++++++++
+        # Year Weather Index
+        #++++++++++++++++++++++++++++++++++++++++
         for year in day_dict:
-            # YEAR
             metadata = {
                 's': s,
                 'year': year,
@@ -321,8 +326,10 @@ def indexes(args):
             ftp_path = '/DenverPost/weather/historical/%s/%s/' % (slug, year)
             log.ftp_page(path, ftp_path)
 
+            #++++++++++++++++++++++++++++++++++++++++
+            # Month Weather Index
+            #++++++++++++++++++++++++++++++++++++++++
             for month in day_dict[year]:
-                # MONTH
                 metadata = {
                     's': s,
                     'year': year,
@@ -331,7 +338,7 @@ def indexes(args):
                     'days': day_dict[year][month],
                     'location': location,
                     'url': 'http://extras.denverpost.com/weather/historical/%s/%s/%s/' % (slug, year, month),
-                    'title': '%s %s weather in %s, Colorado' % (month.title(), year, location_display),
+                    'title': '%s %s historic weather in %s, Colorado' % (month.title(), year, location_display),
                     'breadcrumb_one': '&rsaquo; <a href="../../">%s</a>' % location_display,
                     'breadcrumb_two': '&rsaquo; <a href="../">%s</a>' % year,
                     'breadcrumb_three': '',
@@ -353,6 +360,11 @@ def main(args):
     wd = WeatherData(args)
     content = []
     if args:
+
+        #++++++++++++++++++++++++++++++++++++++++
+        # Daily Weather 
+        #++++++++++++++++++++++++++++++++++++++++
+        
         for location in args.locations[0]:
             if args.verbose:
                 print location
