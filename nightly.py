@@ -172,6 +172,9 @@ class WeatherLog():
         template = string.replace(template, '{{year}}', self.metadata['year'])
         template = string.replace(template, '{{month}}', self.metadata['month'].title())
         template = string.replace(template, '{{s}}', self.metadata['s'])
+        template = string.replace(template, '{{breadcrumb_one}}', self.metadata['breadcrumb_one'])
+        template = string.replace(template, '{{breadcrumb_two}}', self.metadata['breadcrumb_two'])
+        template = string.replace(template, '{{breadcrumb_three}}', self.metadata['breadcrumb_three'])
         if self.metadata['location'] != '':
             template = string.replace(template, '{{slug}}', self.slug)
         return template
@@ -213,7 +216,9 @@ def indexes(args):
         'location': '',
         'url': 'http://extras.denverpost.com/weather/historical/',
         'title': 'Colorado\'s Historical Weather Data',
-        'breadcrumbs': '',
+        'breadcrumb_one': '',
+        'breadcrumb_two': '',
+        'breadcrumb_three': '',
         'description': 'Weather temperatures and rainfall data for each of Colorado\'s cities and towns.'
     }
     log = WeatherLog('index', **metadata)
@@ -253,7 +258,9 @@ def indexes(args):
             'location': location,
             'url': 'http://extras.denverpost.com/weather/historical/%s/' % slug,
             'title': '%s, Colorado: Historical Weather' % location_display,
-            'breadcrumbs': '',
+            'breadcrumb_one': '',
+            'breadcrumb_two': '',
+            'breadcrumb_three': '',
             'description': '%s weather temperatures and rainfall data.' % location_display
         }
         log = WeatherLog('index_city', **metadata)
@@ -303,7 +310,9 @@ def indexes(args):
                 'location': location,
                 'url': 'http://extras.denverpost.com/weather/historical/%s/%s/' % (slug, year),
                 'title': 'Weather in %s, in %s, Colorado' % (year, location_display),
-                'breadcrumbs': '',
+                'breadcrumb_one': '&rsaquo; <a href="../">%s</a>' % location_display,
+                'breadcrumb_two': '',
+                'breadcrumb_three': '',
                 'description': '%s temperatures and rainfall data for %s, Colorado.' % (year, location_display)
             }
             log = WeatherLog('index_year', **metadata)
@@ -323,7 +332,9 @@ def indexes(args):
                     'location': location,
                     'url': 'http://extras.denverpost.com/weather/historical/%s/%s/%s/' % (slug, year, month),
                     'title': '%s %s weather in %s, Colorado' % (month.title(), year, location_display),
-                    'breadcrumbs': '',
+                    'breadcrumb_one': '&rsaquo; <a href="../../">%s</a>' % location_display,
+                    'breadcrumb_two': '&rsaquo; <a href="../">%s</a>' % year,
+                    'breadcrumb_three': '',
                     'description': '%s %s temperatures and rainfall data for %s, Colorado.' % (month.title(), year, location_display)
                 }
                 log = WeatherLog('index_month', **metadata)
@@ -423,6 +434,9 @@ def main(args):
             output = string.replace(output, '{{title}}', title)
             description = "Here's the historical weather data for %s on %s" % (location, day)
             output = string.replace(output, '{{description}}', description)
+            output = string.replace(output, '{{breadcrumb_one}}', '&rsaquo; <a href="../../../">%s</a>' % location)
+            output = string.replace(output, '{{breadcrumb_two}}', '&rsaquo; <a href="../../">%d</a>' % date.today().year)
+            output = string.replace(output, '{{breadcrumb_three}}', '&rsaquo; <a href="../">%s</a>' % date.strftime(date.today(), '%B'))
             path_vars = {
                 'location': string.replace(slug, '+', '_'),
                 'year': date.today().year,
