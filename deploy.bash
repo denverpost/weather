@@ -1,6 +1,6 @@
 #!/bin/bash
 # Update the weather data.
-source source.bash
+source .source.bash
 DATE_SLUG=`date +'%F'`
 NIGHTLY=0
 while [ "$1" != "" ]; do
