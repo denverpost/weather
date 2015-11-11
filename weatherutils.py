@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 # Write our nightly weather files
+import doctest
 import string
 import os
 import csv

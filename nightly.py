@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 # Write our nightly weather files
-import doctest
 import argparse
 from datetime import date, datetime
 from accuweather import WeatherData, PublishWeather
