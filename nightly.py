@@ -3,6 +3,7 @@
 # Write our nightly weather files
 import argparse
 import string
+import os
 from datetime import date, datetime
 from accuweather import WeatherData, PublishWeather
 from weatherutils import WeatherCsv, WeatherLog
