@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 # Write our nightly weather files
 import argparse
+import string
 from datetime import date, datetime
 from accuweather import WeatherData, PublishWeather
 from weatherutils import WeatherCsv, WeatherLog
@@ -183,8 +184,8 @@ def main(args):
             slug = string.lower(string.replace(location, ' ', '_'))
             slug = string.lower(string.replace(slug, '+', '_'))
 
-            """
             # RETURNS 403's rn
+            """
             request = {
                 'type': 'climo',
                 'slug': '/records/2015/06/',
@@ -192,6 +193,8 @@ def main(args):
             }
             wd.get_from_api(location, **request)
             climo_data = wd.response[0]
+            print climo_data
+            sys.exit()
             """
 
             data_type = 'dailyconditions'
