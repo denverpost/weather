@@ -4,6 +4,8 @@
 import argparse
 import string
 import os
+from FtpWrapper import FtpWrapper
+import csv
 from datetime import date, datetime
 from accuweather import WeatherData, PublishWeather
 from weatherutils import WeatherCsv, WeatherLog
