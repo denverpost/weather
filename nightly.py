@@ -7,7 +7,10 @@ import os
 from FtpWrapper import FtpWrapper
 import csv
 from datetime import date, datetime
-from collections import OrderedDict
+try:
+    from collections import OrderedDict
+except:
+    from ordereddict import OrderedDict
 from accuweather import WeatherData, PublishWeather
 from weatherutils import WeatherCsv, WeatherLog
 
