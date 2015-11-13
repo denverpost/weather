@@ -7,6 +7,7 @@ import os
 from FtpWrapper import FtpWrapper
 import csv
 from datetime import date, datetime
+from collections import OrderedDict
 from accuweather import WeatherData, PublishWeather
 from weatherutils import WeatherCsv, WeatherLog
 
@@ -92,7 +93,7 @@ def indexes(args):
 
         # We need the distinct months and years from the dates.
         # We also need the indvidual dates for each month.
-        day_dict = {}
+        day_dict = OrderedDict()
         for date in dates:
             d = dict(zip(date_header, date.split(',')))
             # returns {'date': '27', 'path': '2015/may/27', 'month': 'may', 'year': '2015'}
@@ -101,10 +102,10 @@ def indexes(args):
 
             # Check if the year exists in our dict
             if d['year'] not in day_dict:
-                day_dict[d['year']] = {}
+                day_dict[d['year']] = OrderedDict()
 
             if d['month'] not in day_dict[d['year']]:
-                day_dict[d['year']][d['month']] = {}
+                day_dict[d['year']][d['month']] = OrderedDict()
 
             # Each date's only in the dict once, this we know.
             day_dict[d['year']][d['month']][d['date']] = d['path']
