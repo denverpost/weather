@@ -191,6 +191,7 @@ def main(args):
             slug = string.lower(string.replace(location, ' ', '_'))
             slug = string.lower(string.replace(slug, '+', '_'))
 
+            """
             request = {
                 'type': 'climo',
                 'slug': '/records/2015/06/',
@@ -200,6 +201,7 @@ def main(args):
             climo_data = wd.response
             print climo_data
             sys.exit()
+            """
 
             data_type = 'dailyconditions'
             path = 'html/%s.html' % data_type
