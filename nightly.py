@@ -3,7 +3,7 @@
 # Write our nightly weather files
 import argparse
 import string
-import os
+import os, sys
 from FtpWrapper import FtpWrapper
 import csv
 from datetime import date, datetime
@@ -191,18 +191,15 @@ def main(args):
             slug = string.lower(string.replace(location, ' ', '_'))
             slug = string.lower(string.replace(slug, '+', '_'))
 
-            # RETURNS 403's rn
-            """
             request = {
                 'type': 'climo',
                 'slug': '/records/2015/06/',
                 'suffix': ''
             }
             wd.get_from_api(location, **request)
-            climo_data = wd.response[0]
+            climo_data = wd.response
             print climo_data
             sys.exit()
-            """
 
             data_type = 'dailyconditions'
             path = 'html/%s.html' % data_type

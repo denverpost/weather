@@ -85,7 +85,7 @@ class WeatherLog():
             self.slug = string.replace(self.metadata['location'], ' ', '_').lower()
 
     def read_file(self, fn):
-        """
+        """ Read the contents of a file.
             """
         f = open(fn, 'rb')
         content = f.read()

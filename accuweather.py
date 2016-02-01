@@ -31,7 +31,10 @@ class WeatherData:
             if self.args.verbose:
                 print "URL: %s" % url
             raise ValueError("AccuWeather API response: %s" % response.status)
-        return json.loads(content)
+        try:
+            return json.loads(content)
+        except:
+            print content
 
     def set_location_key(self, zipcode):
         """ Set / update the location_key value.
