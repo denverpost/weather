@@ -12,18 +12,23 @@
         <style type="text/css">
             h3 { margin: auto; }
             h2, h3 {
-                clear: both;
                 margin-top: 10px;
             }
-            p { line-height: 1em; }
             #city-interface
             {
                 width: 250px;
                 float: right;
             }
-            #container { max-width: 980px; }
-            .nobullet li { list-style-type: none; }
+            p
+            {
+                line-height: 1em;
+                clear: both;
+            }
+            dl { margin-bottom: 22.652px; }
             iframe { border-width: 0; }
+            #container { max-width: 300px; overflow: hidden; }
+            .nobullet li { list-style-type: none; }
+            .tiny { font-size:11px!important; }
         </style>
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
         <script src="http://local.digitalfirstmedia.com/common/jquery/jquery-autocomplete.js"></script>
@@ -39,6 +44,17 @@
 <script src="http://extras.denverpost.com/app/weather/js/typeahead.bundle.min.js"></script>
 <div id="weather_widget" class="weather_widget">
     <h2><a href="/weather" title="Colorado Weather"><span id="weather_city">Colorado</span> Weather</a></h2>
+    <nav class="tiny">
+        <a href="/weather#aurora" onClick="load_weather.load_all('Aurora', '5day'); return false;">Aurora Weather</a>
+        &bull;
+        <a href="/weather#littleton" onClick="load_weather.load_all('Littleton', '5day'); return false;">Littleton</a>
+        &bull;
+        <a href="/weather#englewood" onClick="load_weather.load_all('Englewood', '5day'); return false;">Englewood</a>
+        &bull;
+        <a href="/weather#boulder" onClick="load_weather.load_all('Boulder', '5day'); return false;">Boulder</a>
+        &bull;
+        <a href="/weather#arvada" onClick="load_weather.load_all('Arvada', '5day'); return false;">Arvada</a>
+    </nav>
 
     <div id="colorado_cities">
         <input id="city_input" class="typeahead" type="text" placeholder="Type your city / town here" size="30">
