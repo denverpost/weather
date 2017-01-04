@@ -13,21 +13,14 @@
             h2, h3 {
                 margin-top: 10px;
             }
-            #city-interface
-            {
+            #city-interface {
                 width: 250px;
                 float: right;
             }
-            p
-            {
-                line-height: 1em;
-                clear: both;
-            }
             dl { margin-bottom: 22.652px; }
             iframe { border-width: 0; }
-            #container { max-width: 300px; overflow: hidden; }
+            #container { max-width: 300px; padding:0 4px; overflow: hidden; }
             .nobullet li { list-style-type: none; }
-            .tiny { font-size:11px!important; }
         </style>
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
         <script src="http://local.digitalfirstmedia.com/common/jquery/jquery-autocomplete.js"></script>
@@ -42,10 +35,10 @@
 <!-- Weather Widget -->
 <link href="http://extras.denverpost.com/app/weather/style.css" type="text/css" rel="stylesheet" />
 <script src="http://extras.denverpost.com/app/weather/js/typeahead.bundle.min.js"></script>
-<div id="weather_widget" class="weather_widget">
-    <h2><a href="http://www.denverpost.com/weather/" target="_top" title="Colorado Weather"><span id="weather_city">Colorado</span> Weather</a></h2>
+<div id="weather_widget" class="weather_widget related">
+    <h2 class="widget-title"><a href="http://www.denverpost.com/weather/" target="_top" title="Colorado Weather"><span id="weather_city">Colorado</span> Weather</a></h2>
     <nav class="tiny">
-        <a href="/weather#aurora" onClick="load_weather.load_all('Aurora', '5day'); return false;">Aurora Weather</a>
+        <a href="/weather#aurora" onClick="load_weather.load_all('Aurora', '5day'); return false;">Aurora</a>
         &bull;
         <a href="/weather#littleton" onClick="load_weather.load_all('Littleton', '5day'); return false;">Littleton</a>
         &bull;
