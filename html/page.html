@@ -67,11 +67,11 @@
     </style>
 
     
-    <script type="text/javascript" src="http://extras.denverpost.com/media/js/jquery-min.js"></script>
-    <script type="text/javascript" src="http://extras.denverpost.com/media/js/dputils-min.js?v=3"></script>
-    <script type="text/javascript" src="http://www.googletagservices.com/tag/js/gpt.js"></script>
+    <script src="http://extras.denverpost.com/media/js/jquery-min.js"></script>
+    <script src="http://extras.denverpost.com/media/js/dputils-min.js?v=3"></script>
+    <script src="http://www.googletagservices.com/tag/js/gpt.js"></script>
 
-    <script type="text/javascript">
+    <script>
         //Chartbeat startup
         var _sf_startpt=(new Date()).getTime();
         var _sf_async_config={};
@@ -153,7 +153,7 @@
         </div>
     <h1>{{title}}</h1>
     {{content}}
-    <p>Get Colorado's current snow totals at the <a href="http://www.denverpost.com/skireport">Colorado ski report</a>.</p>
+    <p>Get <a href="http://www.denverpost.com/skireport">Colorado's current snow totals at the Colorado ski report</a>.</p>
 
         <div class="rightRail" id="rightRail" style="float:right;width:300px;margin-left:20px;">
 
@@ -198,23 +198,22 @@
 
     <div id="dfmFooter" style="border-top:1px solid #ddd;"><!--Footer Goes Here--></div>
     
-    <script type="text/javascript" src="http://local.denverpost.com/common/dfm/dfm-nav/dfm-nav-core-1.4.7.js"></script>
+    <script src="http://local.denverpost.com/common/dfm/dfm-nav/dfm-nav-core-1.4.7.js"></script>
     <script>
         var waitingforGodot = setTimeout(function(){dfmNav.initParams("mode|article", "site|denverpost", "pageTitle|Weather", "leaderboard|true", "thirdParty|false")},5);
     </script>
 
     <footer>
-    <script type="text/javascript">
+    <script>
         //Chartbeat stuff
         _sf_async_config.uid = 2671;
         _sf_async_config.domain = 'denverpost.com';
-        _sf_async_config.sections = 'weather,data';
+        _sf_async_config.sections = 'weather,data,';
         _sf_async_config.useCanonical = true;
         (function(){
             function loadChartbeat() {
                 window._sf_endpt=(new Date()).getTime();
                 var e = document.createElement('script');
-                e.setAttribute('type', 'text/javascript');
                 e.setAttribute('src','//static.chartbeat.com/js/chartbeat.js');
                 document.body.appendChild(e);
             }

@@ -113,7 +113,7 @@ class WeatherLog():
                 content.append(item)
         elif self.data_type in ['index_city', 'index_year', 'index_month']:
             item = string.replace(item_tmp, '{{location}}', string.replace(self.metadata['location'], '+', ' '))
-            item = string.replace(item, '{{url}}', '2015')
+            item = string.replace(item, '{{url}}', '2017')
             item = string.replace(item, '{{year}}', self.metadata['year'])
             item = string.replace(item, '{{month}}', self.metadata['month'].title())
             item = string.replace(item, '{{s}}', self.metadata['s'])
