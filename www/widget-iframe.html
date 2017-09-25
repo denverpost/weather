@@ -6,8 +6,8 @@
         <meta name="viewport" content="width=device-width" />
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <link rel='stylesheet' id='knowlton-styles-css'  href='https://assets.digitalfirstmedia.com/prod/static/css/denverpost.css?ver=1.0' type='text/css' media='all' />
-        <link rel='stylesheet' id='mason-fonts-css'  href='https://fonts.googleapis.com/css?family=Open%20Sans%7CSource+Serif+Pro%3A400%2C400italic%2C600%2C600italic%2C700%2C700italic%7CSource+Sans+Pro%3A400%2C400italic%2C600%2C600italic%2C700%2C400italic&#038;ver=4.5.3' type='text/css' media='all' />
+        <link rel='stylesheet' id='knowlton-styles-css'  href='//assets.digitalfirstmedia.com/prod/static/css/denverpost.css?ver=1.0' type='text/css' media='all' />
+        <link rel='stylesheet' id='mason-fonts-css'  href='//fonts.googleapis.com/css?family=Open%20Sans%7CSource+Serif+Pro%3A400%2C400italic%2C600%2C600italic%2C700%2C700italic%7CSource+Sans+Pro%3A400%2C400italic%2C600%2C600italic%2C700%2C400italic&#038;ver=4.5.3' type='text/css' media='all' />
         <style type="text/css">
             h3 { margin: auto; }
             h2, h3 {
@@ -22,21 +22,21 @@
             #container { max-width: 300px; padding:0 4px; overflow: hidden; }
             .nobullet li { list-style-type: none; }
         </style>
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-        <script src="http://local.digitalfirstmedia.com/common/jquery/jquery-autocomplete.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+        <script src="//local.digitalfirstmedia.com/common/jquery/jquery-autocomplete.js"></script>
         <script>
             $.cookie=function(e,t,n){if(arguments.length>1&&"[object Object]"!==String(t)){if(n=jQuery.extend({},n),(null===t||void 0===t)&&(n.expires=-1),"number"==typeof n.expires){var i=n.expires,r=n.expires=new Date;r.setDate(r.getDate()+i)}return t=String(t),document.cookie=[encodeURIComponent(e),"=",n.raw?t:encodeURIComponent(t),n.expires?"; expires="+n.expires.toUTCString():"",n.path?"; path="+n.path:"",n.domain?"; domain="+n.domain:"",n.secure?"; secure":""].join("")}n=t||{};var o,s=n.raw?function(e){return e}:decodeURIComponent;return(o=new RegExp("(?:^|; )"+encodeURIComponent(e)+"=([^;]*)").exec(document.cookie))?s(o[1]):null}
         </script>
-        <link rel="stylesheet" type="text/css" href="http://extras.mnginteractive.com/live/css/site36/weatherPage.css">
+        <link rel="stylesheet" type="text/css" href="//extras.mnginteractive.com/live/css/site36/weatherPage.css">
     </head>
     <body class="body-copy weather">
         <div id="container">
 
 <!-- Weather Widget -->
-<link href="http://extras.denverpost.com/app/weather/style.css" type="text/css" rel="stylesheet" />
-<script src="http://extras.denverpost.com/app/weather/js/typeahead.bundle.min.js"></script>
+<link href="//extras.denverpost.com/app/weather/style.css" type="text/css" rel="stylesheet" />
+<script src="//extras.denverpost.com/app/weather/js/typeahead.bundle.min.js"></script>
 <div id="weather_widget" class="weather_widget related">
-    <h2 class="widget-title"><a href="http://www.denverpost.com/weather/" target="_top" title="Colorado Weather"><span id="weather_city">Colorado</span> Weather</a></h2>
+    <h2 class="widget-title"><a href="https://www.denverpost.com/weather/" target="_top" title="Colorado Weather"><span id="weather_city">Colorado</span> Weather</a></h2>
     <nav class="tiny">
         <a href="/weather#aurora" onClick="load_weather.load_all('Aurora', '5day'); return false;">Aurora</a>
         &bull;
@@ -58,7 +58,7 @@
 <!--
     <p>&raquo; <a href="/weather" id="weather_link" target="_top" title="Colorado Weather Forecasts"><span></span> 10-day forecast</a></p>
 -->
-    <p>&raquo; <a href="http://www.denverpost.com/news/weather/"  target="_top" title="Colorado Weather News">Colorado Weather News</a></p>
+    <p>&raquo; <a href="https://www.denverpost.com/news/weather/"  target="_top" title="Colorado Weather News">Colorado Weather News</a></p>
 </div>
 <script>
 var load_weather = {
@@ -98,13 +98,13 @@ var load_weather = {
         if ( typeof type === 'undefined' ) var type = '5day';
         var slug = this.slugify(city);
 
-        var data = $.get("http://denverpostplus.com/app/weather/www/output/currentconditions-" + slug + ".html", 
+        var data = $.get("http://extras.denverpost.com/weather/daily/currentconditions-" + slug + ".html", 
             function (data) 
             { 
                 data = window.load_weather.clean_data(data);
                 $( "#weather_current" ).html(data);
             });
-        var data = $.get("http://denverpostplus.com/app/weather/www/output/" + type + "-" + slug + ".html", 
+        var data = $.get("https://extras.denverpost.com/weather/daily/" + type + "-" + slug + ".html", 
             function (data) 
             {
                 data = window.load_weather.clean_data(data);

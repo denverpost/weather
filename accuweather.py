@@ -6,6 +6,7 @@ import csv
 import doctest
 import json
 import httplib2
+from FtpWrapper import FtpWrapper
 import string
 import argparse
 from datetime import date, timedelta
@@ -285,7 +286,20 @@ class PublishWeather:
         f = open(path, 'wb')
         f.write(self.output)
         f.close()
-        return "Successfully written to %s" % path
+        
+
+        ftp_path = '/DenverPost/weather/daily/'
+        ftp_config = {
+            'user': os.environ.get('FTP_USER'),
+            'host': os.environ.get('FTP_HOST'),
+            'port': os.environ.get('FTP_PORT'),
+            'upload_dir': ftp_path
+        }
+        ftp = FtpWrapper(**ftp_config)
+        ftp.send_file(path)
+        ftp.disconnect()
+
+        return "Successfully written to %s and FTP'd to %s" % ( path, ftp_path )
 
 def main(args):
     wd = WeatherData(args)
