@@ -22,16 +22,16 @@
             .nobullet li { list-style-type: none; }
             iframe { border-width: 0; }
         </style>
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-        <script src="http://local.digitalfirstmedia.com/common/jquery/jquery-autocomplete.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+        <script src="//local.digitalfirstmedia.com/common/jquery/jquery-autocomplete.js"></script>
         <script>
             $.cookie=function(e,t,n){if(arguments.length>1&&"[object Object]"!==String(t)){if(n=jQuery.extend({},n),(null===t||void 0===t)&&(n.expires=-1),"number"==typeof n.expires){var i=n.expires,r=n.expires=new Date;r.setDate(r.getDate()+i)}return t=String(t),document.cookie=[encodeURIComponent(e),"=",n.raw?t:encodeURIComponent(t),n.expires?"; expires="+n.expires.toUTCString():"",n.path?"; path="+n.path:"",n.domain?"; domain="+n.domain:"",n.secure?"; secure":""].join("")}n=t||{};var o,s=n.raw?function(e){return e}:decodeURIComponent;return(o=new RegExp("(?:^|; )"+encodeURIComponent(e)+"=([^;]*)").exec(document.cookie))?s(o[1]):null}
         </script>
-        <link rel="stylesheet" type="text/css" href="http://extras.mnginteractive.com/live/css/site36/weatherPage.css">
+        <link rel="stylesheet" type="text/css" href="//extras.mnginteractive.com/live/css/site36/weatherPage.css">
     </head>
     <body class="body-copy">
         <div id="container">
-            <iframe id="accuWeatherRadar" width="587" height="470" src="http://denverpost.accuweather.com/hostedpages/widget/v2/denverpostradar/radar/denver,co"></iframe>
+            <iframe id="accuWeatherRadar" width="587" height="470" src="https://denverpost.accuweather.com/hostedpages/widget/v2/denverpostradar/radar/denver,co"></iframe>
             <div id="city-interface">
                 <div id="citySelector">
                    <form onSubmit="upDatePage(); return false">
@@ -67,7 +67,7 @@ function updateWeatherData(d){
    $('#weatherExtrasMoon').html(d.moonPhase);
    $('#weatherExtrasAirQuality').html(d.airQualityValue);
    $('#weatherExtrasAirCat').html(d.airQualityCat);
-   $('#weatherExtrasAlerts').attr("href","http://www.accuweather.com/en/us/denver-co/80203/weather-warnings/"+d.accuLocKey);
+   $('#weatherExtrasAlerts').attr("href","https://www.accuweather.com/en/us/denver-co/80203/weather-warnings/"+d.accuLocKey);
    }
 function getLocalWeather(loc){
     ajaxLoc = loc.replace(/\s/g, ''); // remove spaces
@@ -79,8 +79,8 @@ function setCityPage(loc){
         getLocalWeather(loc2);
         loc+=',co';
         }
-    $('#accuWeather5day').attr('src','http://denverpost.accuweather.com/hostedpages/widget/v2/denverpostforecast/weather5/'+loc);
-    $('#accuWeatherRadar').attr('src','http://denverpost.accuweather.com/hostedpages/widget/v2/denverpostradar/radar/'+loc);
+    $('#accuWeather5day').attr('src','https://denverpost.accuweather.com/hostedpages/widget/v2/denverpostforecast/weather5/'+loc);
+    $('#accuWeatherRadar').attr('src','https://denverpost.accuweather.com/hostedpages/widget/v2/denverpostradar/radar/'+loc);
     $('#notValidZipCode').remove();
     }
 function selectItem(li){findValue(li)}
@@ -90,13 +90,13 @@ var accuLocationKey=0;
 var autoCompleteArr=["Aguilar", "Akron", "Alamosa", "Alma", "Antonito", "Arriba", "Arvada", "Aspen", "Ault", "Aurora", "Avon", "Basalt", "Bayfield", "Bennett", "Berthoud", "Bethune", "Black Hawk", "Blanca", "Blue River", "Bonanza", "Boone", "Boulder", "Bow Mar", "Branson", "Breckenridge", "Brighton", "Brookside", "Broomfield", "Brush", "Buena Vista", "Burlington", "Calhan", "Campo", "Cañon City", "Carbondale", "Castle Pines North", "Castle Rock", "Cedaredge", "Centennial", "Center", "Central City", "Cheraw", "Cherry Hills Village", "Cheyenne Wells", "Coal Creek", "Cokedale", "Collbran", "Colorado Springs", "Columbine Valley", "Commerce City", "Cortez", "Craig", "Crawford", "Creede", "Crested Butte", "Crestone", "Cripple Creek", "Crook", "Crowley", "Dacono", "De Beque", "Deer Trail", "Del Norte", "Delta", "Denver", "Dillon", "Dinosaur", "Dolores", "Dove Creek", "Durango", "Eads", "Eagle", "Eaton", "Eckley", "Edgewater", "Elizabeth", "Empire", "Englewood", "Erie", "Estes Park", "Evans", "Fairplay", "Federal Heights", "Firestone", "Flagler", "Fleming", "Florence", "Fort Collins", "Fort Lupton", "Fort Morgan", "Fountain", "Fowler", "Foxfield", "Fraser", "Frederick", "Frisco", "Fruita", "Garden City", "Genoa", "Georgetown", "Gilcrest", "Glendale", "Glenwood Springs", "Golden", "Granada", "Granby", "Grand Junction", "Grand Lake", "Greeley", "Green Mountain Falls", "Greenwood Village", "Grover", "Gunnison", "Gypsum", "Hartman", "Haswell", "Haxtun", "Hayden", "Hillrose", "Holly", "Holyoke", "Hooper", "Hot Sulphur Springs", "Hotchkiss", "Hudson", "Hugo", "Idaho Springs", "Ignacio", "Iliff", "Jamestown", "Johnstown", "Julesburg", "Keenesburg", "Kersey", "Kim", "Kiowa", "Kit Carson", "Kremmling", "La Jara", "La Junta", "La Veta", "Lafayette", "Lake City", "Lakeside", "Lakewood", "Lamar", "Larkspur", "Las Animas", "LaSalle", "Leadville", "Limon", "Littleton", "Lochbuie", "Log Lane Village", "Lone Tree", "Longmont", "Louisville", "Loveland", "Lyons", "Manassa", "Mancos", "Manitou Springs", "Manzanola", "Marble", "Mead", "Meeker", "Merino", "Milliken", "Minturn", "Moffat", "Monte Vista", "Montezuma", "Montrose", "Monument", "Morrison", "Mount Crested Butte", "Mountain View", "Mountain Village", "Naturita", "Nederland", "New Castle", "Northglenn", "Norwood", "Nucla","Nunn", "Oak Creek", "Olathe", "Olney Springs", "Ophir", "Orchard City", "Ordway", "Otis", "Ouray", "Ovid", "Pagosa Springs", "Palisade", "Palmer Lake", "Paoli", "Paonia", "Parachute", "Parker", "Peetz", "Pierce", "Pitkin", "Platteville", "Poncha Springs", "Pritchett", "Pueblo", "Ramah", "Rangely", "Raymer", "Red Cliff", "Rico", "Ridgway", "Rifle", "Rockvale", "Rocky Ford", "Romeo", "Rye", "Saguache", "Salida", "San Luis", "Sanford", "Sawpit", "Sedgwick", "Seibert", "Severance", "Sheridan", "Lake Sheridan Lake", "Silt", "Silver Cliff", "Silver Plume", "Silverthorne", "Silverton", "Simla", "Snowmass Village", "South Fork", "Springfield", "Starkville", "Steamboat Springs", "Sterling", "Stratton", "Sugar City", "Superior", "Swink", "Telluride", "Thornton", "Timnath", "Trinidad", "Two Buttes", "Vail", "Victor", "Vilas", "Vona", "Walden", "Walsenburg", "Walsh", "Ward", "Wellington", "Westcliffe", "Westminster", "Wheat Ridge", "Wiggins", "Wiley", "Williamsburg", "Windsor", "Winter Park", "Woodland Park", "Wray", "Yampa", "Yuma"];
 $(document).ready(function(){if($.cookie('DFM-city')){$('#CityLocal').val($.cookie('DFM-city'));setTimeout("setCityPage($.cookie('DFM-city'))",200)}else{setCityPage("Denver");}$("#CityLocal").autocompleteArray(autoCompleteArr,{delay:10,minChars:1,matchSubset:1,onItemSelect:selectItem,onFindValue:findValue,autoFill:true,maxItemsToShow:10});});
 </script>
-<iframe id="accuWeather5day" width="300" height="466" src="http://denverpost.accuweather.com/hostedpages/widget/v2/denverpostforecast/weather5/denver,co"></iframe>
+<iframe id="accuWeather5day" width="300" height="466" src="https://denverpost.accuweather.com/hostedpages/widget/v2/denverpostforecast/weather5/denver,co"></iframe>
 </div>
 </div>
 
-<h2><a href="http://www.denverpost.com/news/weather/">Weather News</a></h2>
-<script src="http://extras.denverpost.com/cache/2016-weatherpage-fiveitem.js"></script>
-<noscript><p><a href="http://www.denverpost.com/news/weather/">Read the latest in Denver and Colorado weather news</a>.</p></noscript> 
+<h2><a href="https://www.denverpost.com/news/weather/">Weather News</a></h2>
+<script src="https://extras.denverpost.com/cache/2016-weatherpage-fiveitem.js"></script>
+<noscript><p><a href="https://www.denverpost.com/news/weather/">Read the latest in Denver and Colorado weather news</a>.</p></noscript> 
 
 <h3><span class="localWeatherTitle"></span> Weather Extras</h3>
    <div style="float:left; text-align:left; margin-right:10px;">
@@ -122,17 +122,17 @@ $(document).ready(function(){if($.cookie('DFM-city')){$('#CityLocal').val($.cook
    </div>
 <h3>Colorado Weather Extras</h3>
 <ul class="fancyUL">
-   <li><a id="weatherExtrasAlerts" href="http://www.accuweather.com/en/us/denver-co/80203/weather-warnings/347810" target="_top">Weather Alerts / Warnings</a></li>
+   <li><a id="weatherExtrasAlerts" href="https://www.accuweather.com/en/us/denver-co/80203/weather-warnings/347810" target="_top">Weather Alerts / Warnings</a></li>
    <li><a href="javascript:modalMaker(airportDelays)">DIA Departures</a></li>
-   <script type="text/javascript" src="http://extras.denverpost.com/cache/alert_weather_flightdelays_dia.js"></script>
+   <script type="text/javascript" src="https://extras.denverpost.com/cache/alert_weather_flightdelays_dia.js"></script>
    <li><a href="/skireport" target="_top">Colorado Ski Reports</a></li>
    <li><a href="javascript:modalMaker(snowpack)">Colorado Snowpack</a></li>
    <li><a href="javascript:modalMaker(weatherAlertSignUp)">Email Weather Alert sign-up</a></li>
 </ul>
 <script>
 /* Create the variable needed for modalMaker() in freeform 25477757 */
-var airportDelays = '<div style="background-color:white;width:480px"><div class="boxblue clearfix" width="500px"><iframe src="http://www.flightstats.com/go/weblet?guid=0d09d76dc8b209fc:9824ef5:118bdc1a23e:3579&imageColor=black&language=English&weblet=status&action=AirportFlightStatus&airportCode=DEN&airportQueryType=0" scrolling="auto" width=480 height=620></iframe></div><div class="boxblue clearfix"><iframe src="http://www.flightstats.com/go/weblet?guid=0d09d76dc8b209fc:9824ef5:118bdc6f7a1:-55e7&imageColor=black&language=English&weblet=status&action=CurrentAirportDelayGraphic&airportCode=DEN&currentAirportDelayGraphicType=currentAirportDelayGraphic480By630" scrolling="auto" width=480 height=630></iframe><br><table width="480"><tr><td width="65%" style="font-family: Arial, sans-serif; font-size: 7pt;">Flight information is provided by <a target="_blank" href="http://www.flightstats.com">FlightStats</a>, and is subject to the FlightStats <a target="_blank" href="http://www.flightstats.com/go/About/termsOfUse.do">Terms of Use</a>.</td></tr></table></div></div>';
-var weatherAlertSignUp = '<div style="background-color:white;"><div style="background-color:white;"><div style="background-color:white;width:396px;height:100px;position:absolute;margin-top:90px;margin-left:529px;"></div><div style="background-color:white;width:366px;height:200px;position:absolute;margin-top:280px;margin-left:559px;"></div><iframe src="http://www.accuweather.com/alerts/index.asp?partner=accuweather" seamless scrolling=no style="height:910px;width:940px;margin-left:-15px;"></iframe></div></div>';
+var airportDelays = '<div style="background-color:white;width:480px"><div class="boxblue clearfix" width="500px"><iframe src="https://www.flightstats.com/go/weblet?guid=0d09d76dc8b209fc:9824ef5:118bdc1a23e:3579&imageColor=black&language=English&weblet=status&action=AirportFlightStatus&airportCode=DEN&airportQueryType=0" scrolling="auto" width=480 height=620></iframe></div><div class="boxblue clearfix"><iframe src="https://www.flightstats.com/go/weblet?guid=0d09d76dc8b209fc:9824ef5:118bdc6f7a1:-55e7&imageColor=black&language=English&weblet=status&action=CurrentAirportDelayGraphic&airportCode=DEN&currentAirportDelayGraphicType=currentAirportDelayGraphic480By630" scrolling="auto" width=480 height=630></iframe><br><table width="480"><tr><td width="65%" style="font-family: Arial, sans-serif; font-size: 7pt;">Flight information is provided by <a target="_blank" href="https://www.flightstats.com">FlightStats</a>, and is subject to the FlightStats <a target="_blank" href="https://www.flightstats.com/go/About/termsOfUse.do">Terms of Use</a>.</td></tr></table></div></div>';
+var weatherAlertSignUp = '<div style="background-color:white;"><div style="background-color:white;"><div style="background-color:white;width:396px;height:100px;position:absolute;margin-top:90px;margin-left:529px;"></div><div style="background-color:white;width:366px;height:200px;position:absolute;margin-top:280px;margin-left:559px;"></div><iframe src="https://www.accuweather.com/alerts/index.asp?partner=accuweather" seamless scrolling=no style="height:910px;width:940px;margin-left:-15px;"></iframe></div></div>';
 var snowpack = '<div style="width:900px; height:720px;"><ifr'+'ame width="100%" height="100%" seamless src="ftp://ftp-fc.sc.egov.usda.gov/CO/Snow/snow/watershed/daily/co_update_snow.pdf"></iframe></div>'
 
 function modalMaker(d) {
