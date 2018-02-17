@@ -1,6 +1,6 @@
 <!-- Weather Widget -->
-<link href="http://extras.denverpost.com/app/weather/style.css" type="text/css" rel="stylesheet" />
-<script src="http://extras.denverpost.com/app/weather/js/typeahead.bundle.min.js"></script>
+<link href="https://extras.denverpost.com/app/weather/style.css" type="text/css" rel="stylesheet" />
+<script src="https://extras.denverpost.com/app/weather/js/typeahead.bundle.min.js"></script>
 <div id="weather_widget" class="weather_widget">
     <h2><a href="/weather" title="Colorado Weather"><span id="weather_city">Colorado</span> Weather</a></h2>
 
@@ -10,8 +10,8 @@
 
     <div id="weather_current"></div>
     <div id="weather_forecast"></div>
-    <p>&raquo; <a href="/weather" id="weather_link" title="Colorado Weather Forecasts"><span></span> 10-day forecast</a></p>
-    <p>&raquo; <a href="/weathernews" title="Colorado Weather News">Colorado Weather News</a></p>
+    <p>&raquo; <a href="https://www.denverpost.com/weather" id="weather_link" target="_top"><span></span> 10-day forecast</a></p>
+    <p>&raquo; <a href="https://www.denverpost.com/news/weather" target="_top">Colorado Weather News</a></p>
 </div>
 <script>
 var load_weather = {
@@ -51,13 +51,13 @@ var load_weather = {
         if ( typeof type === 'undefined' ) var type = '5day';
         var slug = this.slugify(city);
 
-        var data = $.get("http://denverpostplus.com/app/weather/www/output/currentconditions-" + slug + ".html", 
+        var data = $.get("https://plus.denverpost.com/weather/www/output/currentconditions-" + slug + ".html", 
             function (data) 
             { 
                 data = window.load_weather.clean_data(data);
                 $( "#weather_current" ).html(data);
             });
-        var data = $.get("http://denverpostplus.com/app/weather/www/output/" + type + "-" + slug + ".html", 
+        var data = $.get("https://plus.denverpost.com/weather/www/output/" + type + "-" + slug + ".html", 
             function (data) 
             {
                 data = window.load_weather.clean_data(data);

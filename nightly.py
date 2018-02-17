@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/python
 # -*- coding: utf-8 -*-
 # Write our nightly weather files
 import argparse
@@ -25,7 +25,7 @@ def indexes(args):
         'month': '',
         'days': '',
         'location': '',
-        'url': 'http://extras.denverpost.com/weather/historical/',
+        'url': 'https://extras.denverpost.com/weather/historical/',
         'title': 'Colorado\'s Historical Weather Data',
         'breadcrumb_one': '',
         'breadcrumb_two': '',
@@ -70,7 +70,7 @@ def indexes(args):
             'month': '',
             'days': '',
             'location': location,
-            'url': 'http://extras.denverpost.com/weather/historical/%s/' % slug,
+            'url': 'https://extras.denverpost.com/weather/historical/%s/' % slug,
             'title': '%s, Colorado: Historical Weather' % location_display,
             'breadcrumb_one': '',
             'breadcrumb_two': '',
@@ -124,7 +124,7 @@ def indexes(args):
                 'month': '{{month}}',
                 'days': '',
                 'location': location,
-                'url': 'http://extras.denverpost.com/weather/historical/%s/%s/' % (slug, year),
+                'url': 'https://extras.denverpost.com/weather/historical/%s/%s/' % (slug, year),
                 'title': 'Weather in %s, in %s, Colorado' % (year, location_display),
                 'breadcrumb_one': '&rsaquo; <a href="../">%s</a>' % location_display,
                 'breadcrumb_two': '',
@@ -148,7 +148,7 @@ def indexes(args):
                     'month': month,
                     'days': day_dict[year][month],
                     'location': location,
-                    'url': 'http://extras.denverpost.com/weather/historical/%s/%s/%s/' % (slug, year, month),
+                    'url': 'https://extras.denverpost.com/weather/historical/%s/%s/%s/' % (slug, year, month),
                     'title': '%s %s historic weather in %s, Colorado' % (month.title(), year, location_display),
                     'breadcrumb_one': '&rsaquo; <a href="../../">%s</a>' % location_display,
                     'breadcrumb_two': '&rsaquo; <a href="../">%s</a>' % year,
@@ -228,7 +228,7 @@ def main(args):
                 weathernews = ''
             f.close()
             if weathernews == '':
-                weathernews = '<p>Nope, no <a href="http://www.denverpost.com/weathernews">weather news in Colorado</a> today.</p>'
+                weathernews = '<p>Nope, no <a href="https://www.denverpost.com/weathernews">weather news in Colorado</a> today.</p>'
             else:
                 weathernews = '<ul>%s</ul>' % weathernews
             output = string.replace(output, '{{weathernews}}', weathernews)
@@ -267,7 +267,7 @@ def main(args):
                 'month': date.strftime(date.today(), '%B').lower(),
                 'day': date.today().day
             }
-            url = 'http://extras.denverpost.com/weather/historical/%(location)s/%(year)s/%(month)s/%(day)s/daily-weather-%(location)s.html' % path_vars
+            url = 'https://extras.denverpost.com/weather/historical/%(location)s/%(year)s/%(month)s/%(day)s/daily-weather-%(location)s.html' % path_vars
             output = string.replace(output, '{{url}}', string.replace(url, '+', '_'))
 
             slug = slug.replace('+', '_')

@@ -98,7 +98,7 @@ var load_weather = {
         if ( typeof type === 'undefined' ) var type = '5day';
         var slug = this.slugify(city);
 
-        var data = $.get("http://extras.denverpost.com/weather/daily/currentconditions-" + slug + ".html", 
+        var data = $.get("https://extras.denverpost.com/weather/daily/currentconditions-" + slug + ".html", 
             function (data) 
             { 
                 data = window.load_weather.clean_data(data);

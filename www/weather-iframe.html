@@ -71,7 +71,7 @@ function updateWeatherData(d){
    }
 function getLocalWeather(loc){
     ajaxLoc = loc.replace(/\s/g, ''); // remove spaces
-    $.ajax({url:"http://denverpostplus.com/weather/weatherData.php?loc="+ajaxLoc,type:'GET',dataType:"jsonp",jsonp:false,jsonpCallback:"updateWeatherData"});}
+    $.ajax({url:"https://plus.denverpost.com/weather/weatherData.php?loc="+ajaxLoc,type:'GET',dataType:"jsonp",jsonp:false,jsonpCallback:"updateWeatherData"});}
 function setCityPage(loc){
     loc2=loc.toLowerCase().replace(/\b[a-z]/g, function(letter){return letter.toUpperCase()});
     $('.localWeatherTitle').html(loc2);
